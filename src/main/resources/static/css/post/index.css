@@ -1,0 +1,141 @@
+#container {
+    background-color: #dbdbdb;
+}
+
+.main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    background-size: 100%;
+
+    padding: 120px 100px;
+}
+
+.main-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.category-container {
+    display: flex;
+    align-items: center;
+
+    background-color: rgb(249, 249, 249);
+
+    width: 1000px;
+    height: 70px;
+    border-radius: 3px;
+}
+
+.fa-house {
+    margin: 0px 50px;
+    font-size: 20px;
+}
+
+.category-container span b {
+    font-size: 20px;
+}
+
+.header-title {
+    margin-top: 80px;
+}
+
+.header-title h2 {
+    font-size: 40px;
+}
+
+.header-title h4 {
+    font-size: 15px;
+}
+
+.main-content {
+    width: 1000px;
+    height: 100%;
+}
+
+.main-img {
+    position: relative;
+    display: flex;
+    justify-content: center;
+
+    border-radius: 4px;
+
+    background-color: rgb(131, 161, 125);
+    width: 1000px;
+    height: 450px;
+}
+
+.main-info {
+    position: absolute;
+    
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+    overflow: hidden;
+    bottom: 0;
+    width: 90%;
+    height: 60px;
+    background-color: white;
+
+    border-top-right-radius: 4px;
+    border-top-left-radius: 4px;
+}
+
+.post-info {
+    margin-left: 20px;
+    font-size: 18px;
+}
+
+.post-info b,span {
+    font-size: 20px;
+}
+
+.post-activity {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    overflow: hidden;
+    width: 140px;
+    height: 100%;
+    background-color: rgb(68, 107, 222);
+}
+
+.like-button {
+    width: 105%;
+    height: 105%;
+    background-color: rgb(68, 107, 222);
+
+    font-size: 15px;
+}
+
+.main-navigation {
+    display: flex;
+    justify-content: space-around;
+
+    margin-top: 60px;
+    margin-bottom: 60px;
+    padding-bottom: 20px;
+    font-size: 30px;
+
+    width: 1000px;
+    border-bottom: 2px solid #858585;
+}
+
+.main-navigation li a {
+    font-size: 16px;
+}
+
+.main-navigation li a:hover {
+    color: blue;
+}
+
+.main-article {
+    background-color: white;
+    width: 1000px;
+    height: 1500px;
+}
