@@ -62,3 +62,8 @@ button:not(:disabled):hover {
     background-color: #fafafa;
     color: #3e3e3e;
 }
+
+#container {
+    position: relative;
+    width: 1400px;
+}
