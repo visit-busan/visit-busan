@@ -7,4 +7,6 @@ import org.apache.ibatis.annotations.Mapper;
 public interface AccountRepository {
 
     public UserMst findByUsername (String username);
+
+    public UserMst findId(String name, String tellNumber);
 }
