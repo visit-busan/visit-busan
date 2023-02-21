@@ -3,5 +3,24 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.korit.visitbusan.repository.AccountRepository">
+    <select id="findId" parameterType="String" resultType="com.korit.visitbusan.entity.UserMst">
+        select
+            user_id as userId,
+            username,
+            password,
+            name,
+            gender,
+            birth,
+            tell_number as tellNumber,
+            email,
+            provider
+        from
+            user_mst
+        where
+            name = #{name};
+    </select>
 
+    <select id="findByUsername" resultType="com.korit.visitbusan.entity.UserMst">
+
+    </select>
 </mapper>

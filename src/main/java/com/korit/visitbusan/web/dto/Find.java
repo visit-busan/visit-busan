@@ -6,13 +6,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Builder
-public class CMRespDto<T> {
+public class Find {
 
-    private int code;
-    private String message;
-    private T data;
+    private String name;
 
+    private String tellNumber;
 }
