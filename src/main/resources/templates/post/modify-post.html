@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ModifyPost</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+        integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/static/css/reset.css">
+    <link rel="stylesheet" href="/static/css/common.css">
+    <link rel="stylesheet" href="/static/css/header.css">
+    <link rel="stylesheet" href="/static/css/post/modify-post.css">
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+
+    <!-- include summernote css/js -->
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+
+    <!-- include libraries(jQuery, bootstrap) -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#summernote').summernote({
+                height: 1500,                 // 에디터 높이
+                minHeight: null,             // 최소 높이
+                maxHeight: null,             // 최대 높이
+                focus: true,                  // 에디터 로딩후 포커스를 맞출지 여부
+                lang: "ko-KR",					// 한글 설정
+                callbacks: {	//여기 부분이 이미지를 첨부하는 부분
+                    onImageUpload: function (files) {
+                        uploadSummernoteImageFile(files[0], this);
+                    },
+                    onPaste: function (e) {
+                        var clipboardData = e.originalEvent.clipboardData;
+                        if (clipboardData && clipboardData.items && clipboardData.items.length) {
+                            var item = clipboardData.items[0];
+                            if (item.kind === 'file' && item.type.indexOf('image/') !== -1) {
+                                e.preventDefault();
+                            }
+                        }
+                    }
+                }
+            });
+            /**
+            * 이미지 파일 업로드
+            */
+            function uploadSummernoteImageFile(file, editor) {
+                data = new FormData();
+                data.append("file", file);
+                $.ajax({
+                    data: data,
+                    type: "POST",
+                    url: "/uploadSummernoteImageFile",
+                    contentType: false,
+                    processData: false,
+                    success: function (response) {
+                        //항상 업로드된 파일의 url이 있어야 한다.
+                        console.log(data)
+                        $(editor).summernote('insertImage', "/image/" + response.data.url);
+                    }
+                });
+            }
+
+            
+        });
+
+
+    </script>
+</head>
+
+<body>
+    <div id="container">
+        <header class="header-container">
+            <h1 class="brand-logo">
+                <a href="#"><img src="/static/image/logo.png" alt=""></a>
+            </h1>
+            <ul class="menu-container">
+                <li><a href="#">부산에가면</a></li>
+                <li><a href="#">추천여행</a></li>
+            </ul>
+            <ul class="account-container">
+                <li><a>로그인</a></li>
+                <li><a>회원가입</a></li>
+            </ul>
+        </header>
+
+        <main class="main-container">
+            <header class="main-header">
+                <div class="category-container">
+                    <i class="fa-solid fa-house"></i>
+                    <span><b>부산에 가면</b></span>
+                </div>
+                <div class="header-title">
+                    <input type="text" class="main-title" placeholder="제목">
+                    <input type="text" class="sub-title" placeholder="부제목">
+                </div>
+            </header>
+            <div class="main-content">
+                <div class="img-container">
+                    <img src="" alt="no-img" class="main-img">
+                </div>
+                <ul class="main-navigation">
+                    <li><a href="#"><b>상세정보</b></a></li>
+                    <li><a href="#"><b>교통안내</b></a></li>
+                    <li><a href="#"><b>이용안내</b></a></li>
+                </ul>
+                <div class="main-article">
+                    <div class="buttons">
+                        <button class="get-content-button">내용 다시 가져오기</button>
+                        <button class="summornote-submit-button">수정</button>
+                    </div>
+                    <form action="/uploadSummernoteImageFile" method="post">
+                        <textarea id="summernote" name="editordata"></textarea>
+                    </form>
+                </div>
+                <div class="main-location">
+
+                </div>
+                <div class="main-usage-information">
+                    <div class="">
+
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="/static/js/post/modify-post.js"></script>
+</body>
+
+</html>

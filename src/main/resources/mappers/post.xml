@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.korit.visitbusan.repository.PostRepository">
+    <insert id="savePost" parameterType="com.korit.visitbusan.web.dto.TourReqDto" useGeneratedKeys="true" keyProperty="tourId">
+        insert into
+            tour_mst
+        value
+            (0, #{tourCategory}, #{userId}, #{tourTitle}, #{tourSubTitle}, #{tourContents}, null, null, null, null, now(), now() );
+    </insert>
+
+    <update id="saveThumbnailImg">
+        update
+            tour_mst
+        set
+            thumbnail_image = #{thumbnailImg}
+        where
+            tour_id = #{tourId}
+    </update>
+
+    <update id="saveMainImg">
+        update
+            tour_mst
+        set
+            main_image = #{mainImg}
+        where
+            tour_id = #{tourId}
+    </update>
+</mapper>

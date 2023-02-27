@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>시립도서관</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/static/css/admin/reset.css">
+    <link rel="stylesheet" href="/static/css/admin/common.css">
+    <link rel="stylesheet" href="/static/css/admin/gnb.css">
+    <link rel="stylesheet" href="/static/css/admin/lnb.css">
+    <link rel="stylesheet" href="/static/css/admin/user/user_common.css">
+    <link rel="stylesheet" href="/static/css/admin/user/role/user_role.css">
+    
+</head>
+<body>
+    <div id="container">
+        <header class="header-container">
+            <div class="brand-logo">
+                <a href="/templates/admin/dashboard/tour_dashboard.html"><img src="/static/image/logo.png" alt=""></a>
+            </div>
+            <ul class="account-container">
+                <li><a href="/account/logout">로그아웃</a></li>
+            </ul>
+        </header>
+        
+        <main class="main-container">
+            <aside class="left-aside">
+                <div class="aside-title">
+                    <h1 class="title-text-h1">관리자 시스템</h1>
+                </div>
+                <nav class="main-menu">
+                    <h2 class="title-text-h2">대시보드</h2>
+                    <ul class="sub-menu">
+                        <a href="/templates/admin/dashboard/tour_dashboard.html"><li>대시보드</li></a>
+                    </ul>
+                    <h2 class="title-text-h2">관광정보 관리</h2>
+                    <ul class="sub-menu">
+                        <a href="/templates/admin/tour/category/tour_category.html"><li>관광지 분류</li></a>
+                        <a href="/templates/admin/tour/manage/tour_search.html"><li>관광정보 관리</li></a>
+                    </ul>
+                    <h2 class="title-text-h2">사용자 관리</h2>
+                    <ul class="sub-menu">
+                        <a href="/templates/admin/user/user_info.html"><li>사용자 정보 관리</li></a>
+                        <a href="/templates/admin/user/user_role.html"><li>사용자 권한 관리</li></a>
+                    </ul>
+                </nav>
+            </aside>    
+            <div class="content-container">
+                <h1 class="content-title">사용자 권한 관리</h1>
+                <div class="content-main">
+                    <div class="content-items">
+                        <div class="left-items">
+                            <a href=""><button type="button" class="create-button">등록</button></a>
+                            <button type="button" class="delete-button">삭제</button>
+                        </div>
+                        <div class="right-items">
+                            <select class="condition-select">
+                                <option value="userid">권한이름</option>
+                                <option value="username">권한</option>
+                            </select>
+                            <input type="search" class="search-input" placeholder="검색어를 입력하세요.">
+                            <button type="button" class="search-button">검색</button>
+                        </div>
+                    </div>
+                    <div class="table-container">
+                        <table class="content-table">
+                            <thead>
+                                <tr>
+                                    <th><input type="checkbox" class="delete-checkall"></th>
+                                    <th>권한이름</th>
+                                    <th>권한</th>
+                                    <th>관리</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="page-controller">
+                        <a href="" class="disabled">이전</a>
+                        <ul class="page-numbers">
+                            <a href=""><li>1</li></a>
+                            <a href=""><li>2</li></a>
+                            <a href=""><li>3</li></a>
+                            <a href=""><li>4</li></a>
+                            <a href=""><li>5</li></a>
+                        </ul>
+                        <a href="">다음</a>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="/static/js/admin/book_search.js"></script>
+</body>
+</html>
