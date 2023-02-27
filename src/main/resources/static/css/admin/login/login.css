@@ -1,0 +1,107 @@
+body {
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+    height: 100%;
+
+    background-color: #1a73e8;
+}
+
+.header-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    margin-top: 15%;
+    margin-bottom: 20px;
+}
+
+.main-container {
+
+}
+
+.login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    margin: 0px auto;
+    padding: 40px 100px;
+    width: 600px;
+
+    background-color: white;
+    box-shadow: 0px 0px 5px 1px white;
+}
+
+.login-title {
+    font-size: 30px;
+    margin-bottom: 30px;
+}
+
+.login-group {
+    display: flex;
+    flex-direction: column;
+    
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+.login-group label {
+    margin-bottom: 5px;
+}
+
+.login-inputs {
+    height: 40px;
+    font-size: 18px;
+    text-align: center;
+}
+
+.login-error {
+    font-size: 12px;
+    color: red;
+}
+
+.button-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    margin-top: 20px;
+    width: 100%;
+}
+
+.button-group button {
+    margin-bottom: 10px;
+    width: 100%;
+    font-weight: 600;
+}
+
+.google-login, .naver-login {
+    color: white;
+}
+
+.google-login {
+    background-color: #1a73e8;
+}
+
+.naver-login {
+    background-color: #03c75a;
+}
+
+.btn-login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    margin-top: 30px;
+    width: 100%;
+}
+
+.btn-login button{
+    
+    font-weight: 600;
+    
+    width: 400px;
+    height: 40px;
+}
