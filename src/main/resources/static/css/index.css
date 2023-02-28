@@ -2,18 +2,18 @@
   background-color: #dbdbdb;
 }
 
-.main-container {
+.main-container { 
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  /* justify-content: center; */
 
+  height: 820px;
+  /* background-color: #00b7ff95; */
   background: url("/static/image/indexbackground.jpg");
   background-size: 100%;
 
-  padding: 120px 100px;
-  /* width: 100%;
-  height: 560px; */
+  padding: 60px;
 }
 
 .main-title-container {
@@ -36,19 +36,42 @@
   font-weight: 600;
 }
 
+.categoryAndSearch {
+  display: flex;
+}
+
+.category {
+  width: 100px;
+  height: 60px;
+  margin-right: 20px;
+
+  text-align: center;
+
+  color: #000000;
+  border-style: none;
+  font-size: 20px;
+  font-weight: 600;
+  background-color: rgba(255, 255, 255, 0.217);
+}
+
+.category > ul {
+  background-color: rgba(255, 255, 255);
+  opacity: 0.3;
+}
+
 .main-search-container {
   margin-top: 90px;
   width: 65%;
 }
 
-.main-search-border {
+.main-search-border > form {
   display: flex;
   justify-content: space-between;
   align-items: center;
 
   border-radius: 3px;
   padding-left: 20px;
-  width: 100%;
+  width: 800px;
   height: 60px;
   background-color: rgba(255, 255, 255, 0.217);
 }
@@ -86,9 +109,174 @@
   font-size: 30px;
 }
 
-.main-map-container {
-  margin-top: 80px;
-  width: 100%;
+/* 카카오맵 ID값 */
+/* center: new kakao.maps.LatLng(36.2683, 127.6358), // 지도의 중심좌표
+level: 13, // 지도의 확대 레벨 */
+#main-map-container {
+  margin-top: 50px;
+  width: 1100px;
   height: 400px;
-  background-color: rgba(245, 137, 225, 0.418);
+
+  box-sizing: border-box;
+  border-radius: 5px;
+}
+.footer-top {
+  color: #ffffff;
+  width: 100%;
+  height: 531px;
+  background: url(/static/image/footer_up.png);
+  padding: 50px 0;
+  text-align: center;
+}
+.footer-top-inner {
+  margin: 0 auto;
+  position: relative;
+  width: 1300px;
+  height: 100%;
+  box-sizing: border-box;
+  display: block;
+}
+.footer-top-title {
+  font-size: 20px;
+  line-height: 23px;
+  margin-bottom: 30px;
+
+  display: block;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+}
+.footer-top-social {
+  font-size: 0;
+  max-width: 400px;
+  margin: 0 auto;
+  margin-bottom: 50px;
+  margin: 0 450px 50px;
+}
+.footer-top-social > a {
+  margin-right: 10px;
+}
+
+.footer-top-menu > ul > li {
+  float: left;
+  width: 25%;
+  /* text-align: left; */
+  padding: 0 94px;
+}
+.footer-top-menu > ul > li > h3 {
+  font-size: 22px;
+  margin-bottom: 30px;
+}
+.footer-top-menu > ul > li > ul > li {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.footer-container {
+  /* background: url(/static/image/footerbackground.jpg) 0 0 no-repeat; */
+  background-color: #2c323a;
+  width: 1400px;
+  height: 300px;
+
+  /* margin-top: 40px; */
+  /* padding-top: 40px; */
+
+  display: flex;
+  justify-content: space-between;
+}
+
+.footer-left,
+.footer-center,
+.footer-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin-left: 100px;
+
+  background-color: #2c323a;
+  width: 27%;
+  height: 240px;
+  padding: 30px 0;
+}
+
+.footer-content h1 {
+  font-size: 25px;
+}
+
+.footer-logo {
+  width: 150px;
+}
+
+.footer-contract {
+  width: 85%;
+}
+
+.footer-contract a {
+  font-size: 20px;
+}
+
+.footer-number {
+  font-size: 50px;
+}
+
+.footer-title {
+  color: #ffffff;
+  margin-top: 30px;
+  /* margin-right: 300px; */
+  font-size: 15px;
+}
+
+.footer-contract a,
+h1 {
+  color: #ffffff;
+  margin-right: 3px;
+}
+
+.footer-content h2 {
+  color: #999a9d;
+}
+
+.footer-contract .a-point {
+  color: #ffcb04;
+}
+
+.footer-text {
+  color: #999a9d;
+}
+
+.qualify {
+  width: 200px;
+  height: 150px;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+
+  width: 150px;
+}
+
+.buttons button {
+  margin-bottom: 10px;
+}
+
+.footer-box {
+  display: block;
+  width: 160px;
+  height: 46px;
+  padding: 10px;
+  border: 1px solid #dbdbdb;
+  line-height: 1.5em;
+  margin-top: 10px;
+  overflow: hidden;
+  color: #cacaca;
+  font-size: 16px;
+  top: 15px;
+}
+.box2 {
+  margin-top: 0px;
+}
+.footer-box img {
+  float: right;
 }

@@ -18,7 +18,7 @@ public class PostController {
 
     @GetMapping("/register")
     public String register() {
-        return "/post/register-post";
+        return "/account/register-post";
     }
 
 }

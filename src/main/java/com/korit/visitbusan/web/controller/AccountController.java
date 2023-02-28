@@ -11,16 +11,16 @@ public class AccountController {
 
     @GetMapping("/login")
     public String login() {
-        return "/account/login";
+        return "account/login";
     }
 
     @PostMapping("/login/error")
     public String loginError() {
-        return "/account/login";
+        return "account/login";
     }
 
     @GetMapping("/register")
     public String register() {
-        return "account/register";
+            return "account/register";
     }
 }

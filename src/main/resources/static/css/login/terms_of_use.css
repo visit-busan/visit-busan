@@ -1,0 +1,48 @@
+/* 레이아웃 틀 */
+html {
+  height: 100%;
+}
+
+.main-container {
+  height: 1000px;
+  display: block;
+  background-size: auto;
+}
+
+body {
+  margin: 0 auto;
+  height: 100%;
+  background: #f5f6f7;
+  font-family: Dotum, "돋움", Helvetica, sans-serif;
+}
+
+#header {
+  padding-top: 62px;
+  padding-bottom: 20px;
+  text-align: center;
+}
+#wrapper {
+  position: relative;
+  height: 100%;
+}
+
+#txt {
+  width: 1200px;
+  height: 800px;
+
+  font-size: 17px;
+
+  resize: none; /*크기조절이 안됨*/
+  overflow-y: auto; /*세로방향만 오토*/
+
+  background-color: #f5f6f798;
+}
+
+.agree {
+  float: right;
+  display: inline-flexbox;
+}
+.agreeNextPage{
+  background-color: #f5f6f7d2;
+  border-radius: 3px;
+}

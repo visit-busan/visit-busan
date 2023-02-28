@@ -1,5 +1,5 @@
-const id = document.querySelector("#id");
-const pw = document.querySelector("#pw");
+const id = document.querySelector("#username");
+const pw = document.querySelector("#password");
 const btn = document.querySelector("#btn");
 
 btn.addEventListener("click", () => {

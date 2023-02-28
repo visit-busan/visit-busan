@@ -1,12 +1,14 @@
 package com.korit.visitbusan.security;
 
 import com.korit.visitbusan.entity.RoleDtl;
+import com.korit.visitbusan.entity.RoleMst;
 import com.korit.visitbusan.entity.UserMst;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -15,19 +17,39 @@ import java.util.Map;
 
 @RequiredArgsConstructor
 @AllArgsConstructor
-public class PrincipalDetails implements UserDetails {
+public class PrincipalDetails implements UserDetails, OAuth2User {
 
     @Getter
     private final UserMst user;
     private Map<String, Object> response;
 
     @Override
+    public Map<String, Object> getAttributes() {
+        return response;
+    }
+
+    @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         ArrayList<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 
-        user.getRoleDtl().forEach(dtl -> {
-            authorities.add(() -> dtl.getRoleMst().getRoleName());
-        });
+//        user.getRoleDtl().forEach(dtl -> {
+//            authorities.add(() -> dtl.getRoleMst().getRoleName());
+//        });
+
+        List<RoleDtl> roleDtlList = user.getRoleDtl();
+        for(int i = 0; i < roleDtlList.size(); i++) {
+            RoleDtl dtl =  roleDtlList.get(i);
+            RoleMst roleMst = dtl.getRoleMst();
+            String roleName = roleMst.getRoleName();
+
+            GrantedAuthority role = new GrantedAuthority() {
+                @Override
+                public String getAuthority() {
+                    return roleName;
+                }
+            };
+            authorities.add(role);
+        }
 
         return authorities;
     }
@@ -60,5 +82,10 @@ public class PrincipalDetails implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    @Override
+    public String getName() {
+        return user.getName();
     }
 }
