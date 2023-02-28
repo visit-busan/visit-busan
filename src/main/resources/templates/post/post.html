@@ -5,11 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Post</title>
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="/static/css/reset.css">
     <link rel="stylesheet" href="/static/css/common.css">
     <link rel="stylesheet" href="/static/css/header.css">
     <link rel="stylesheet" href="/static/css/post/index.css">
+    <link rel="stylesheet" href="/static/css/post/post.css">
 </head>
 <body>
     <div id="container">
@@ -34,46 +36,82 @@
                     <span><b>부산에 가면</b></span>
                 </div>
                 <div class="header-title">
-                    <h2>제목</h2>
-                    <h4>지은이</h4>
+                    <h2 class="main-title">제목</h2>
+                    <h4 class="sub-title">지은이</h4>
                 </div>
             </header>
             <div class="main-content">
-                <div class="main-img">
-                    메인이미지가 들어올 공간입니다.
-                    <div class="main-info">
-                        <div class="post-info">
-                            <b>평점★</b><span class="post-rating">5.0</span> │ <b>조회</b> <span class="post-view">2577</span> │ <b>리뷰</b> <span class="post-review">0</span> │
-                        </div>
-                        <div class="post-activity">
-                            <button type="button" class="like-button">♡좋아요(<span class="post-like">0</span>)</button>
+                <div class="main-img-container">
+                    <img src="" alt="" class="main-img">
+                    <div class="main-info-container">
+                        <div class="main-info">
+                            <div class="post-info">
+                                <b>평점★</b><span class="post-rating">5.0</span> │ <b>조회</b> <span class="post-view">2577</span> │ <b>리뷰</b> <span class="post-review">0</span> │
+                            </div>
+                            <div class="post-activity">
+                                <button type="button" class="like-button">♡좋아요(<span class="post-like">0</span>)</button>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <ul class="main-navigation">
-                    <li><a href="#"><b>상세정보</b></a></li>
-                    <li><a href="#"><b>교통안내</b></a></li>
-                    <li><a href="#"><b>이용안내</b></a></li>
-                    <li><a href="#"><b>여행사진</b></a></li>
-                    <li><a href="#"><b>리뷰</b></a></li>
+                    <li><b class="article-button">상세정보</b></li>
+                    <li><b class="usage-button">이용안내</b></li>
+                    <li><b class="review-button">리뷰</b></li>
                 </ul>
-                <div class="main-article">
+                <div class="content-container">
 
-                </div>
-                <div class="main-location">
-
-                </div>
-                <div class="main-rule">
-
-                </div>
-                <div class="main-photo">
-
-                </div>
-                <div class="main-review">
-
+                    <div class="main-article">
+                        
+                    </div>
+                    <div class="main-rule off">
+                        <div class="main-map-container">
+    
+                        </div>
+                        <div class="rule-container">
+                            <div class="rule-name-dot"><h2 class="rule-name">전화번호</h2><b class="rule-dot">ㆍ</b></div>
+                            <span class="rule-content tellnumber">0000000</span>
+                        </div>
+                        <div class="rule-container">
+                            <div class="rule-name-dot"><h2 class="rule-name">홈페이지</h2><b class="rule-dot">ㆍ</b></div>
+                            <span class="rule-content homepageurl">0000000</span>
+                        </div>
+                        <div class="rule-container">
+                            <div class="rule-name-dot"><h2 class="rule-name">휴무일</h2><b class="rule-dot">ㆍ</b></div>
+                            <span class="rule-content holidayinfo">0000000</span>
+                        </div>
+                        <div class="rule-container">
+                            <div class="rule-name-dot"><h2 class="rule-name">편의시설</h2><b class="rule-dot">ㆍ</b></div>
+                            <span class="rule-content handicappedarea">0000000</span>
+                        </div>
+                        <div class="rule-container">
+                            <div class="rule-name-dot"><h2 class="rule-name">이용시간</h2><b class="rule-dot">ㆍ</b></div>
+                            <span class="rule-content usagedayandtime">0000000</span>
+                        </div>
+                        <div class="rule-container">
+                            <div class="rule-name-dot"><h2 class="rule-name">이용요금</h2><b class="rule-dot">ㆍ</b></div>
+                            <span class="rule-content usageamount">0000000</span>
+                        </div>
+                        <div class="rule-container">
+                            <div class="rule-name-dot"><h2 class="rule-name">대표메뉴</h2><b class="rule-dot">ㆍ</b></div>
+                            <span class="rule-content mainmenu">0000000</span>
+                        </div>
+                        <div class="rule-container">
+                            <div class="rule-name-dot"><h2 class="rule-name">교통정보</h2><b class="rule-dot">ㆍ</b></div>
+                            <span class="rule-content trafficinfo">0000000</span>
+                        </div>
+                        <div class="rule-container">
+                            <div class="rule-name-dot"><h2 class="rule-name">기타</h2><b class="rule-dot">ㆍ</b></div>
+                            <span class="rule-content etcinfo">0000000</span>
+                        </div>
+                    </div>
+                    <div class="main-review off">
+    
+                    </div>
                 </div>
             </div>
         </main>
+        <script src="/static/js/post/post.js"></script>
     </div>
 </body>
 </html>

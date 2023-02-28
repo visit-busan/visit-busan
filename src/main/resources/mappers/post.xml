@@ -18,6 +18,7 @@
             thumbnail_image = #{thumbnailImg}
         where
             tour_id = #{tourId}
+
     </update>
 
     <update id="saveMainImg">
@@ -28,4 +29,50 @@
         where
             tour_id = #{tourId}
     </update>
+    
+    <select id="getPost" resultType="com.korit.visitbusan.entity.TourMst">
+        select
+            tm.tour_id as tourId,
+            tm.category_id as categoryId,
+            tm.user_id as userId,
+            tm.title,
+            tm.subtitle,
+            tm.contents,
+            tm.main_image as mainImage,
+            tm.thumbnail_image as thumbnailImage,
+            tm.lat,
+            tm.lng as lon,
+            tm.create_date as createDate,
+
+            tu.tell_number as tellNumber,
+            tu.homepage_url as homepageUrl,
+            tu.hldy_info as holidayInfo,
+            tu.handicapped_area as handicappedArea,
+            tu.usage_dayandtime as usageDayAndTime,
+            tu.usage_amount as usageAmount,
+            tu.rprsntv_menu as mainMenu,
+            tu.trfc_info as trafficInfo,
+            tu.etc_info as etcInfo
+        from
+            tour_mst tm
+            left outer join tour_usage tu on (tu.tour_id = tm.tour_id)
+        where
+            tm.tour_id = #{tourId};
+    </select>
+
+    <insert id="saveTourRating" parameterType="com.korit.visitbusan.entity.TourRating">
+        insert into
+            tour_rating
+        value
+            (0, #{tourId}, #{userId}, #{ratingCount});
+    </insert>
+
+    <insert id="saveTourComment" parameterType="com.korit.visitbusan.entity.TourComment">
+        insert into
+            tour_comment
+        value
+            (0, #{tourId}, #{userId}, #{reviewComment});
+    </insert>
+
+
 </mapper>

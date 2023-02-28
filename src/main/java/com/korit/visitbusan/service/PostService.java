@@ -1,7 +1,11 @@
 package com.korit.visitbusan.service;
 
-import com.korit.visitbusan.entity.Img;
+import com.korit.visitbusan.entity.TourComment;
+import com.korit.visitbusan.entity.TourMst;
+import com.korit.visitbusan.entity.TourRating;
 import com.korit.visitbusan.repository.PostRepository;
+import com.korit.visitbusan.web.dto.PostRespDto;
+import com.korit.visitbusan.web.dto.ReviewReqDto;
 import com.korit.visitbusan.web.dto.TourReqDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -25,6 +29,31 @@ public class PostService {
 
     @Value("${file.path}")
     private String filePath;
+
+    public PostRespDto getPostByTourId(int tourId) {
+        TourMst tourMst = postRepository.getPost(tourId);
+        PostRespDto postRespDto = new PostRespDto(tourMst.getTourId(),
+                tourMst.getCategoryId(),
+                tourMst.getTitle(),
+                tourMst.getSubtitle(),
+                tourMst.getContents(),
+                tourMst.getMainImage(),
+                tourMst.getSubtitle(),
+                tourMst.getLat(),
+                tourMst.getLon(),
+                tourMst.getCreateDate(),
+                tourMst.getTellNumber(),
+                tourMst.getHomepageUrl(),
+                tourMst.getHolidayInfo(),
+                tourMst.getHandicappedArea(),
+                tourMst.getUsageDayAndTime(),
+                tourMst.getUsageAmount(),
+                tourMst.getMainMenu(),
+                tourMst.getTrafficInfo(),
+                tourMst.getEtcInfo()
+                );
+        return postRespDto;
+    }
 
     public List<String> registerPostImg(List<MultipartFile> files) {
         if(files.size() < 1) {
@@ -132,4 +161,24 @@ public class PostService {
 
         return tourReqDto;
     }
+
+    //-----------------------------Review 관련 기능--------------------------------
+
+    public void registerReviewAndRating(ReviewReqDto reviewReqDto) {
+        TourRating tourRating = TourRating.builder()
+                .ratingId(0).tourId(reviewReqDto.getTourId())
+                .userId(reviewReqDto.getUserId())
+                .ratingCount(reviewReqDto.getRating()).build();
+
+        postRepository.saveTourRating(tourRating);
+
+        TourComment tourComment = TourComment.builder()
+                .commentId(0)
+                .tourId(reviewReqDto.getTourId())
+                .userId(reviewReqDto.getUserId())
+                .reviewComment(reviewReqDto.getReview()).build();
+
+        postRepository.saveTourComment(tourComment);
+    }
+
 }
