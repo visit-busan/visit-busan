@@ -4,11 +4,102 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.korit.visitbusan.repository.AccountRepository">
-    <select id="findByUsername" resultType="com.korit.visitbusan.entity.UserMst">
+    <resultMap id="userMst" type="com.korit.visitbusan.entity.UserMst">
+        <result property="userId" column="user_id"></result>
+        <result property="username" column="username"></result>
+        <result property="password" column="password"></result>
+        <result property="name" column="name"></result>
+        <result property="gender" column="gender"></result>
+        <result property="birth" column="birth"></result>
+        <result property="tellNumber" column="tell_number"></result>
+        <result property="email" column="email"></result>
+        <result property="userLng" column="user_lng"></result>
+        <result property="userLat" column="user_lat"></result>
+        <result property="provider" column="provider"></result>
+        <result property="userMarketing" column="user_marketing"></result>
+        <result property="createDate" column="create_date"></result>
+        <result property="updateDate" column="update_date"></result>
+        <collection property="roleDtl" javaType="list" resultMap="roleDtl"></collection>
+    </resultMap>
 
+    <resultMap id="roleMst" type="com.korit.visitbusan.entity.RoleMst">
+        <result property="roleId" column="role_id"></result>
+        <result property="roleName" column="role_name"></result>
+        <result property="createDate" column="create_date"></result>
+        <result property="updateDate" column="update_date"></result>
+    </resultMap>
+
+    <resultMap id="roleDtl" type="com.korit.visitbusan.entity.RoleDtl">
+        <result property="roleDtlId" column="role_dtl_id"></result>
+        <result property="userId" column="user_id"></result>
+        <result property="roleId" column="role_id"></result>
+        <result property="createDate" column="create_date"></result>
+        <result property="updateDate" column="update_date"></result>
+        <collection property="roleMst" resultMap="roleMst"></collection>
+    </resultMap>
+
+    <select id="findByUsername" parameterType="String" resultMap="userMst">
+        select
+            um.user_id,
+            um.username,
+            um.password,
+            um.name,
+            um.email,
+            um.tell_number,
+
+            rd.role_id,
+            rm.role_name,
+
+            um.create_date,
+            um.update_date
+        from
+        user_mst um
+            left outer join role_dtl rd on(rd.user_id = um.user_id)
+            left outer join role_mst rm on(rm.role_id = rd.role_id)
+        where
+            um.username = #{username}
     </select>
 
-    <select id="findId" resultType="com.korit.visitbusan.entity.UserMst">
+    <select id="findByUserId" parameterType="integer" resultMap="userMst">
+        select
+            um.user_id,
+            um.username,
+            um.password,
+            um.name,
+            um.email,
 
+            rd.role_id,
+            rm.role_name,
+
+            um.create_date,
+            um.update_date
+        from
+            user_mst um
+            left outer join role_dtl rd on(rd.user_id = um.user_id)
+            left outer join role_mst rm on(rm.role_id = rd.role_id)
+        where
+            um.user_id = #{userId}
     </select>
+
+    <insert id="saveUser"
+            parameterType="com.korit.visitbusan.entity.UserMst"
+            useGeneratedKeys="true"
+            keyProperty="userId">
+        insert into user_mst
+        values(0, #{username}, #{password}, #{name}, #{gender}, #{birth}, #{tellNumber}, #{email}, null, 1, 1, 1, now(), now())
+    </insert>
+
+    <insert id="saveRole" parameterType="com.korit.visitbusan.entity.UserMst">
+        insert into role_dtl
+        values(0, #{userId}, 2, now(), now())
+    </insert>
+
+    <update id="setUserProvider" parameterType="com.korit.visitbusan.entity.UserMst">
+        update
+            user_mst
+        set
+            provider = #{provider}
+        where
+            user_id = #{userId}
+    </update>
 </mapper>

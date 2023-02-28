@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.korit.visitbusan.repository.SearchRepository">
+
+    <select id="searchTourByCategoryName" parameterType="string" resultType="com.korit.visitbusan.entity.TourMst" >
+        select
+            tc.category_id as categoryId,
+            tc.category_name as categoryName,
+            tc.user_id as userId,
+
+            tm.tour_id as tourId,
+            tm.category_id as categoryId,
+            tm.user_id as userId,
+            tm.title,
+            tm.subtitle as subTitle,
+            tm.contents,
+            tm.main_image as mainImage,
+            tm.thumbnail_image as thumbnailImage,
+            tm.lat as latitude,
+            tm.lng as longitude,
+
+            tc.create_date as createDate,
+            tc.update_date as updateDate
+        from
+            tour_category tc
+            left outer join tour_mst tm on(tm.category_id = tc.category_id)
+        where
+            tc.category_name = #{categoryName}
+    </select>
+
+</mapper>

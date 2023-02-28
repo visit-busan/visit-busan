@@ -6,6 +6,10 @@ spring:
     static-path-pattern: /static/**
     pathmatch:
       matching-strategy: ant_path_matcher
+  security:
+    user:
+      name: test
+      password: 1234
   datasource:
       driver-class-name: com.mysql.cj.jdbc.Driver
       url: jdbc:mysql://ohkwang.crmlwf3dfqrm.ap-northeast-2.rds.amazonaws.com:3306/visitbusan

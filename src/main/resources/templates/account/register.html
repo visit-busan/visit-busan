@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Visit Busan login page</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+    integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="/static/css/reset.css" />
+  <link rel="stylesheet" href="/static/css/common.css" />
+  <link rel="stylesheet" href="/static/css/header.css" />
+  <link rel="stylesheet" href="/static/css/index.css" />
+  <link rel="stylesheet" href="/static/css/login/register.css" />
+  <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+</head>
+
+<body>
+  <div id="container">
+    <header class="header-container">
+      <h1 class="brand-logo">
+        <a href="#"><img src="/static/image/logo.png" alt="" /></a>
+      </h1>
+      <ul class="menu-container">
+        <li><a href="#">부산에가면</a></li>
+        <li><a href="#">추천여행</a></li>
+      </ul>
+      <ul class="account-container">
+        <li><a>검색하기</a></li>
+        <li><a style="color: #2172dd">로그인</a></li>
+        <li><a>회원가입</a></li>
+        <li><a>Language</a></li>
+      </ul>
+    </header>
+
+    <main class="main-container">
+      <section class="register-form">
+        <!-- wrapper -->
+        <div id="wrapper">
+          <!-- content-->
+          <div id="content">
+            <!-- ID  -->
+            <div>
+              <h1 style="font-size: 25px; margin-bottom: 50px; margin-top: 20px; text-align: center;">
+                VISIT BUSAN LOGIN REGISTER PAGE
+              </h1>
+              <div class="subs">
+                <h3>
+                  <label for="subscription">가입유형</label>
+                </h3>
+                <span>
+                  <!-- value값 수정필요 -->
+                  <!-- 기본값 일반 -->
+                  <label><input type="radio" name="sub" value="user" checked>일반</label>
+                  <label><input type="radio" name="sub" value="writer">작가</label>
+                </span>
+              </div>
+
+              <h3 class="join_title">
+                <label for="username">아이디</label>
+              </h3>
+              <span class="box int_id">
+                <!-- 0 -->
+                <input type="text"  id="username" class="int register-input-username" maxlength="20" placeholder="사용하실 아이디를 입력하세요" />
+              </span>
+              <span class="error_next_box"></span>
+            </div>
+
+            <!-- PW1 -->
+            <div>
+              <h3 class="join_title"><label for="password">비밀번호</label></h3>
+              <span class="box int_pass">
+                <!-- 1 -->
+                <input type="text" class="register-input-password int" id="password"  maxlength="20" placeholder="비밀번호를 입력하세요." />
+                <span id="alertTxt">사용불가</span>
+                <img src="../../static/image/m_icon_check_disable.png" id="pswd1_img1" class="pswdImg" />
+              </span>
+              <span class="error_next_box"></span>
+            </div>
+
+            <!-- PW2 -->
+            <div>
+              <h3 class="join_title">
+                <label for="repassword">비밀번호 재확인</label>
+              </h3>
+              <span class="box int_pass_check">
+                <!-- 2 -->
+                <input type="text" class="register-input-repassword int" id="repassword" maxlength="20" placeholder="비밀번호를 다시한번 입력하세요." />
+                <img src="../../static/image/m_icon_check_disable.png" id="pswd2_img1" class="pswdImg" />
+              </span>
+              <span class="error_next_box"></span>
+            </div>
+
+            <!-- NAME -->
+            <div>
+              <h3 class="join_title"><label for="name">이름</label></h3>
+              <span class="box int_name">
+                <!-- 3 -->
+                <input type="text" class="register-input-name int" id="name" maxlength="3" placeholder="이름을 입력하세요" />
+              </span>
+              <span class="error_next_box"></span>
+            </div>
+
+            <!--  -->
+            <div>
+              <h3 class="join_title"><label for="birth">생년월일</label></h3>
+              <span class="box int_birth">
+                <!-- 4 -->
+                <input type="text" class="register-input-birth int" id="birth" maxlength="6" placeholder="생년월일을 입력하세요 Ex)960101" />
+              </span>
+              <span class="error_next_box"></span>
+            </div>
+
+            <!-- BIRTH -->
+            <!-- <div>
+              <h3 class="join_title"><label for="birth">생년월일</label></h3>
+
+              <div id="bir_wrap"> -->
+                <!-- BIRTH_YY -->
+                <!-- <div id="bir_yy">
+                  <span class="box">
+                    <input type="text" class="register-inputs int" id="yy" maxlength="4" placeholder="년(4자)" />
+                  </span>
+                </div> -->
+
+                <!-- BIRTH_MM -->
+                <!-- <div id="bir_mm">
+                  <span class="box">
+                    <select id="mm" class="sel">
+                      <option>월</option>
+                      <option value="01">1</option>
+                      <option value="02">2</option>
+                      <option value="03">3</option>
+                      <option value="04">4</option>
+                      <option value="05">5</option>
+                      <option value="06">6</option>
+                      <option value="07">7</option>
+                      <option value="08">8</option>
+                      <option value="09">9</option>
+                      <option value="10">10</option>
+                      <option value="11">11</option>
+                      <option value="12">12</option>
+                    </select>
+                  </span>
+                </div> -->
+
+                <!-- BIRTH_DD -->
+                <!-- <div id="bir_dd">
+                  <span class="box">
+                    <input type="text" id="dd" class="int" maxlength="2" placeholder="일" />
+                  </span>
+                </div>
+              </div>
+              <span class="error_next_box"></span>
+            </div> -->
+
+            <!-- GENDER -->
+            <div>
+              <h3 class="join_title"><label for="gender">성별</label></h3>
+              <span class="box gender_code">
+                <select id="gender" class="sel register-input-gender">
+                  <!-- 5 -->
+                  <option>성별</option>
+                  <option value="1">남자</option>
+                  <option value="2">여자</option>
+                </select>
+              </span>
+              <span class="error_next_box">필수 정보입니다.</span>
+            </div>
+
+            <!-- EMAIL -->
+            <div>
+              <h3 class="join_title">
+                <label for="email">본인확인 이메일<span class="optional">(선택)</span></label>
+              </h3>
+              <span class="box int_email">
+                <!-- 6 -->
+                <input type="text" class="register-input-email int" id="email" maxlength="100" placeholder="선택입력" />
+              </span>
+              <span class="error_next_box">이메일 주소를 다시 확인해주세요.</span>
+            </div>
+
+            <!-- MOBILE -->
+            <div>
+              <h3 class="join_title">
+                <label for="tellNumber">휴대전화</label>
+              </h3>
+              <span class="box int_mobile">
+                <!-- 7 -->
+                <input type="tel" class="register-input-tellNumber int" id="tellNumber" maxlength="16" placeholder="전화번호 입력" />
+              </span>
+              <span class="error_next_box"></span>
+            </div>
+
+            <div class="location-agree">
+              <h3>
+                <label for="subscription">위치정보 수집동의</label>
+              </h3>
+              <span>
+                <!-- value값 수정필요 -->
+                <!-- 기본값 동의 -->
+                <label><input type="radio" name="location" value="1" checked> 동의</label>
+                <label><input type="radio" name="location" value="2"> 비동의</label>
+              </span>
+            </div>
+
+            <div class="marketing-agree">
+              <h3>
+                <label for="subscription">마케팅 수신동의</label>
+              </h3>
+              <span>
+                <!-- value값 수정필요 -->
+                <!-- 기본값 동의 -->
+                <label><input type="radio" name="marketing" value="1" checked> 동의</label>
+                <label><input type="radio" name="marketing" value="2"> 비동의</label>
+              </span>
+            </div>
+
+            <!--  -->
+
+            <!-- JOIN BTN-->
+            <div class="btn_area">
+              <button type="button" id="btnJoin">
+                <span>가입하기</span>
+              </button>
+            </div>
+          </div>
+          <!-- content-->
+        </div>
+      </section>
+    </main>
+  </div>
+  <script src="../../static/js/login/register.js"></script>
+</body>
+
+</html>

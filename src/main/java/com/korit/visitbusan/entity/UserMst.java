@@ -16,10 +16,11 @@ public class UserMst {
     private String username;
 
     private String password;
+    private String repassword;
 
     private String name;
 
-    private int gender;
+    private String gender;
 
     private String birth;
 
@@ -27,11 +28,17 @@ public class UserMst {
 
     private String email;
 
+    private double userLat;
+
+    private double userLng;
+
     private String provider;
+
+    private int userMarketing;
 
     private List<RoleDtl> roleDtl;
 
     private LocalDateTime createDate;
-    
+
     private LocalDateTime updateDate;
 }

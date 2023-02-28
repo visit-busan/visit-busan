@@ -1,71 +1,198 @@
 .header-container {
-    position:relative;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
+  position: relative;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 
-    padding: 50px 20px;
+  padding: 50px 20px;
 
-    width: 100%;
-    height: 40px;
+  width: 1400px;
+  height: 40px;
 
-    background-color: white;
+  background-color: white;
 }
 
 .brand-logo {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    bottom: -70px;
-    left: 100px;
-    background-color: rgb(0, 183, 255);
-    width: 180px;
-    height: 170px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  bottom: -70px;
+  left: 0px;
+  background-color: rgb(0, 183, 255);
+  width: 180px;
+  height: 170px;
 }
 
 .brand-logo a {
-    font-size: 30px;
-    font-weight: 800;
-    color: rgb(218, 214, 214);
+  font-size: 30px;
+  font-weight: 800;
+  color: rgb(218, 214, 214);
 }
 
 .menu-container {
-    margin-left: 150px;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
+  position: relative;
+  margin-left: 150px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 
-    width: 70%;
-    height: 60px;
+  width: 70%;
+  height: 60px;
+}
+
+.menu {
+  display: flex;
+}
+
+.menu li a {
+  margin-right: 70px;
+}
+
+.menu li > ul {
+  display: none;
+}
+
+.menu:hover li > ul {
+  display: block;
+
+  position: absolute;
+  bottom: -280px;
+  right: 620px;
 }
 
 .menu-container li a {
-    font-size: 30px;
-    font-weight: 600;
-    color: rgb(0, 0, 0);
+  font-size: 30px;
+  font-weight: 600;
+  color: rgb(0, 0, 0);
 }
 
 .menu-container li a:hover {
-    text-shadow: 0 0 15px #121212aa;
+  text-shadow: 0 0 15px #121212aa;
 }
 
 .account-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* margin-right: 8px; */
 }
 
-.account-container li:nth-child(1)::after {
-    content: "";
-    margin: 0px 5px;
-    border-left: 2px solid rgb(0, 0, 0);
+.account-container li:nth-child(1)::after,
+.account-container li:nth-child(2)::after,
+.account-container li:nth-child(3)::after {
+  content: "";
+  margin: 0px 8px;
+
+  border-left: 2px solid #727272;
 }
 
 .account-container li a {
-    font-size: 18px;
-    font-weight: 600;
-    color: rgb(0, 0, 0);
+  margin-left: 8px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #727272;
 
-    cursor: pointer;
+  cursor: pointer;
+}
+
+.menu-container > li > a {
+  position: relative;
+  /* display: block; */
+  font-size: 26px;
+  color: #000000;
+  padding: 21px 35px 30px 25px;
+  text-decoration: none;
+}
+
+/* //// */
+
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,700,500);
+
+/* main Styles */
+
+html {
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  background: #fafafa;
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+.container {
+  width: 1000px;
+  margin: auto;
+}
+
+h1 {
+  /* text-align: center; */
+  margin-top: 150px;
+}
+
+/* Navigation Styles */
+
+.menu-container ul {
+  font-size: 0;
+  /* margin: 0; */
+  padding: 0;
+}
+
+.menu-container ul li {
+  display: inline-block;
+  position: relative;
+}
+
+.menu-container ul li a {
+  color: black;
+  display: block;
+  font-size: 25px;
+  padding: 15px 14px;
+  transition: 0.3s linear;
+}
+
+.menu-container ul li:hover {
+  /* background: #126d9b; */
+}
+
+.menu-container ul li ul {
+  /* border-bottom: 5px solid #2ba0db; */
+  display: none;
+  position: absolute;
+  width: 250px;
+}
+
+.menu-container ul li ul li {
+  /* border-top: 1px solid #444; */
+  display: block;
+}
+
+.menu-container ul li ul li:first-child {
+  border-top: none;
+}
+
+.menu-container ul li ul li a {
+  /* background: white; */
+  display: block;
+  padding: 10px 14px;
+}
+
+.menu-container ul li ul li a:hover {
+  background: white;
+}
+
+.menu-container .fa.fa-angle-down {
+  margin-left: 6px;
 }
