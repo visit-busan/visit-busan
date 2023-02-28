@@ -1,4 +1,4 @@
-package com.korit.visitbusan.entity;
+package com.korit.visitbusan.web.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -8,10 +8,10 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
-public class TourMst {
+public class PostRespDto {
     private int tourId;
     private int categoryId;
     private String title;
