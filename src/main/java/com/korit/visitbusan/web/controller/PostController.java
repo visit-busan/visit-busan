@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/post")
 public class PostController {
 
+    @GetMapping("")
+    public String post() { return "post/post"; }
     @GetMapping("/modify")
     public String modifyPost() {
         return "/post/modify-post";
@@ -18,7 +20,7 @@ public class PostController {
 
     @GetMapping("/register")
     public String register() {
-        return "/account/register-post";
+        return "/post/register-post";
     }
 
 }

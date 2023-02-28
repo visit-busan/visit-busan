@@ -41,6 +41,10 @@
 
 .header-title {
     margin-top: 80px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .header-title h2 {
@@ -48,6 +52,7 @@
 }
 
 .header-title h4 {
+    margin-top: 20px;
     font-size: 15px;
 }
 
@@ -56,11 +61,8 @@
     height: 100%;
 }
 
-.main-img {
+.main-img-container {
     position: relative;
-    display: flex;
-    justify-content: center;
-
     border-radius: 4px;
 
     background-color: rgb(131, 161, 125);
@@ -68,15 +70,28 @@
     height: 450px;
 }
 
-.main-info {
+.main-img {
+    width: 1000px;
+    height: 450px;
+}
+
+.main-info-container {
     position: absolute;
-    
+    bottom: 0;
+
+    display: flex;
+    justify-content: center;
+
+    width: 1000px;
+    height: 60px;
+}
+
+.main-info {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    
+
     overflow: hidden;
-    bottom: 0;
     width: 90%;
     height: 60px;
     background-color: white;
@@ -126,16 +141,81 @@
     border-bottom: 2px solid #858585;
 }
 
-.main-navigation li a {
+.main-navigation li b {
     font-size: 16px;
+    cursor: default;
 }
 
-.main-navigation li a:hover {
+.main-navigation li b:hover {
     color: blue;
 }
 
 .main-article {
     background-color: white;
     width: 1000px;
-    height: 1500px;
+    height: auto;
+
+    color: black;
+    font-weight: 300;
+    font-size: 20px;
+    line-height: 25px;
+}
+
+.main-article p {
+    margin: 10px 0 10px;
+
+    color: black;
+    font-weight: 300;
+    font-size: 20px;
+}
+
+.main-rule {
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+    border: 1px solid black;
+    border-radius: 15px;
+}
+
+.rule-container {
+    display: flex;
+    align-items: center;
+    padding: 5px 20px;
+
+}
+
+.rule-name {
+    width: 150px;
+    font-size: 20px;
+    color: #3b53a1;
+}
+
+.rule-dot {
+    font-size: 20px;
+    color: #3b53a1;
+    width: 30px;
+}
+
+.rule-content {
+    display: block;
+    font-size: 20px;
+    width: 820px;
+
+    line-height: 25px;
+}
+
+.rule-name-dot {
+    display: flex;
+    width: 180px;
+}
+
+.main-review {
+    height: 200px;
+    width: 100%;
+    background-color: aqua;
+}
+
+.off {
+    display: none;
 }
