@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class TourCategoryMst {
+public class AdminTourCategoryMst {
 
 
     @ApiModelProperty(hidden = true)

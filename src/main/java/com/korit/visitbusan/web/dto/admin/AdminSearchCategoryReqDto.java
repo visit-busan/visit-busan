@@ -3,10 +3,8 @@ package com.korit.visitbusan.web.dto.admin;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
-import java.util.List;
-
 @Data
-public class SearchCategoryReqDto {
+public class AdminSearchCategoryReqDto {
     private int page;
     private String searchValue;
     private int count;

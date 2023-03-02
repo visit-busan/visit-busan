@@ -1,12 +1,19 @@
 package com.korit.visitbusan.repository.admin;
 
-import com.korit.visitbusan.entity.admin.TourCategoryMst;
+import com.korit.visitbusan.entity.admin.AdminTourCategoryMst;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
+/*******************************************
+ *** 작성자 : 권오광
+ *  버전 : V0.1
+ *  내용 : 관광정보 카테고리 조회 데이터 처리를 위한 Repository
+ *  작성일 : 2023.03.02
+ *******************************************/
+
 @Mapper
-public interface CategoryRepository {
+public interface AdminCategoryRepository {
 
     /*
     C: 카테고리 등록
@@ -21,7 +28,7 @@ public interface CategoryRepository {
      */
 
     public int getcategoryTotalCount();
-    public List<TourCategoryMst> searchCategory();
+    public List<AdminTourCategoryMst> searchCategory();
 
 
 }

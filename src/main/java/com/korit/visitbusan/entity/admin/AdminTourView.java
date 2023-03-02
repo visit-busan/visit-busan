@@ -1,4 +1,4 @@
 package com.korit.visitbusan.entity.admin;
 
-public class TourMst {
+public class AdminTourView {
 }
