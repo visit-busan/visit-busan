@@ -20,19 +20,7 @@
 <body>
   <div id="container">
     <header class="header-container">
-      <h1 class="brand-logo">
-        <a href="#"><img src="/static/image/logo.png" alt="" /></a>
-      </h1>
-      <ul class="menu-container">
-        <li><a href="#">부산에가면</a></li>
-        <li><a href="#">추천여행</a></li>
-      </ul>
-      <ul class="account-container">
-        <li><a>검색하기</a></li>
-        <li><a style="color: #2172dd">로그인</a></li>
-        <li><a>회원가입</a></li>
-        <li><a>Language</a></li>
-      </ul>
+
     </header>
 
     <main class="main-container">
@@ -50,18 +38,40 @@
           <div class="btn-area">
             <button id="btn" type="submit">로그인</button>
           </div>
-          <div class="caption">
-            <a href="">비밀번호를 잊으셨습니까??</a>
+          <div class="caption-find">
+            <a href="http://localhost:8000/account/find/username" class="findid">아이디</a>
+            /
+            <a href="http://localhost:8000/account/find/password" class="findpw">비밀번호 찾기</a>
+            |
+            <a href="http://localhost:8000/account/register" class="join">회원가입</a>
           </div>
           <div class="caption">
-            <p><a href="" class="googleL">구글 로그인</a></p>
-            <p><a href="" class="naverL">네이버 로그인</a></p>
+            <p>
+            <div class="google"><img src="/static/image/google-login-bar-white.png" style="width: 200px; height: 70px;"
+                onclick="location.href= '/oauth2/authorization/google'"></div>
+            </p>
+            <p>
+            <div class="naver"><img src="/static/image/naver-lgoin-bar-green (1).png"
+                style="width: 200px; height: 70px;" onclick="location.href= '/oauth2/authorization/naver'"></div>
+            </p>
           </div>
         </form>
       </section>
     </main>
+    <div class="footer-top">
+
+    </div>
+
+    <footer class="footer-container">
+
+    </footer>
   </div>
   <script src="/static/js/login/login.js"></script>
+  <script src="/static/js/account/principal.js"></script>
+  <script src="/static/js/component/header.js"></script>
+  <script src="/static/js/component/footer.js"></script>
+  <script src="/static/js/index.js"></script>
+
 </body>
 
 </html>

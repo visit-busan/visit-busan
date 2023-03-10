@@ -5,9 +5,9 @@ html {
 
 .main-container {
   padding-top: 100px;
-  height: 1250px;
+  height: 1300px;
   display: block;
-  background-size: 130%;
+  background-size: 140%;
 }
 
 body {
@@ -86,7 +86,6 @@ input {
 }
 
 .step_url {
-  /*@naver.com*/
   position: absolute;
   top: 16px;
   right: 13px;
@@ -105,6 +104,16 @@ input {
   cursor: pointer;
 }
 
+.register-error {
+  margin-top: 5px;
+  font-size: 13px;
+  color: red;
+}
+.register-error-text {
+  margin-top: 5px;
+  font-size: 13px;
+  color: red;
+}
 #bir_wrap {
   display: table;
   width: 100%;
@@ -135,9 +144,8 @@ select {
   width: 100%;
   height: 29px;
   font-size: 15px;
-  background: #fff url(../../../static/image/sel_arr_2x.gif) 100% 50% no-repeat;
+  /* background: #fff url(../../../static/image/sel_arr_2x.gif) 100% 50% no-repeat; */
   background-size: 20px 8px;
-  -webkit-appearance: none;
   display: inline-block;
   text-align: start;
   border: none;

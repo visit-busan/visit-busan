@@ -20,144 +20,29 @@
   <link rel="stylesheet" href="/static/css/common.css" />
   <link rel="stylesheet" href="/static/css/header.css" />
   <link rel="stylesheet" href="/static/css/post/index.css" />
-
   <link rel="stylesheet" href="/static/css/index.css" />
   <link rel="stylesheet" href="/static/css/post/kakaomap.css" />
-
 </head>
 
 <body>
   <div id="container">
     <header class="header-container">
-      <h1 class="brand-logo">
-        <a href="#"><img src="/static/image/logo.png" alt="" /></a>
-      </h1>
-      <div class="menu-container">
-        <ul class="all-menu">
-          <li class="sub-menu">
-            <a href="/templates/index.html">HOME</a>
-          </li>
-          <li>
-            <a href="#">부산에가면<i class="fa fa-angle-down"></i></a>
-            <ul>
-              <li><a href="#">명소</a></li>
-              <li><a href="#">음식</a></li>
-              <li><a href="#">숙박</a></li>
-              <li><a href="#">쇼핑</a></li>
-              <li><a href="#">축제</a></li>
-              <li><a href="#">내주변</a></li>
-            </ul>
-          </li>
-          <li class="sub-menu">
-            <a href="#">추천여행<i class="fa fa-angle-down"></i></a>
-            <ul>
-              <li>
-                <a href="https://www.visitbusan.net/index.do?menuCd=DOM_000000202012000000">일정여행</a>
-              </li>
-              <li>
-                <a href="https://www.visitbusan.net/index.do?menuCd=DOM_000000202002000000">테마여행</a>
-              </li>
-              <li>
-                <a href="https://www.visitbusan.net/index.do?menuCd=DOM_000000202003000000">미식투어</a>
-              </li>
-              <li>
-                <a href="https://www.visitbusan.net/index.do?menuCd=DOM_000000202008000000">해양·체험</a>
-              </li>
-              <li>
-                <a href="https://www.visitbusan.net/index.do?menuCd=DOM_000000202011000000">부산여행 심리 테스트</a>
-              </li>
-            </ul>
-          </li>
-          <li class="sub-menu">
-            <a href="#">여행준비<i class="fa fa-angle-down"></i></a>
-            <ul>
-              <li>
-                <a
-                  href="https://www.visitbusan.net/board/list.do?boardId=BBS_0000007&menuCd=DOM_000000203001000000&contentsSid=61">여행큐레이션</a>
-              </li>
-              <li>
-                <a
-                  href="https://www.visitbusan.net/board/list.do?boardId=BBS_0000007&menuCd=DOM_000000203001000000&contentsSid=61">가이드북&지도</a>
-              </li>
-              <li>
-                <a href="https://www.visitbusan.net/index.do?menuCd=DOM_000000203013000000">문화관광해설사</a>
-              </li>
-              <li>
-                <a href="https://www.visitbusan.net/index.do?menuCd=DOM_000000203014000000">여행준비정보</a>
-              </li>
-              <li>
-                <a href="https://www.visitbusan.net/index.do?menuCd=DOM_000000203015000000">뉴스레터</a>
-              </li>
-              <li>
-                <a href="https://www.visitbusan.net/index.do?menuCd=DOM_000000203016000000">관광안내소</a>
-              </li>
-            </ul>
-          </li>
-          <li class="sub-menu">
-            <a href="#">유용한정보<i class="fa fa-angle-down"></i></a>
-            <ul>
-              <li>
-                <a
-                  href="https://www.visitbusan.net/board/list.do?boardId=BBS_0000001&menuCd=DOM_000000204001000000&contentsSid=71">공지</a>
-              </li>
-              <li>
-                <a href="https://www.visitbusan.net/index.do?menuCd=DOM_000000204002000000">이벤트&설문</a>
-              </li>
-              <li>
-                <a
-                  href="https://www.visitbusan.net/schedule/list.do?boardId=BBS_0000009&menuCd=DOM_000000204012000000&contentsSid=447">공연&행사</a>
-              </li>
-              <li>
-                <a href="https://www.visitbusan.net/index.do?menuCd=DOM_000000204005000000">부산여행상품</a>
-              </li>
-              <li>
-                <a href="https://www.visitbusan.net/index.do?menuCd=DOM_000000204021000000">부산관광브랜드</a>
-              </li>
-              <li>
-                <a
-                  href="https://www.visitbusan.net/board/list.do?boardId=BBS_0000008&menuCd=DOM_000000204008000000&contentsSid=78">부산여행영상</a>
-              </li>
-              <li>
-                <a href="https://www.visitbusan.net/index.do?menuCd=DOM_000000204009000000">부산여행사진</a>
-              </li>
-              <li>
-                <a href="https://www.visitbusan.net/index.do?menuCd=DOM_000000204007000000">여행공유</a>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </div>
 
-      <ul class="account-container">
-        <li><a href="/">검색하기</a></li>
-        <li><a href="account/login" style="color: #2172dd">로그인</a></li>
-        <li><a href="account/register">회원가입</a></li>
-      </ul>
-
-      <select style="margin-left: 8px">
-        <option value="">Language</option>
-        <option value="/kr/index.do">한국어</option>
-        <option value="/en/index.do">English</option>
-        <option value="/zhs/index.do">中文(简体)</option>
-        <option value="/zht/index.do">中文(繁體)</option>
-        <option value="/ja/index.do">日本語</option>
-      </select>
     </header>
-
     <main class="main-container" style="background: url(/static/image/indexbackground.jpg); background-size: 100%;">
-      <div class="categoryAndSearch">
+      <div class="categoryAndSearch" style="margin-top: 40px;">
         <!--카테고리 셀렉-->
         <div id="category-select">
           <span class="select-box">
             <select class="category">
               <option>전체</option>
-              <option value="01">option1</option>
-              <option value="02">option2</option>
-              <option value="03">option3</option>
-              <option value="04">option4</option>
-              <option value="05">option5</option>
-              <option value="06">option6</option>
-              <option value="07">option7</option>
+              <option value="1">카테고리</option>
+              <option value="2">카테고리</option>
+              <option value="3">카테고리</option>
+              <option value="4">카테고리</option>
+              <option value="5">카테고리</option>
+              <option value="6">카테고리</option>
+              <option value="7">카테고리</option>
             </select>
           </span>
         </div>
@@ -166,11 +51,13 @@
             <span class="search-type-text">명소검색</span>
             <input type="text" value="" id="keyword" size="15" class="search-input" placeholder="이곳에 검색할 장소를 입력해주세요.">
             <button type="submit" class="search-button">
+              <!-- <button type="submit" class="search-button" onclick="getLocation()"> -->
               <i class="fa-solid fa-magnifying-glass"></i>
             </button>
           </form>
         </div>
       </div>
+      <p id="demo"></p>
       <!-- 카카오맵api http://localhost:5501 -->
 
       <div class="map_wrap">
@@ -194,135 +81,48 @@
     </main>
     <!-- footer-top -->
     <div class="footer-top">
-      <div class="footer-top-inner">
-        <p class="footer-top-title">
-          <img src="/static/image/sns1.png" alt="" /> VISIT BUSAN SOCIAL MEDIA
-        </p>
-        <div class="footer-top-social">
-          <a href="#"><img src="/static/image/sns2.png" alt="" /></a>
-          <a href="#"><img src="/static/image/sns3.png" alt="" /></a>
-          <a href="#"><img src="/static/image/sns4.png" alt="" /></a>
-          <a href="#"><img src="/static/image/sns5.png" alt="" /></a>
-        </div>
-        <div class="footer-top-menu">
-          <ul>
-            <li class="gotobusan">
-              <h3>부산에가면</h3>
-              <ul>
-                <li>명소</li>
-                <li>음식</li>
-                <li>숙박</li>
-                <li>쇼핑</li>
-                <li>축제</li>
-                <li>내주변</li>
-              </ul>
-            </li>
-
-            <li class="chuchun">
-              <h3>추천여행</h3>
-              <ul>
-                <li>일정여행</li>
-                <li>테마여행</li>
-                <li>미식투어</li>
-                <li>해양/체험</li>
-                <li>부산여행</li>
-                <li>심리테스트</li>
-              </ul>
-            </li>
-
-            <li class="ready">
-              <h3>여행준비</h3>
-              <ul>
-                <li>여행큐레이션</li>
-                <li>가이드북&지도</li>
-                <li>문화관광해설자</li>
-                <li>뉴스레터</li>
-                <li>관광안내소</li>
-              </ul>
-            </li>
-
-            <li class="data">
-              <h3>유용한정보</h3>
-              <ul>
-                <li>공지</li>
-                <li>이벤트&설문</li>
-                <li>공연&행사</li>
-                <li>부산여행상품</li>
-                <li>부산여행영상</li>
-                <li>부산여행사진</li>
-                <li>여행공유</li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-      </div>
+      
     </div>
     <p id="result"></p>
     <footer class="footer-container">
-      <div class="footer-left footer-content">
-        <h1 class="footer-title">제공</h1>
-        <img src="/static/image/logo.png" class="footer-logo" />
-        <div class="footer-contract">
-          <b><a class="a-point" href="">개인정보처리방침</a></b>
-          <b><a href="">저작권보호정책</a></b>
-          <b><a href="">약관</a></b>
-          <b><a href="">행정서비스현황</a></b>
-          <b><a href="">뷰어다운로드</a></b>
-        </div>
-        <h2>Copyright Busan Metropolitan City. All rights reserved.</h2>
-      </div>
-      <div class="footer-center footer-content">
-        <h1 class="footer-title">관광 문의</h1>
-        <h2>
-          <b class="footer-number"><img src="/static/image/footer3.png" alt="" /></b>
-        </h2>
-        <img src="/static/image/WAQC.png" alt="" class="qualify" />
-      </div>
-      <div class="footer-right footer-content">
-        <h1 class="footer-title">민원 대표 전화</h1>
-        <h2><b class="footer-number">051-120</b></h2>
-        <p class="footer-text">평일 08:30 - 18:30</p>
-        <p class="footer-text">※야간/공휴일 등 근무시간외는 당직실로 전환.</p>
-        <div class="buttons">
-          <div>
-            <a href="https://www.busandabom.net/index.nm" class="footer-box">부산문화포탈 다봄<img
-                src="/static/image/footer4.png" alt="" /></a>
-            <br />
-            <a href="https://www.visitbusan.net/index.do?menuCd=DOM_000000202012000000#" class="footer-box box2">여행 상담
-              <img src="/static/image/footer4.png" alt="" /></a>
-          </div>
-
-        </div>
-      </div>
+      
     </footer>
   </div>
+  <script src="/static/js/account/principal.js"></script>
+  <script src="/static/js/component/header.js"></script>
+  <script src="/static/js/component/footer.js"></script>
+  <script src="/static/js/index.js"></script>
   <script type="text/javascript" src="/static/js/kakaomap/kakao.js"></script>
   <script charset="UTF-8" src="https://t1.daumcdn.net/mapjsapi/js/main/4.4.8/kakao.js"></script>
   <script charset="UTF-8" src="https://t1.daumcdn.net/mapjsapi/js/libs/services/1.0.2/services.js"></script>
-  
+
   <script>
-    // 마커를 담을 배열입니다
     var markers = [];
+    var mapContainer = null;
+    var map = null;
+    var ps = null;
+    var infowindow = null;
 
-    var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-      mapOption = {
-        center: new kakao.maps.LatLng(35.1795, 129.0756), // 지도의 중심좌표
-        level: 13 // 지도의 확대 레벨
-      };
+    function loadMap(lat, long) {
+      markers = [];
+      mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+        mapOption = {
+          // center: new kakao.maps.LatLng(lat, long), // 지도의 중심좌표
+          center: new kakao.maps.LatLng(lat, long), // 지도의 중심좌표
+          level: 5 // 지도의 확대 레벨
+        };
+      ///////////////////////////
+      // 지도를 생성합니다    
+      map = new kakao.maps.Map(mapContainer, mapOption);
 
-    // 지도를 생성합니다    
-    var map = new kakao.maps.Map(mapContainer, mapOption);
+      // 장소 검색 객체를 생성합니다
+      ps = new kakao.maps.services.Places();
 
-    // 장소 검색 객체를 생성합니다
-    var ps = new kakao.maps.services.Places();
+      // 검색 결과 목록이나 마커를 클릭했을 때 장소명을 표출할 인포윈도우를 생성합니다
+      infowindow = new kakao.maps.InfoWindow({ zIndex: 1 });
 
-    // 검색 결과 목록이나 마커를 클릭했을 때 장소명을 표출할 인포윈도우를 생성합니다
-    var infowindow = new kakao.maps.InfoWindow({ zIndex: 1 });
+    }
 
-    // 키워드로 장소를 검색합니다
-    searchPlaces();
-
-    // 키워드 검색을 요청하는 함수입니다
     function searchPlaces() {
 
       var keyword = document.getElementById('keyword').value;
@@ -337,7 +137,6 @@
       ps.keywordSearch(keyword, placesSearchCB);
     }
 
-    // 장소검색이 완료됐을 때 호출되는 콜백함수 입니다
     function placesSearchCB(data, status, pagination) {
       if (status === kakao.maps.services.Status.OK) {
 
@@ -518,6 +317,26 @@
         el.removeChild(el.lastChild);
       }
     }
+
+    getLocation();
+
+    function getLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+      }
+    }
+
+    function showPosition(position) {
+
+      let lat = position.coords.latitude;
+      let long = position.coords.longitude;
+      console.log(lat);
+      console.log(long);
+      loadMap(lat, long);
+    }
+    // window.location(showPosition);
+    // 마커를 담을 배열입니다
+
   </script>
 
 </body>

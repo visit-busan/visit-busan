@@ -1,5 +1,6 @@
 package com.korit.visitbusan.config;
 
+import com.korit.visitbusan.security.PrincipalOAuth2DetailsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
@@ -20,6 +21,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+
+    private final PrincipalOAuth2DetailsService principalOauth2DetailsService;
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -36,7 +39,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
         http.httpBasic().disable();
         http.authorizeRequests()
-                .antMatchers("/mypage/**", "/security/**", "/write")
+                .antMatchers("/mypage/**", "/security/**", "/write" , "/api/account/delete/**")
                 .authenticated()
                 .antMatchers("/admin/**")
                 .hasRole("ADMIN")
@@ -47,11 +50,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest()
                 .permitAll()
                 .and()
+
                 .formLogin()
                 .loginPage("/account/login")
                 .loginProcessingUrl("/account/login")
                 .successForwardUrl("/index")
                 .failureForwardUrl("/account/login/error")
+                .defaultSuccessUrl("/index")
+
+                .and()
+                .oauth2Login()
+                .userInfoEndpoint()
+                .userService(principalOauth2DetailsService)
+
+                .and()
                 .defaultSuccessUrl("/index");
+
+
     }
 }

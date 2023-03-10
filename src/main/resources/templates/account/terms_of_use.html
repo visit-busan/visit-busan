@@ -20,24 +20,12 @@
 <body>
   <div id="container">
     <header class="header-container">
-      <h1 class="brand-logo">
-        <a href="#"><img src="/static/image/logo.png" alt="" /></a>
-      </h1>
-      <ul class="menu-container">
-        <li><a href="#">부산에가면</a></li>
-        <li><a href="#">추천여행</a></li>
-      </ul>
-      <ul class="account-container">
-        <li><a>검색하기</a></li>
-        <li><a style="color: #2172dd">로그인</a></li>
-        <li><a>회원가입</a></li>
-        <li><a>Language</a></li>
-      </ul>
+
     </header>
 
     <main class="main-container">
       <section class="term-form">
-        <textarea id="txt" readonly>
+        <textarea id="txt" style="margin: 20px;" readonly>
             제 1 조 (목적)
 이 약관은 비짓부산(VisitBusan)(이하 "회사"라 함)가 인터넷상에서 제공하는 모든 온라인서비스(이하 "서비스"라 함)의 이용조건 및 절차에 관한 기본사항을 정하는데 목적이 있습니다.
 
@@ -194,15 +182,39 @@
 
 출력하기
             </textarea>
+
         <div class="agree">
-          <form method="POST">
-            <label><input type="checkbox" name="agree" value="1">위 내용에 동의합니다.</label>
-            <input class="agreeNextPage" type="submit" value="회원가입 페이지로">
+          <label><input type="checkbox" class="agree-check" name="req">위 내용에 동의합니다.</label>
+          <br><button class="agreeNextPage" type="submit" value="">회원가입 페이지로</button>
         </div>
+
       </section>
+
     </main>
+
+    <div class="footer-top">
+
+    </div>
+
+    <footer class="footer-container">
+
+    </footer>
   </div>
-  <script src="../../static/js/login/register.js"></script>
+  <script src="/static/js/account/principal.js"></script>
+  <script src="/static/js/component/header.js"></script>
+  <script src="/static/js/component/footer.js"></script>
+  <script src="/static/js/index.js"></script>
+  <script src="/static/js/login/term_of_user.js"></script>
+  <script>
+    $(".menu-container li").hover(
+      function () {
+        $("ul", this).stop().slideDown(200);
+      },
+      function () {
+        $("ul", this).stop().slideUp(200);
+      }
+    );
+  </script>
 </body>
 
 </html>

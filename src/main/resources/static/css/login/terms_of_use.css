@@ -40,9 +40,16 @@ body {
 
 .agree {
   float: right;
-  display: inline-flexbox;
+  margin-right: 60px;
+}
+.agree-check {
+  margin-right: 0px;
 }
 .agreeNextPage{
+  width: 137px;
   background-color: #f5f6f7d2;
   border-radius: 3px;
+  /* margin-left: 30px; */
+  margin-top: 5px;
 }
+

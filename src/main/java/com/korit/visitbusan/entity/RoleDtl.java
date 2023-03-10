@@ -22,6 +22,5 @@ public class RoleDtl {
     private RoleMst roleMst;
 
     private LocalDateTime createDate;
-
     private LocalDateTime updateDate;
 }

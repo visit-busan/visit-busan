@@ -6,12 +6,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 @Builder
-public class Find {
-
+@AllArgsConstructor
+@NoArgsConstructor
+public class FindUsername {
     private String name;
-
     private String tellNumber;
 }

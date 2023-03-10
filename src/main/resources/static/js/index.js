@@ -1,5 +1,6 @@
 window.onload = () => {
     HeaderService.getInstance().loadHeader();
+    FooterService.getInstance().loadFooter();
     ComponentEvent.getInstance().addClickEventSearchButton();
 }
 
@@ -12,19 +13,19 @@ class ComponentEvent {
         return this.#instance
     }
 
-    addClickEventSearchButton() {
-        const searchButton = document.querySelector(".search-button");
-        const searchInput = document.querySelector(".search-input");
-        searchButton.onclick = () => {
-            location.href = `http://localhost:8000/search?searchValue=${searchInput.value}`;
-        }
+    // addClickEventSearchButton() {
+    //     const searchButton = document.querySelector(".search-button");
+    //     const searchInput = document.querySelector(".search-input");
+    //     searchButton.onclick = () => {
+    //        location.href = `http://localhost:8000/search?searchValue=${searchInput.value}`;
+    //     }
 
-        searchInput.onkeyup = () => {
-            console.log(window.event.keyCode);
-            if(window.event.keyCode == 13) {
-                searchButton.click();
-            }
-        }
-    }
+    //     searchInput.onkeyup = () => {
+    //         console.log(window.event.keyCode);
+    //         if(window.event.keyCode == 13) {
+    //             searchButton.click();
+    //         }
+    //     }
+    // }
 }
 

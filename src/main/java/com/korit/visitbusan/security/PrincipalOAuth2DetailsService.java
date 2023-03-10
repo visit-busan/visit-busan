@@ -4,6 +4,7 @@ package com.korit.visitbusan.security;
 import com.korit.visitbusan.entity.UserMst;
 import com.korit.visitbusan.repository.AccountRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 import java.util.Map;
 import java.util.UUID;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class PrincipalOAuth2DetailsService extends DefaultOAuth2UserService {
@@ -33,7 +35,6 @@ public class PrincipalOAuth2DetailsService extends DefaultOAuth2UserService {
         String email = (String) attributes.get("email");
         String username = email.substring(0, email.indexOf("@"));
         String provider = userRequest.getClientRegistration().getClientName();
-
         UserMst userMst = accountRepository.findByUsername(username);
 
         if (userMst == null) {
