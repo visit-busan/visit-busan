@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class AdminTourCategoryView {
+public class AdminCategoryView {
 
     @ApiModelProperty(value="카테고리 순번", example="1")
     private int categoryId;

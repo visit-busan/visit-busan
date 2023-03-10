@@ -10,8 +10,8 @@
     <link rel="stylesheet" href="/static/css/admin/common.css">
     <link rel="stylesheet" href="/static/css/admin/gnb.css">
     <link rel="stylesheet" href="/static/css/admin/lnb.css">
-    <link rel="stylesheet" href="/static/css/admin/user/user_common.css">
-    <link rel="stylesheet" href="/static/css/admin/user/role/user_role.css">
+    <link rel="stylesheet" href="/static/css/admin/tour/tour_common.css">
+    <link rel="stylesheet" href="/static/css/admin/tour/manage/tour_tag.css">
     
 </head>
 <body>
@@ -49,7 +49,7 @@
                 </nav>
             </aside> 
             <div class="content-container">
-                <h1 class="content-title">사용자 권한 관리</h1>
+                <h1 class="content-title">관광태그 관리</h1>
                 <div class="content-main">
                     <div class="content-items">
                         <div class="left-items">
@@ -57,11 +57,12 @@
                             <button type="button" class="delete-button">삭제</button>
                         </div>
                         <div class="right-items">
-                            <select class="condition-select">
-                                <option value="userid">권한이름</option>
-                                <option value="username">권한</option>
+                            <select class="category-select">
+                                <option value="">전체조회</option>
+                                <option value="명소">명소</option>
+                                <option value="맛집">맛집</option>
                             </select>
-                            <input type="search" class="search-input" placeholder="검색어를 입력하세요.">
+                            <input type="search" class="search-input">
                             <button type="button" class="search-button">검색</button>
                         </div>
                     </div>
@@ -70,8 +71,10 @@
                             <thead>
                                 <tr>
                                     <th><input type="checkbox" class="delete-checkall"></th>
-                                    <th>권한이름</th>
-                                    <th>권한</th>
+                                    <th>태그 코드</th>
+                                    <th>관광지 분류</th>
+                                    <th>태그명</th>
+                                    <th>작성자</th>
                                     <th>관리</th>
                                 </tr>
                             </thead>

@@ -6,9 +6,9 @@ import lombok.Data;
 import javax.validation.constraints.NotBlank;
 
 @Data
-public class AdminSearchCategoryReqDto {
+public class AdminSearchTourReqDto {
 
-    @ApiModelProperty(value = "검색값", example = "도보")
+    @ApiModelProperty(value = "검색값", example = "블라블라블라")
     private String searchValue;
 
     @NotBlank
@@ -18,7 +18,7 @@ public class AdminSearchCategoryReqDto {
     @ApiModelProperty(value = "페이지 번호", example = "1")
     private int page;
 
-    @ApiModelProperty(value = "페이지당 출력 카테고리 개수", example = "5")
+    @ApiModelProperty(value = "페이지당 출력 관광지 개수", example = "5")
     private int count;
 
     @ApiModelProperty(hidden = true)

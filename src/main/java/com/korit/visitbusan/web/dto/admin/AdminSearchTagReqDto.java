@@ -6,7 +6,7 @@ import lombok.Data;
 import javax.validation.constraints.NotBlank;
 
 @Data
-public class AdminSearchCategoryReqDto {
+public class AdminSearchTagReqDto {
 
     @ApiModelProperty(value = "검색값", example = "도보")
     private String searchValue;

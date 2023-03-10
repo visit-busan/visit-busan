@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>시립도서관</title>
+    <title>visit-busan 관리자 페이지</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="/static/css/admin/reset.css">
     <link rel="stylesheet" href="/static/css/admin/common.css">
@@ -18,7 +18,7 @@
     <div id="container">
         <header class="header-container">
             <div class="brand-logo">
-                <a href="/templates/admin/dashboard/tour_dashboard.html"><img src="/static/image/logo.png" alt=""></a>
+                <a href="/admin/dashboard"><img src="/static/image/logo.png" alt=""></a>
             </div>
             <ul class="account-container">
                 <li><a href="/account/logout">로그아웃</a></li>
@@ -33,20 +33,21 @@
                 <nav class="main-menu">
                     <h2 class="title-text-h2">대시보드</h2>
                     <ul class="sub-menu">
-                        <a href="/templates/admin/dashboard/tour_dashboard.html"><li>대시보드</li></a>
+                        <a href="/admin/dashboard"><li>대시보드</li></a>
                     </ul>
                     <h2 class="title-text-h2">관광정보 관리</h2>
                     <ul class="sub-menu">
-                        <a href="/templates/admin/tour/category/tour_category.html"><li>관광지 분류</li></a>
-                        <a href="/templates/admin/tour/manage/tour_search.html"><li>관광정보 관리</li></a>
+                        <a href="/admin/tour/category"><li>관광지 분류</li></a>
+                        <a href="/admin/tour/manage/tour_search"><li>관광정보 관리</li></a>
+                        <a href="/admin/tour/manage/tour_tag"><li>관광태그 관리</li></a>
                     </ul>
                     <h2 class="title-text-h2">사용자 관리</h2>
                     <ul class="sub-menu">
-                        <a href="/templates/admin/user/user_info.html"><li>사용자 정보 관리</li></a>
-                        <a href="/templates/admin/user/user_role.html"><li>사용자 권한 관리</li></a>
+                        <a href="/admin/user/info"><li>사용자 정보 관리</li></a>
+                        <a href="/admin/user/role"><li>사용자 권한 관리</li></a>
                     </ul>
                 </nav>
-            </aside>    
+            </aside> 
             <div class="content-container">
                 <h1 class="content-title">관광정보 관리</h1>
                 <div class="content-main">

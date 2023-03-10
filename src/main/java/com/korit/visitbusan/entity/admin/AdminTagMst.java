@@ -12,17 +12,17 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class AdminTourCategoryMst {
+public class AdminTagMst {
 
 
     @ApiModelProperty(hidden = true)
-    private int categoryId;
-
-    @ApiModelProperty(value = "등록자 ID", example = "admin")
-    private int username;
+    private int tagId;
 
     @ApiModelProperty(value = "카테고리 이름", example = "도보여행")
     private String categoryName;
+
+    @ApiModelProperty(value = "등록자 ID", example = "admin")
+    private String username;
 
     @ApiModelProperty(value= "생성일", example = "2023-02-28")
     private LocalDateTime createDate;
