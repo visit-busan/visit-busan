@@ -39,11 +39,82 @@
     font-size: 20px;
 }
 
+.category-monitor {
+    font-size: 20px;
+}
+
 .header-title {
     margin-top: 80px;
+    width: 100%;    
+}
+
+.category-tags-selector {
+    display: flex;
+
+    width: 100%;
+    height: 50px;
+
+    border: 1px solid black;
+    border-radius: 3px;
+}
+
+.category-selector-container {
+    display: flex;
+    align-items: center;
+    width: 25%;
+}
+
+.category-selector-container h2 {
+    height: 100%;
+    margin: 0;
+    line-height: 50px;
+}
+
+.category-selector-container select {
+    margin-left: 20px;
+    height: 30px;
+}
+
+.tags-selector-container {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 75%;
+    height: 100%;
+
+}
+
+.tags-selector-container h2 {
+    height: 100%;
+    width: 70px;
+
+    margin: 0 10px 0 0;
+    
+    text-align: center;
+    line-height: 24px;
+    font-size: 15px;
+}
+
+.tag-button {
+    border: 1px solid black;
+    border-radius: 15px;
+
+    height: 30px;
+    padding: 0 10px;
+    margin-right: 5px;
+    background-color: azure;
+    
+    text-align: center;
+    line-height: 30px;
+    cursor: pointer;
+}
+
+.selected {
+    background-color: rgb(198, 255, 255);
 }
 
 .main-title {
+    width: 100%;
     font-size: 40px;
     display: block;
     margin: 0 auto;
@@ -51,6 +122,7 @@
 }
 
 .sub-title  {
+    width: 100%;
     font-size: 15px;
     display: block;
     margin: 0 auto;
@@ -62,9 +134,27 @@
     height: 100%;
 }
 
+.thumbnail-with-form {
+    border: 1px solid black;
+    border-radius: 5px;
+    width: 1000px;
+    height: 350px;
+}
+
 .thumbnail-form {
     width: 1000px;
     height: 240px;
+}
+
+.thumbnail-with-link {
+    border: 1px solid black;
+    border-radius: 5px;
+    width: 1000px;
+    height: 100px;
+}
+
+.thumbnail-link {
+    width: 100%;
 }
 
 .thumbnail-container {
@@ -84,7 +174,24 @@
 }
 
 .thumbnail-file {
-    display: none;
+}
+
+.mainimg-with-form {
+    border: 1px solid black;
+    border-radius: 5px;
+    width: 1000px;
+    height: 570px;
+}
+
+.mainimg-with-link {
+    border: 1px solid black;
+    border-radius: 5px;
+    width: 1000px;
+    height: 100px;
+}
+
+.mainimg-link {
+    width: 100%;
 }
 
 .mainimg-container {
@@ -94,7 +201,7 @@
     border-radius: 4px;
 
     background-color: rgba(242, 242, 242, 0.806);
-    width: 1000px;
+    width: 100%;
     height: 450px;
 }
 
@@ -104,7 +211,6 @@
 }
 
 .mainimg-file {
-    display: none;
 }
 
 .main-navigation {

@@ -31,4 +31,181 @@
             tc.category_name = #{categoryName}
     </select>
 
+    <select id="searchTour" resultType="com.korit.visitbusan.entity.SearchResult"
+            parameterType="com.korit.visitbusan.web.dto.SearchReqDto">
+        select
+            tm.tour_id as tourId,
+            tm.title,
+            tm.subtitle,
+            tm.thumbnail_image as thumbnailImage,
+            tm.contents,
+            tm.view_count as viewCount,
+            vc.comment_count as commentCount,
+            lc.like_count as likeCount,
+            tag.tag_name
+        from
+            tour_mst tm
+            left outer join (SELECT
+                                tour_id,
+                                count(*) as comment_count
+                            FROM
+                                comment_mst
+                            group by
+                                tour_id) vc on (vc.tour_id = tm.tour_id)
+            left outer join (select
+                                tour_id,
+                                count(*) as like_count
+                            from
+                                tour_like
+                            group by
+                                tour_id) lc on (lc.tour_id = tm.tour_id)
+            left outer join (select
+                                td.tour_id as tour_id,
+                                tt.tag_name as tag_name
+                            from
+                                tag_dtl td
+                                left outer join tour_tag tt on (tt.tag_id = td.tag_id)
+                            where
+                                tag_name = #{tagName}) tag on (tag.tour_id = tm.tour_id)
+        where
+            1 = 1
+        <if test='searchValue != null and searchValue != ""'>
+            and (
+                tm.title like CONCAT('%', #{searchValue}, '%')
+            or  tm.subtitle like CONCAT('%', #{searchValue}, '%')
+            or  tm.contents like CONCAT('%', #{searchValue}, '%')
+            )
+        </if>
+        <if test='categoryId != null and categoryId != ""'>
+            and	tm.category_id = #{categoryId}
+        </if>
+        <if test='tagName != null and tagName != ""'>
+            and tag.tag_name = #{tagName}
+        </if>
+        order by
+        <choose>
+            <when test='order == "view"'>tm.view_count desc</when>
+            <when test='order == "like"'>lc.like_count desc</when>
+        </choose>
+        <if test='order == ""'>
+            tm.tour_id
+        </if>
+        limit #{index}, 8;
+    </select>
+
+    <select id="getTotalCount" resultType="integer"
+            parameterType="com.korit.visitbusan.web.dto.SearchReqDto">
+        select
+            count(*)
+        from
+            tour_mst tm
+            left outer join (SELECT
+                                tour_id,
+                                count(*) as comment_count
+                            FROM
+                                comment_mst
+                            group by
+                                tour_id) vc on (vc.tour_id = tm.tour_id)
+            left outer join (select
+                                tour_id,
+                                count(*) as like_count
+                            from
+                                tour_like
+                            group by
+                                tour_id) lc on (lc.tour_id = tm.tour_id)
+            left outer join (select
+                                td.tour_id as tour_id,
+                                tt.tag_name as tag_name
+                            from
+                                tag_dtl td
+                                left outer join tour_tag tt on (tt.tag_id = td.tag_id)
+                            where
+                                tag_name = #{tagName}) tag on (tag.tour_id = tm.tour_id)
+        where
+            1 = 1
+        <if test='searchValue != null and searchValue != ""'>
+            and (
+                tm.title like CONCAT('%', #{searchValue}, '%')
+            or  tm.subtitle like CONCAT('%', #{searchValue}, '%')
+            or  tm.contents like CONCAT('%', #{searchValue}, '%')
+            )
+        </if>
+        <if test='categoryId != null and categoryId != ""'>
+            and	tm.category_id = #{categoryId}
+        </if>
+        <if test='tagName != null and tagName != ""'>
+            and tag.tag_name = #{tagName}
+        </if>
+        order by
+        <choose>
+            <when test='order == "view"'>tm.view_count desc</when>
+            <when test='order == "like"'>lc.like_count desc</when>
+        </choose>
+        <if test='order == ""'>
+            tm.tour_id
+        </if>
+        ;
+    </select>
+
+    <select id="getTags" resultType="string">
+        select
+            tag_name
+        from
+            tour_tag
+        where
+            category_id = #{categoryId};
+    </select>
+
+    <select id="getCategoryName" resultType="string">
+        select
+            category_name
+        from
+            tour_category
+        where
+            category_id = #{categoryId};
+    </select>
+
+    <!-- <select id="getTotalCount" resultType="integer"-->
+<!--            parameterType="com.korit.visitbusan.web.dto.SearchReqDto">-->
+<!--        select-->
+<!--            count(*)-->
+<!--        from-->
+<!--            tour_mst tm-->
+<!--            left outer join (SELECT-->
+<!--                                tour_id,-->
+<!--                                count(*) as comment_count-->
+<!--                            FROM-->
+<!--                                comment_mst-->
+<!--                            group by-->
+<!--                                tour_id) vc on (vc.tour_id = tm.tour_id)-->
+<!--            left outer join (select-->
+<!--                                tour_id,-->
+<!--                                count(*) as like_count-->
+<!--                            from-->
+<!--                                tour_like-->
+<!--                            group by-->
+<!--                                tour_id) lc on (lc.tour_id = tm.tour_id)-->
+<!--        where-->
+<!--            1 = 1-->
+<!--        <if test='searchValue != null and searchValue != ""'>-->
+<!--            and (-->
+<!--                tm.title like CONCAT('%', #{searchValue}, '%')-->
+<!--            or  tm.subtitle like CONCAT('%', #{searchValue}, '%')-->
+<!--            or  tm.contents like CONCAT('%', #{searchValue}, '%')-->
+<!--            )-->
+<!--        </if>-->
+<!--        <if test='categoryId != null and categoryId != ""'>-->
+<!--            and	tm.category_id = #{categoryId}-->
+<!--        </if>-->
+<!--        order by-->
+<!--        <choose>-->
+<!--            <when test='order == "view"'>tm.view_count desc</when>-->
+<!--            <when test='order == "like"'>lc.like_count desc</when>-->
+<!--        </choose>-->
+<!--        <if test='order == ""'>-->
+<!--            tm.tour_id-->
+<!--        </if>-->
+<!--        ;-->
+<!--    </select>-->
+
 </mapper>

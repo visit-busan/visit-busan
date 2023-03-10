@@ -13,6 +13,4 @@
             title = #{title}
     </delete>
 
-
-
 </mapper>

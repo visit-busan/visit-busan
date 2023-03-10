@@ -21,6 +21,7 @@
 
 .category-container {
     display: flex;
+    justify-content: space-between;
     align-items: center;
 
     background-color: rgb(249, 249, 249);
@@ -70,11 +71,11 @@
 
 .main-info {
     position: absolute;
-    
+
     display: flex;
     align-items: center;
     justify-content: space-between;
-    
+
     overflow: hidden;
     bottom: 0;
     width: 90%;
@@ -90,7 +91,8 @@
     font-size: 18px;
 }
 
-.post-info b,span {
+.post-info b,
+span {
     font-size: 20px;
 }
 
@@ -98,7 +100,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    
+
     overflow: hidden;
     width: 140px;
     height: 100%;
@@ -139,3 +141,4 @@
     width: 1000px;
     height: 1500px;
 }
+

@@ -102,8 +102,6 @@
                         </div>
                         <div class="rev-line"></div>
                         <div class="rev-item">
-
-
                             <div class="rev-writer">
                                 <div class="w-img"><img src="/static/image/img_profile.png" alt="작성자 섬네일"></div>
                                 <div class="w-id"><span>이성욱</span></div>
@@ -229,101 +227,7 @@
 
 
             <!-- modal -->
-            <div id="modal" class="modal-overlay">
-                <div class="modal-window regist">
-                    <div class="modal-header">
-                        <h2 class="modal-title">리뷰 등록</h2>
-                        <button class="close-button">x</button>
-                    </div>
-                    <div class="modal-body">
-                        <form>
-                            <table>
-                                <colgroup>
-                                    <col>
-                                    <col>
-                                </colgroup>
-                                <tr>
-                                    <th>리뷰장소</th>
-                                    <td>
-                                        <p class="title">${tour_title}</p>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>작성자</th>
-                                    <td>
-                                        <p class="writer-user">${name}</p>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>별점</th>
-                                    <td>
-                                        <!-- <a href=""><img src="/static/image/star.png" alt=""></a>
-                                        <a href=""><img src="/static/image/star.png" alt=""></a>
-                                        <a href=""><img src="/static/image/star.png" alt=""></a>
-                                        <a href=""><img src="/static/image/star.png" alt=""></a>
-                                        <a href=""><img src="/static/image/star.png" alt=""></a>-->
-                                        <i class="fa-solid fa-star" id="tour-rating"></i>
-                                        <i class="fa-solid fa-star" id="tour-rating"></i>
-                                        <i class="fa-solid fa-star" id="tour-rating"></i>
-                                        <i class="fa-solid fa-star" id="tour-rating"></i>
-                                        <i class="fa-solid fa-star" id="tour-rating"></i>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>방문여부</th>
-                                    <td class="whether-to-visit">
-                                        <p class="rev-radi">
-                                            <label for="sub1" class=""><input type="radio" name="sub" value="ok"
-                                                    checked>
-                                                <span class="label-text">방문했어요</span></label>
-                                        </p>
-
-                                        <p class="rev-radi">
-                                            <label for="sub2"><input type="radio" name="sub" value="no"><span class="label-text">방문전입니다</span> </label>
-
-                                        </p>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>대표 이미지</th>
-                                    <td class="review-img-container">
-                                        <form action="">
-                                            <div class="review-img-box">
-                                                <img src="/static/image/noimg.png" class="review-img">
-                                                <input type="file" class="regist-category-img" accept=".png, .jpg">
-                                            </div>
-
-                                            <div class="review-img-box">
-                                                <img src="/static/image/noimg.png" class="review-img">
-                                                <input type="file" class="regist-category-img" accept=".png, .jpg">
-                                            </div>
-                                            <div class="review-img-box">
-                                                <img src="/static/image/noimg.png" class="review-img">
-                                                <input type="file" class="regist-category-img"
-                                                    accept=".png, .jpg, .bmp, .jpeg, .tif">
-                                            </div>
-                                        </form>
-
-
-                                    </td>
-                                </tr>
-                                <tr class="review-text">
-                                    <th>
-                                        리뷰내용
-                                    </th>
-                                    <td>
-                                        <textarea name="reivew" id="" cols="30" rows="10"></textarea>
-                                    </td>
-                                </tr>
-                            </table>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button class="regist-button">등록</button>
-                        <button class="cancel-button">취소</button>
-                    </div>
-                </div>
-            </div>
+            
         </main>
     </div>
 </body>
