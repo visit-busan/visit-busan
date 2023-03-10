@@ -91,8 +91,7 @@ public class AccountApi {
                         , "사용자 아이디 가져오기 완료"
                         , accountService.findUsername(findUsername.getName(), findUsername.getTellNumber()).getUsername()));
     }
-<<<<<<< HEAD
-=======
+
     @ApiOperation(value = "post username", notes = "사용자 비밀번호 찾기")
     @PostMapping("/find/password")
     public ResponseEntity<?> findPassword (@RequestBody FindPassword findPassword) {
@@ -128,5 +127,4 @@ public class AccountApi {
                 .created(URI.create("/api/account/delete/" + userId))
                 .body(new CMRespDto<>(HttpStatus.OK.value(), "회원 정보 삭제", accountService.deleteUser(userId)));
     }
->>>>>>> ft_login
 }

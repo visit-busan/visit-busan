@@ -1,7 +1,4 @@
 window.onload = () => {
-<<<<<<< HEAD
-    RegisterEvent.getInstance().addRegisterSubmitOnclickEvent();
-=======
     // PrincipalApi.getInstance().getPrincipal();
     RegisterEvent.getInstance().addRegisterSubmitOnclickEvent();
     HeaderService.getInstance().loadHeader();
@@ -10,7 +7,6 @@ window.onload = () => {
     RegisterService.getInstance().addEventToPasswordInput();
     RegisterService.getInstance().addEventToRegisterInput();
     ComponentEvent.getInstance().addClickEventSearchButton();
->>>>>>> ft_login
 }
 
 class RegisterApi {
@@ -22,8 +18,6 @@ class RegisterApi {
         return this.#instance;
     }
 
-<<<<<<< HEAD
-=======
     duplicateUsername(username) {
         const usernameInput = document.querySelectorAll('.register-error-text');
         $.ajax({
@@ -34,7 +28,7 @@ class RegisterApi {
             data: { "username": username },
             dataType: "json",
             success: (response) => {
-                usernameInput.textContent = "사용이 가능한 아이디 입니다.";
+                usernameInput[0].textContent = "사용이 가능한 아이디 입니다.";
                 // alert("사용이 가능한 아이디 입니다");
             },
             error: (error) => {
@@ -47,7 +41,6 @@ class RegisterApi {
     회원가입
     */
 
->>>>>>> ft_login
     register(user) {
         $.ajax({
             async: false,
@@ -59,19 +52,12 @@ class RegisterApi {
             success: response => {
                 console.log(response);
                 alert("회원가입 성공!");
-<<<<<<< HEAD
-                window.location.href = 'http://www.localhost:8000/';
-            },
-            error: error => {
-                console.log(error);
-=======
                 window.location.href = 'http://localhost:8000/account/login';
             },
             error: error => {
                 console.log(error);
                 alert("회원가입 실패 다시 입력해주세요.");
                 RegisterService.getInstance().setErrorMessage(error.responseJSON.data);
->>>>>>> ft_login
             }
         });
     }
@@ -86,8 +72,6 @@ class RegisterService {
         }
         return this.#instance;
     }
-<<<<<<< HEAD
-=======
     setErrorMessage(errors) {
         const registerError = document.querySelectorAll(".register-error");
         // 
@@ -158,7 +142,6 @@ class RegisterService {
             }
         }
     }
->>>>>>> ft_login
 }
 
 
@@ -177,21 +160,6 @@ class RegisterEvent {
         const registerSubmit = document.querySelector("#btnJoin");
 
         registerSubmit.onclick = () => {
-<<<<<<< HEAD
-            const usernameValue = document.querySelector(".register-input-username").value;
-            const passwordValue = document.querySelector(".register-input-password").value;
-            const nameValue = document.querySelector(".register-input-name").value;
-            const birthValue = document.querySelector(".register-input-birth").value;
-            const genderValue = document.querySelector(".register-input-gender").value;
-            const emailValue = document.querySelector(".register-input-email").value;
-            const tellNumberValue = document.querySelector(".register-input-tellNumber").value;
-
-            console.log(emailValue);
-            const user = new User(usernameValue, passwordValue, nameValue, birthValue, genderValue, emailValue, tellNumberValue);
-            // 
-
-            RegisterApi.getInstance().register(user);
-=======
             getLocation();
 
             function getLocation() {
@@ -248,34 +216,21 @@ class RegisterEvent {
 
                 RegisterApi.getInstance().register(user);
             }
->>>>>>> ft_login
         }
     }
 }
 // const principal = PrincipalApi.getInstance().getPrincipal();
 // console.log(`${principal.userMst.roleDtl.roleId}`);
 class User {
-<<<<<<< HEAD
-    username = null;
-    password = null;
-=======
     // roleId = null;
     username = null;
     password = null;
     repassword = null;
->>>>>>> ft_login
     name = null;
     gender = null;
     birth = null;
     email = null;
     tellNumber = null;
-<<<<<<< HEAD
-
-
-    constructor(username, password, name, birth, gender, email, tellNumber) {
-        this.username = username;
-        this.password = password;
-=======
     userLat = null;
     userLng = null;
     userMarketing = null;
@@ -287,17 +242,13 @@ class User {
         this.username = username;
         this.password = password;
         this.repassword = repassword;
->>>>>>> ft_login
         this.name = name;
         this.gender = gender;
         this.birth = birth;
         this.email = email;
         this.tellNumber = tellNumber;
-<<<<<<< HEAD
-=======
         this.userLat = userLat;
         this.userLng = userLng;
         this.userMarketing = userMarketing;
->>>>>>> ft_login
     }
 }
