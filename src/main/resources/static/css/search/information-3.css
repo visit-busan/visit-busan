@@ -44,9 +44,16 @@
 .main-navigation {
   margin-bottom: 10px;
 }
+/* .main-content {
+  height: 2000px;
+} */
 
 .main-article {
   border-top: 1px solid #dbdbdb;
+  height: 1500px;
+}
+.main-container {
+  height: 2000px;
 }
 
 .rev-head {
@@ -251,4 +258,13 @@
 
 .rev-body {
   margin-bottom: 10px;
+}
+
+.index-container {
+  margin-top: 20px;
+}
+.index-container > button {
+  font-size: 18px;
+  color: #999;
+  margin-right: 3px;
 }

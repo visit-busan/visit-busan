@@ -6,12 +6,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Search</title>
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
         integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="/static/css/reset.css" />
     <link rel="stylesheet" href="/static/css/common.css" />
     <link rel="stylesheet" href="/static/css/header.css" />
+    <link rel="stylesheet" href="/static/css/index.css" />
     <link rel="stylesheet" href="/static/css/search/search.css" />
     <link rel="stylesheet" href="/static/css/post/index.css">
     <link rel="stylesheet" href="/static/css/search/information-3.css" />
@@ -21,17 +23,7 @@
 <body>
     <div id="container">
         <header class="header-container">
-            <h1 class="brand-logo">
-                <a href="#"><img src="/static/image/logo.png" alt="" /></a>
-            </h1>
-            <ul class="menu-container">
-                <li><a href="#">부산에가면</a></li>
-                <li><a href="#">추천여행</a></li>
-            </ul>
-            <ul class="account-container">
-                <li><a>로그인</a></li>
-                <li><a>회원가입</a></li>
-            </ul>
+
         </header>
 
         <main class="main-container" style="margin-top: 30px;">
@@ -220,6 +212,92 @@
                             </div>
                         </div>
 
+                        <div class="rev-item">
+                            <div class="rev-writer">
+                                <div class="w-img"><img src="/static/image/img_profile.png" alt="작성자 섬네일"></div>
+                                <div class="w-id"><span>정순동</span></div>
+                                <div class="w-date"><span>2023-02-25 12:08:52.0</span></div>
+                                <div class="w-star">
+                                    <div class="star-con"><span class="blind">평점</span> <img
+                                            src="/static/image/star.png" class="star-img" alt="평점별">
+                                        <span>1</span> <span class="blind">점</span>
+                                    </div>
+                                    <div class="heart-con"><span class="blind">좋아요</span><img
+                                            src="/static/image/heart.png" class="heart-img" alt=""><span
+                                            class="likecnt">0</span>
+                                        <span class="blind">점</span>
+                                    </div>
+                                </div>
+                                <div class="w-recomm"></div>
+                            </div>
+                            <div class="rev-content">
+                                <div class="rev-tit">
+                                    <strong class="subject">방문했음</strong>
+                                </div>
+                                <div class="rev-body">
+                                    <p class="cont">복합문화공간 현대 모터스 스튜디오는 무료로 볼 수 있고 전시라곤 믿기 어려울만큼 양질의 전시를 하고 있어 꼭 한번 가볼만한
+                                        장소에요 F193 에는 수시로 좋은 전시를 하고 있고 대형서점도 함께 있어서 주변에 볼거리 즐길거리가 풍부해서 부산에 꼭 들려야하는 여행지로
+                                        추천드립니다 </p>
+                                    <ul class="tag-list">
+                                        <li></li>
+                                    </ul>
+                                    <ul class="rev-Img-list">
+                                        <li>
+                                            <a href="#"><img src="/static/image/20221013110856373_thumbL.jpg"
+                                                    alt=""></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="rev-item">
+                            <div class="rev-writer">
+                                <div class="w-img"><img src="/static/image/img_profile.png" alt="작성자 섬네일"></div>
+                                <div class="w-id"><span>정순동</span></div>
+                                <div class="w-date"><span>2023-02-25 12:08:52.0</span></div>
+                                <div class="w-star">
+                                    <div class="star-con"><span class="blind">평점</span> <img
+                                            src="/static/image/star.png" class="star-img" alt="평점별">
+                                        <span>1</span> <span class="blind">점</span>
+                                    </div>
+                                    <div class="heart-con"><span class="blind">좋아요</span><img
+                                            src="/static/image/heart.png" class="heart-img" alt=""><span
+                                            class="likecnt">0</span>
+                                        <span class="blind">점</span>
+                                    </div>
+                                </div>
+                                <div class="w-recomm"></div>
+                            </div>
+                            <div class="rev-content">
+                                <div class="rev-tit">
+                                    <strong class="subject">방문했음</strong>
+                                </div>
+                                <div class="rev-body">
+                                    <p class="cont">복합문화공간 현대 모터스 스튜디오는 무료로 볼 수 있고 전시라곤 믿기 어려울만큼 양질의 전시를 하고 있어 꼭 한번 가볼만한
+                                        장소에요 F193 에는 수시로 좋은 전시를 하고 있고 대형서점도 함께 있어서 주변에 볼거리 즐길거리가 풍부해서 부산에 꼭 들려야하는 여행지로
+                                        추천드립니다 </p>
+                                    <ul class="tag-list">
+                                        <li></li>
+                                    </ul>
+                                    <ul class="rev-Img-list">
+                                        <li>
+                                            <a href="#"><img src="/static/image/20221013110856373_thumbL.jpg"
+                                                    alt=""></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="index-container">
+                            <button class="index-box">1</button>
+                            <button class="index-box">2</button>
+                            <button class="index-box">3</button>
+                            <button class="index-box">4</button>
+                            <button class="index-box">5</button>
+                            <button class="index-box" disabled>></button>
+                            <button class="index-box" disabled>>l</button>
+                        </div>
 
 
 
@@ -229,7 +307,7 @@
 
 
             <!-- modal -->
-            <div id="modal" class="modal-overlay">
+            <div id="modal" class="modal-overlay" style="display: none;">
                 <div class="modal-window regist">
                     <div class="modal-header">
                         <h2 class="modal-title">리뷰 등록</h2>
@@ -257,11 +335,6 @@
                                 <tr>
                                     <th>별점</th>
                                     <td>
-                                        <!-- <a href=""><img src="/static/image/star.png" alt=""></a>
-                                        <a href=""><img src="/static/image/star.png" alt=""></a>
-                                        <a href=""><img src="/static/image/star.png" alt=""></a>
-                                        <a href=""><img src="/static/image/star.png" alt=""></a>
-                                        <a href=""><img src="/static/image/star.png" alt=""></a>-->
                                         <i class="fa-solid fa-star" id="tour-rating"></i>
                                         <i class="fa-solid fa-star" id="tour-rating"></i>
                                         <i class="fa-solid fa-star" id="tour-rating"></i>
@@ -279,7 +352,8 @@
                                         </p>
 
                                         <p class="rev-radi">
-                                            <label for="sub2"><input type="radio" name="sub" value="no"><span class="label-text">방문전입니다</span> </label>
+                                            <label for="sub2"><input type="radio" name="sub" value="no"><span
+                                                    class="label-text">방문전입니다</span> </label>
 
                                         </p>
                                     </td>
@@ -324,8 +398,20 @@
                     </div>
                 </div>
             </div>
+
         </main>
+        <div class="footer-top" style="margin-top: 430px;">
+
+        </div>
+        <p id="result"></p>
+        <footer class="footer-container">
+
+        </footer>
     </div>
+    <script src="/static/js/account/principal.js"></script>
+    <script src="/static/js/component/header.js"></script>
+    <script src="/static/js/component/footer.js"></script>
+    <script src="/static/js/index.js"></script>
 </body>
 
 </html>

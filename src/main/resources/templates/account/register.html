@@ -20,19 +20,7 @@
 <body>
   <div id="container">
     <header class="header-container">
-      <h1 class="brand-logo">
-        <a href="#"><img src="/static/image/logo.png" alt="" /></a>
-      </h1>
-      <ul class="menu-container">
-        <li><a href="#">부산에가면</a></li>
-        <li><a href="#">추천여행</a></li>
-      </ul>
-      <ul class="account-container">
-        <li><a>검색하기</a></li>
-        <li><a style="color: #2172dd">로그인</a></li>
-        <li><a>회원가입</a></li>
-        <li><a>Language</a></li>
-      </ul>
+
     </header>
 
     <main class="main-container">
@@ -46,15 +34,18 @@
               <h1 style="font-size: 25px; margin-bottom: 50px; margin-top: 20px; text-align: center;">
                 VISIT BUSAN LOGIN REGISTER PAGE
               </h1>
+
               <div class="subs">
                 <h3>
                   <label for="subscription">가입유형</label>
                 </h3>
-                <span>
-                  <!-- value값 수정필요 -->
-                  <!-- 기본값 일반 -->
-                  <label><input type="radio" name="sub" value="user" checked>일반</label>
-                  <label><input type="radio" name="sub" value="writer">작가</label>
+                <span class="box sub_code">
+                  <select id="subscription" class="sel register-input-subscription">
+                    <!-- 5 -->
+                    <option>선택하세요.</option>
+                    <option value="2">일반</option>
+                    <option value="3">작가</option>
+                  </select>
                 </span>
               </div>
 
@@ -63,98 +54,60 @@
               </h3>
               <span class="box int_id">
                 <!-- 0 -->
-                <input type="text"  id="username" class="int register-input-username" maxlength="20" placeholder="사용하실 아이디를 입력하세요" />
+                <input type="text" id="username" class="int register-input-username" minlength="6" maxlength="18"
+                  placeholder="사용하실 아이디를 입력하세요" autocomplete="off" />
               </span>
-              <span class="error_next_box"></span>
+              <div class="register-error"></div>
+              <div class="register-error-text"></div>
             </div>
 
-            <!-- PW1 -->
+            <!-- password -->
             <div>
               <h3 class="join_title"><label for="password">비밀번호</label></h3>
               <span class="box int_pass">
                 <!-- 1 -->
-                <input type="text" class="register-input-password int" id="password"  maxlength="20" placeholder="비밀번호를 입력하세요." />
-                <span id="alertTxt">사용불가</span>
+                <input type="password" class="register-input-password int" id="password" minlength="6" maxlength="18"
+                  placeholder="비밀번호를 입력하세요." autocomplete="off" />
+
                 <img src="../../static/image/m_icon_check_disable.png" id="pswd1_img1" class="pswdImg" />
               </span>
-              <span class="error_next_box"></span>
             </div>
+            <div class="register-error"></div>
 
-            <!-- PW2 -->
+            <!-- repassword -->
             <div>
               <h3 class="join_title">
                 <label for="repassword">비밀번호 재확인</label>
               </h3>
               <span class="box int_pass_check">
                 <!-- 2 -->
-                <input type="text" class="register-input-repassword int" id="repassword" maxlength="20" placeholder="비밀번호를 다시한번 입력하세요." />
+                <input type="password" class="register-input-repassword int" id="repassword" minlength="6"
+                  maxlength="18" placeholder="비밀번호를 다시한번 입력하세요." autocomplete="off" />
                 <img src="../../static/image/m_icon_check_disable.png" id="pswd2_img1" class="pswdImg" />
               </span>
-              <span class="error_next_box"></span>
             </div>
+            <div class="register-error"></div>
 
             <!-- NAME -->
             <div>
               <h3 class="join_title"><label for="name">이름</label></h3>
               <span class="box int_name">
                 <!-- 3 -->
-                <input type="text" class="register-input-name int" id="name" maxlength="3" placeholder="이름을 입력하세요" />
+                <input type="text" class="register-input-name int" id="name" maxlength="3" placeholder="이름을 입력하세요" autocomplete="off" />
               </span>
-              <span class="error_next_box"></span>
             </div>
+            <div class="register-error"></div>
 
             <!--  -->
             <div>
               <h3 class="join_title"><label for="birth">생년월일</label></h3>
               <span class="box int_birth">
                 <!-- 4 -->
-                <input type="text" class="register-input-birth int" id="birth" maxlength="6" placeholder="생년월일을 입력하세요 Ex)960101" />
+                <input type="text" class="register-input-birth int" id="birth" minlength="6" maxlength="6"
+                  placeholder="생년월일을 입력하세요 예시)960101" autocomplete="off" />
               </span>
-              <span class="error_next_box"></span>
             </div>
-
-            <!-- BIRTH -->
-            <!-- <div>
-              <h3 class="join_title"><label for="birth">생년월일</label></h3>
-
-              <div id="bir_wrap"> -->
-                <!-- BIRTH_YY -->
-                <!-- <div id="bir_yy">
-                  <span class="box">
-                    <input type="text" class="register-inputs int" id="yy" maxlength="4" placeholder="년(4자)" />
-                  </span>
-                </div> -->
-
-                <!-- BIRTH_MM -->
-                <!-- <div id="bir_mm">
-                  <span class="box">
-                    <select id="mm" class="sel">
-                      <option>월</option>
-                      <option value="01">1</option>
-                      <option value="02">2</option>
-                      <option value="03">3</option>
-                      <option value="04">4</option>
-                      <option value="05">5</option>
-                      <option value="06">6</option>
-                      <option value="07">7</option>
-                      <option value="08">8</option>
-                      <option value="09">9</option>
-                      <option value="10">10</option>
-                      <option value="11">11</option>
-                      <option value="12">12</option>
-                    </select>
-                  </span>
-                </div> -->
-
-                <!-- BIRTH_DD -->
-                <!-- <div id="bir_dd">
-                  <span class="box">
-                    <input type="text" id="dd" class="int" maxlength="2" placeholder="일" />
-                  </span>
-                </div>
-              </div>
-              <span class="error_next_box"></span>
-            </div> -->
+            <div class="register-error"></div>
 
             <!-- GENDER -->
             <div>
@@ -162,25 +115,24 @@
               <span class="box gender_code">
                 <select id="gender" class="sel register-input-gender">
                   <!-- 5 -->
-                  <option>성별</option>
+                  <option>선택하세요.</option>
                   <option value="1">남자</option>
                   <option value="2">여자</option>
                 </select>
               </span>
-              <span class="error_next_box">필수 정보입니다.</span>
             </div>
 
             <!-- EMAIL -->
             <div>
               <h3 class="join_title">
-                <label for="email">본인확인 이메일<span class="optional">(선택)</span></label>
+                <label for="email">이메일</label>
               </h3>
               <span class="box int_email">
                 <!-- 6 -->
-                <input type="text" class="register-input-email int" id="email" maxlength="100" placeholder="선택입력" />
+                <input type="text" class="register-input-email int" id="email" maxlength="100" placeholder="선택입력" autocomplete="off" />
               </span>
-              <span class="error_next_box">이메일 주소를 다시 확인해주세요.</span>
             </div>
+            <div class="register-error"></div>
 
             <!-- MOBILE -->
             <div>
@@ -189,20 +141,28 @@
               </h3>
               <span class="box int_mobile">
                 <!-- 7 -->
-                <input type="tel" class="register-input-tellNumber int" id="tellNumber" maxlength="16" placeholder="전화번호 입력" />
+                <input type="tel" class="register-input-tellNumber int" id="tellNumber" minlength="11" maxlength="11"
+                  placeholder="전화번호 입력" autocomplete="off"/>
               </span>
-              <span class="error_next_box"></span>
             </div>
+            <div class="register-error"></div>
 
             <div class="location-agree">
               <h3>
                 <label for="subscription">위치정보 수집동의</label>
               </h3>
-              <span>
-                <!-- value값 수정필요 -->
-                <!-- 기본값 동의 -->
-                <label><input type="radio" name="location" value="1" checked> 동의</label>
-                <label><input type="radio" name="location" value="2"> 비동의</label>
+              <span class="box location_code">
+                <select id="subscription-location" class="sel register-input-location-lng">
+                  <!-- 5 -->
+                  <option>선택하세요.</option>
+                  <option value="1">동의</option>
+                  <option value="0">비동의</option>
+                </select>
+                <select id="subscription-location" class="sel register-input-location-lat" style="display: none;">
+                  <!-- 5 -->
+                  <option value="1">동의</option>
+                  <option value="0">비동의</option>
+                </select>
               </span>
             </div>
 
@@ -210,11 +170,13 @@
               <h3>
                 <label for="subscription">마케팅 수신동의</label>
               </h3>
-              <span>
-                <!-- value값 수정필요 -->
-                <!-- 기본값 동의 -->
-                <label><input type="radio" name="marketing" value="1" checked> 동의</label>
-                <label><input type="radio" name="marketing" value="2"> 비동의</label>
+              <span class="box marketing_code">
+                <select id="subscription-marketing" class="sel register-input-marketing">
+                  <!-- 5 -->
+                  <option>선택하세요.</option>
+                  <option value="1">동의</option>
+                  <option value="0">비동의</option>
+                </select>
               </span>
             </div>
 
@@ -231,8 +193,18 @@
         </div>
       </section>
     </main>
+    <div class="footer-top">
+
+    </div>
+
+    <footer class="footer-container">
+
+    </footer>
   </div>
-  <script src="../../static/js/login/register.js"></script>
+  <script src="/static/js/account/principal.js"></script>
+  <script src="/static/js/component/header.js"></script>
+  <script src="/static/js/component/footer.js"></script>
+  <script src="/static/js/login/register.js"></script>
 </body>
 
 </html>

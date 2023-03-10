@@ -12,9 +12,8 @@ public class IndexController {
         return "index";
     }
 
-    @PostMapping("/login/error")
-    public String loginError() {
-        return "account/login_error";
+    @GetMapping("/mypage")
+    public String getMypage() {
+        return "account/mypage";
     }
-
 }

@@ -86,12 +86,19 @@
             useGeneratedKeys="true"
             keyProperty="userId">
         insert into user_mst
-        values(0, #{username}, #{password}, #{name}, #{gender}, #{birth}, #{tellNumber}, #{email}, null, 1, 1, 1, now(), now())
+        values(0, #{username}, #{password}, #{name}, #{gender}, #{birth}, #{tellNumber}, #{email}, #{provider}, #{userLng}, #{userLat}, #{userMarketing}, now(), now())
     </insert>
 
     <insert id="saveRole" parameterType="com.korit.visitbusan.entity.UserMst">
         insert into role_dtl
         values(0, #{userId}, 2, now(), now())
+<!--        values(0, #{userId}, #{roleId}, now(), now())-->
+    </insert>
+
+    <insert id="saveRoleId" parameterType="com.korit.visitbusan.entity.UserMst">
+        insert into role_dtl
+        values(0, #{userId}, 2, now(), now()),
+                (0, #{userId}, 3, now(), now())
     </insert>
 
     <update id="setUserProvider" parameterType="com.korit.visitbusan.entity.UserMst">
@@ -102,4 +109,40 @@
         where
             user_id = #{userId}
     </update>
+
+    <select id="findUsername" resultType="com.korit.visitbusan.entity.UserMst">
+        select
+            username
+        from
+            user_mst
+        where
+            name = #{name} and tell_number = #{tellNumber};
+    </select>
+
+    <select id="findPassword" resultType="com.korit.visitbusan.entity.UserMst">
+        select
+            password
+        from
+            user_mst
+        where
+            name = #{name} and tell_number = #{tellNumber} and username = #{username};
+    </select>
+
+    <update id="changePassword" parameterType="com.korit.visitbusan.entity.UserMst">
+        update
+            user_mst
+        set
+            password = #{password}
+        where
+            name = #{name} and tell_number = #{tellNumber} and username = #{username};
+    </update>
+
+    <delete id="deleteUser">
+        delete
+        from
+            user_mst
+        where
+            user_id = #{userId}
+    </delete>
+
 </mapper>

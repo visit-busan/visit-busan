@@ -20,23 +20,14 @@ import java.util.Map;
 public class PrincipalDetails implements UserDetails, OAuth2User {
 
     @Getter
-    private final UserMst user;
+    private final UserMst userMst;
     private Map<String, Object> response;
-
-    @Override
-    public Map<String, Object> getAttributes() {
-        return response;
-    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         ArrayList<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 
-//        user.getRoleDtl().forEach(dtl -> {
-//            authorities.add(() -> dtl.getRoleMst().getRoleName());
-//        });
-
-        List<RoleDtl> roleDtlList = user.getRoleDtl();
+        List<RoleDtl> roleDtlList = userMst.getRoleDtl();
         for(int i = 0; i < roleDtlList.size(); i++) {
             RoleDtl dtl =  roleDtlList.get(i);
             RoleMst roleMst = dtl.getRoleMst();
@@ -56,12 +47,12 @@ public class PrincipalDetails implements UserDetails, OAuth2User {
 
     @Override
     public String getPassword() {
-        return user.getPassword();
+        return userMst.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return user.getUsername();
+        return userMst.getUsername();
     }
 
     @Override
@@ -86,6 +77,11 @@ public class PrincipalDetails implements UserDetails, OAuth2User {
 
     @Override
     public String getName() {
-        return user.getName();
+        return userMst.getName();
+    }
+
+    @Override
+    public Map<String, Object> getAttributes() {
+        return response;
     }
 }
