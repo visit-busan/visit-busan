@@ -1,27 +1,30 @@
 window.onload = () => {
-    ComponentEvents.getInstance().initializeButton();
-    ComponentEvents.getInstance().registerButton();
-    ComponentEvents.getInstance().clickImgs();
-    ComponentEvents.getInstance().clickMainNavigation();
+    RegisterService.getInstance().loadPage();
+
+    ComponentEvents.getInstance().clickNavigationButton();
+    ComponentEvents.getInstance().clickToggleButton();
+    ComponentEvents.getInstance().clickRegisterButton();
     ComponentEvents.getInstance().addChangeEventThumbnailFile();
     ComponentEvents.getInstance().addChangeEventMainImgFile();
+    ComponentEvents.getInstance().addChangeEventCategorySelector();
 }
+
 // -----------------------------------------
 //                  Object
 // -----------------------------------------
+let principalData = null;
+let thumbnailFormFlag = true;
+let mainImageFormFlag = true;
 
 let registerObj = {
-    tourId : "",
-    tourCategory : "",
-    userId: "4",
+    tourId : 530,
+    categoryId : 1,
+    userId: null,
     tourTitle : "",
     tourSubTitle : "",
     tourContents : "",
-    tourTrafficInformation : "",
-    tourHandicappedArea : "",
     usageHomepage: "",
     usageNumber: "",
-    usageRunDay: "",
     usageOffDay: "",
     usageRuntime: "",
     usageUsingFee: "",
@@ -30,6 +33,9 @@ let registerObj = {
     usageOther: "",
     usageTraffic: ""
 }
+
+let thumbnailUrl = null;
+let mainImageUrl = null;
 
 let thumbnailObj = {
     files: new Array(),
@@ -41,40 +47,55 @@ let mainImgObj = {
     formData: new FormData()
 }
 
+let tagList = new Array();
+let tagIdList = new Array();
+
 // -----------------------------------------
 //                   APIs
 // -----------------------------------------
-
 class RegisterApi {
     static #instance = null;
     static getInstance() {
         if(this.#instance == null) {
             this.#instance = new RegisterApi();
-        };
+        }
         return this.#instance;
     }
 
     registerPost() {
-        let successFlag = false;
-
         $.ajax({
-            async: false,
-            type: "post",
-            url: "http://localhost:8000/api/post/register",
+            async:false,
+            type:"post",
+            url:`/api/post/register`,
             contentType: "application/json",
             data: JSON.stringify(registerObj),
-            dataType: "json",
+            dataType:"json",
             success: response => {
-                successFlag = true;
+                console.log(response);
                 registerObj.tourId = response.data;
-                console.log(registerObj);
             },
             error: error => {
+                console.log(error);                
+            }
+        })
+    }
+
+    registerPostTags() {
+        $.ajax({
+            async:false,
+            type:"post",
+            url:`/api/post/register/${registerObj.tourId}/tag`,
+            contentType: "application/json",
+            data: JSON.stringify({
+                "tagList" : tagList
+            }),
+            dataType: "json",
+            success: response => {
+                alert("태그등록완료");
+            },error: error => {
                 console.log(error);
             }
         });
-
-        return successFlag
     }
 
     registerThumbnail() {
@@ -88,11 +109,29 @@ class RegisterApi {
             data: thumbnailObj.formData,
             dataType: 'json',
             success: response => {
-                alert("Thumbnail 등록 완료!");
+                alert("썸네일 파일 등록 완료!");
             },
             error: error => {
                 console.log(error);
-                this.registerMainImg();
+            }
+        });
+    }
+
+    registerThumbnailWithLink() {
+        $.ajax({
+            async: false,
+            type: "post",
+            url: `http://localhost:8000/api/post/register/${registerObj.tourId}/thumbnail/link`,
+            contentType: 'application/json',
+            dataType:'json',
+            data: JSON.stringify({
+                "link" : thumbnailUrl
+            }),
+            success: response => {
+                alert("링크로 썸네일 등록 완료!");
+            },
+            error: error => {
+                console.log(error);
             }
         });
     }
@@ -108,18 +147,74 @@ class RegisterApi {
             data: mainImgObj.formData,
             dataType: 'json',
             success: response => {
-                alert("게시글 등록 완료!");
+                alert("메인이미지 파일 등록 완료!");
+                location.reload();
             },
             error: error => {
                 console.log(error);
             }
         });
     }
+
+    registerMainImgWithLink() {
+        $.ajax({
+            async: false,
+            type: "post",
+            url: `http://localhost:8000/api/post/register/${registerObj.tourId}/mainimg/link`,
+            contentType: 'application/json',
+            dataType:'json',
+            data: JSON.stringify({
+                "link" : mainImageUrl
+            }),
+            success: response => {
+                alert("링크로 메인이미지 등록 완료!");
+                location.reload();
+            },
+            error: error => {
+                console.log(error);
+            }
+        });
+    }
+
+    getCategories() {
+        let responseData = null;
+        $.ajax({
+            async: false,
+            type: "get",
+            url: `/api/post/categories`,
+            dataType: "json",
+            success: response => {
+                responseData = response
+                console.log(response);
+            },
+            error: error => {
+                console.log(error);
+            }
+        });
+        return responseData;
+    }
+
+    getTags() {
+        let responseData = null;
+        $.ajax({
+            async:false,
+            type:"get",
+            url: `/api/post/${registerObj.categoryId}/tags`,
+            dataType: "json",
+            success: response => {
+                responseData = response;
+            },
+            error: error => {
+                console.log(error);
+            }
+        });
+        return responseData;
+    }
 }
+
 // -----------------------------------------
 //                 Services
 // -----------------------------------------
-
 class RegisterService {
     static #instance = null;
     static getInstance() {
@@ -129,63 +224,101 @@ class RegisterService {
         return this.#instance;
     }
 
-    initializeContent() {
-        if(confirm("정말 게시글 내용을 지우시겠습니까?")) {
-            let contentArea = document.querySelector(".note-editable");
-            let inputs = document.querySelectorAll("Input");
-            contentArea.innerHTML = `   `;
-            
-            inputs.forEach(input => {
-                input.value = "";
-            })
-        };
+    loadPage() {
+        principalData = PrincipalApi.getInstance().getPrincipal();
+        console.log(principalData);
+        if(principalData != null) {
+            registerObj.userId = principalData.user.userId;
+        }
+        let categories = RegisterApi.getInstance().getCategories().data;
+        const categorySelector = document.querySelector(".category-selector");
+        categories.forEach(data => {  
+            categorySelector.innerHTML += `
+                <option value="${data.categoryId}">${data.categoryName}</option>
+            `;
+        });
+        this.loadTags();
     }
 
     registerPost() {
+        if(registerObj.userId == null) {
+            alert("로그인 없이는 게시글을 등록할 수 없습니다!");
+            return;
+        }
+        let thumbnailLink = document.querySelector(".thumbnail-link");
+        let mainImageLink = document.querySelector(".mainimg-link");
         let mainTitle = document.querySelector(".main-title");
         let subTitle = document.querySelector(".sub-title");
-        let homepage = document.querySelector(".homepage-input");
-        let number = document.querySelector(".number-input");
-        let runday = document.querySelector(".runday-input");
-        let offday = document.querySelector(".offday-input");
-        let runtime = document.querySelector(".runtime-input");
-        let usingfee = document.querySelector(".usingfee-input");
-        let mainmenu = document.querySelector(".mainmenu-input");
-        let convenient = document.querySelector(".convenient-input");
-        let other = document.querySelector(".other-input");
-        let traffic = document.querySelector(".traffic-input");
-        let category = document.querySelector(".category-selector");
+        let homepageInput = document.querySelector(".homepage-input");
+        let numberInput = document.querySelector(".number-input");
+        let holidayInput = document.querySelector(".offday-input");
+        let runtimeInput = document.querySelector(".runtime-input");
+        let usingfeeInput = document.querySelector(".usingfee-input");
+        let mainmenuInput = document.querySelector(".mainmenu-input");
+        let convenientInput = document.querySelector(".convenient-input");
+        let otherInput = document.querySelector(".other-input");
+        let trafficInput = document.querySelector(".traffic-input");
+
         
         registerObj.tourTitle = mainTitle.value;
         registerObj.tourSubTitle = subTitle.value;
         registerObj.tourContents = $('#summernote').summernote('code');
-        registerObj.usageHomepage = homepage.value;
-        registerObj.usageNumber = number.value;
-        registerObj.usageRunDay = runday.value;
-        registerObj.usageOffDay = offday.value;
-        registerObj.usageRuntime = runtime.value;
-        registerObj.usageUsingFee = usingfee.value;
-        registerObj.usageMainMenu = mainmenu.value;
-        registerObj.usageConvenient = convenient.value;
-        registerObj.usageOther = other.value;
-        registerObj.usageTraffic = traffic.value;
-        registerObj.tourCategory = category.value;
+        registerObj.usageHomepage = homepageInput.value;
+        registerObj.usageNumber = numberInput.value;
+        registerObj.usageOffDay = holidayInput.value;
+        registerObj.usageRuntime = runtimeInput.value;
+        registerObj.usageUsingFee = usingfeeInput.value;
+        registerObj.usageMainMenu = mainmenuInput.value;
+        registerObj.usageConvenient = convenientInput.value;
+        registerObj.usageOther = otherInput.value;
+        registerObj.usageTraffic = trafficInput.value;
+        thumbnailUrl = thumbnailLink.value;
+        mainImageUrl = mainImageLink.value;
 
-        thumbnailObj.formData.append("files", thumbnailObj.files[0]);
-        mainImgObj.formData.append("files", mainImgObj.files[0]);
-
+        const tagCheck = document.querySelectorAll(".tag-check");
+        tagCheck.forEach((check,index) => {
+            if(check.checked) {
+                tagList.push(tagIdList[index]);
+            }
+        });
         RegisterApi.getInstance().registerPost();
-        RegisterApi.getInstance().registerThumbnail();
-        RegisterApi.getInstance().registerMainImg();
+        if(tagList.length > 0) {
+            RegisterApi.getInstance().registerPostTags();
+        } else {
+            alert("태그 등록 없이 게시글 등록.");
+        }
+        if(thumbnailFormFlag) {
+            if(thumbnailObj.files[0] == null) {
+                alert("썸네일 이미지가 없습니다!");
+            } else {
+                thumbnailObj.formData.append("files", thumbnailObj.files[0]);
+                RegisterApi.getInstance().registerThumbnail();
+            }
+        } else {
+            RegisterApi.getInstance().registerThumbnailWithLink();
+        }
+        
+        if(mainImageFormFlag) {
+            if(mainImgObj.files[0] == null) {
+                alert("메인이미지가 없습니다!");
+                location.reload();
+            } else {
+                mainImgObj.formData.append("files", mainImgObj.files[0]);
+                RegisterApi.getInstance().registerMainImg();
+            }
+        } else {
+            RegisterApi.getInstance().registerMainImgWithLink();
+        }
+
     }
 
     getThumbnailPreview() {
-        const thumbnailImg = document.querySelector(".thumbnail");
+        const thumbnail = document.querySelector(".thumbnail");
 
         const reader = new FileReader();
 
         reader.onload = (e) => {
-            thumbnailImg.src = e.target.result;
+            thumbnail.src = e.target.result;
         }
 
         console.log(reader.readAsDataURL(thumbnailObj.files[0]));
@@ -202,11 +335,30 @@ class RegisterService {
 
         console.log(reader.readAsDataURL(mainImgObj.files[0]));
     }
-}
-// -----------------------------------------
-//                  Events
-// -----------------------------------------
 
+    loadTags() {
+        let tags = RegisterApi.getInstance().getTags().data;
+        let tagSelectorContainer = document.querySelector(".tags-selector-container");
+        tagSelectorContainer.innerHTML = `
+            <h2>태그선택(중복가능)</h2>
+        `;
+        for(let i = 0; i < 30; i ++) {
+            tagIdList.pop();
+        }
+        tags.forEach((tag,index) => {
+            tagIdList.push(tag.tagId);
+            tagSelectorContainer.innerHTML += `
+                <input type="checkbox" class="tag-check" style="display:none;">
+                <li class="tag-button">#${tag.tagName}</li>
+            `;
+        });
+        ComponentEvents.getInstance().clickTagButton();
+    }
+}
+
+// -----------------------------------------
+//                 Events
+// -----------------------------------------
 class ComponentEvents {
     static #instance = null;
     static getInstance() {
@@ -216,51 +368,61 @@ class ComponentEvents {
         return this.#instance;
     }
 
-    initializeButton() {
-        let initializeButton = document.querySelector(".initialize-button");
+    clickNavigationButton() {
+        const articleButton = document.querySelector('.article-button');
+        const usageButton = document.querySelector('.usage-button');
+        const mainArticle = document.querySelector('.main-article');
+        const mainUsageInformation = document.querySelector('.main-usage-information');
         
-        initializeButton.onclick = () => {
-            RegisterService.getInstance().initializeContent();
-        }
-    };
-
-    registerButton() {
-        let registerButton = document.querySelector(".register-button");
-
-        registerButton.onclick = () => {
-            RegisterService.getInstance().registerPost();
-        }
-    }
-
-    clickImgs() {
-        let thumbnail = document.querySelector(".thumbnail");
-        let thumbnailAdd = document.querySelector(".thumbnail-file");
-
-        let mainImg = document.querySelector(".mainimg");
-        let mainImgAdd = document.querySelector(".mainimg-file");
-
-        thumbnail.onclick = () => {
-            thumbnailAdd.click();
-        }
-
-        mainImg.onclick = () => {
-            mainImgAdd.click();
-        }
-    }
-
-    clickMainNavigation() {
-        let articleButton = document.querySelector(".article-button");
-        let usageButton = document.querySelector(".usage-button");
-        let contentContainer = document.querySelector(".content-container").children;
-
         articleButton.onclick = () => {
-            contentContainer[0].classList.remove("off");
-            contentContainer[1].classList.add("off");
+            mainArticle.classList.remove('off');
+            mainUsageInformation.classList.add('off');
         }
 
         usageButton.onclick = () => {
-            contentContainer[0].classList.add("off");
-            contentContainer[1].classList.remove("off");
+            mainArticle.classList.add("off");
+            mainUsageInformation.classList.remove("off");
+        }
+    }
+
+    clickToggleButton() {
+        const thumbnailToggle = document.querySelector(".thumbnail-toggle");
+        const mainImageToggle = document.querySelector(".mainimg-toggle");
+        const formThumbnail = document.querySelector(".thumbnail-with-form");
+        const linkThumbnail = document.querySelector(".thumbnail-with-link");
+        const formMainImage = document.querySelector(".mainimg-with-form");
+        const linkMainImage = document.querySelector(".mainimg-with-link");
+
+        thumbnailToggle.onclick = () => {
+            if(thumbnailFormFlag == true) {
+                thumbnailFormFlag = false;
+                formThumbnail.classList.add("off");
+                linkThumbnail.classList.remove("off");
+            }else {
+                thumbnailFormFlag = true;
+                formThumbnail.classList.remove("off");
+                linkThumbnail.classList.add("off");
+            }
+        }
+
+        mainImageToggle.onclick = () => {
+            if(mainImageFormFlag == true) {
+                mainImageFormFlag = false;
+                formMainImage.classList.add("off");
+                linkMainImage.classList.remove("off");
+            }else {
+                mainImageFormFlag = true;
+                formMainImage.classList.remove("off");
+                linkMainImage.classList.add("off");
+            }
+        }
+    } 
+
+    clickRegisterButton() {
+        const registerButton = document.querySelector(".register-button");
+
+        registerButton.onclick = () => {
+            RegisterService.getInstance().registerPost();
         }
     }
 
@@ -273,8 +435,6 @@ class ComponentEvents {
             thumbnailObj.files.pop();
 
             formData.forEach(value => {
-                console.log("thumbnail-form.input.value : " + value);
-
                 if(value.size != 0) {
                     thumbnailObj.files.push(value);
                     changeFlag = true;
@@ -297,8 +457,6 @@ class ComponentEvents {
             mainImgObj.files.pop();
 
             formData.forEach(value => {
-                console.log("mainimg-form.input.value : " + value);
-
                 if(value.size != 0) {
                     mainImgObj.files.push(value);
                     changeFlag = true;
@@ -310,5 +468,32 @@ class ComponentEvents {
                 mainimgFile.value = null;
             }
         }
+    }
+
+    addChangeEventCategorySelector() {
+        const categorySelector = document.querySelector(".category-selector");
+        const categoryMonitor = document.querySelector(".category-monitor");
+        categorySelector.onchange = () => {
+            categoryMonitor.innerHTML = `
+                ${categorySelector.options[categorySelector.selectedIndex].text}
+            `;
+            registerObj.categoryId = categorySelector.options[categorySelector.selectedIndex].value;
+            RegisterService.getInstance().loadTags();
+        }
+    }
+
+    clickTagButton() {
+        const tagButtons = document.querySelectorAll(".tag-button");
+        const tagCheck = document.querySelectorAll(".tag-check");
+        tagButtons.forEach((tagButton,index) => {
+            tagButton.onclick = () => {
+                if(tagCheck[index].checked) {
+                    tagCheck[index].checked = false;
+                } else {
+                    tagCheck[index].checked = true;
+                }
+                tagButton.classList.toggle("selected");
+            }
+        });
     }
 }

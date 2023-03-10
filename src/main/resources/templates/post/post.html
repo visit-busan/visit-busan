@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="/static/css/reset.css">
     <link rel="stylesheet" href="/static/css/common.css">
     <link rel="stylesheet" href="/static/css/header.css">
-    <link rel="stylesheet" href="/static/css/post/index.css">
+    <!-- <link rel="stylesheet" href="/static/css/post/index.css"> -->
     <link rel="stylesheet" href="/static/css/post/post.css">
 </head>
 <body>
@@ -32,9 +32,14 @@
         <main class="main-container">
             <header class="main-header">
                 <div class="category-container">
-                    <i class="fa-solid fa-house"></i>
-                    <span><b>부산에 가면</b></span>
+                    <div class="category-navigator">
+                        <i class="fa-solid fa-house"></i>
+                        <a href="http://localhost:8000/search?categoryId=0"><b>부산에 가면&nbsp;&nbsp;>&nbsp;&nbsp;</b></a>
+                    </div>
+                    <div class="modify-buttons">
+                    </div>
                 </div>
+                
                 <div class="header-title">
                     <h2 class="main-title">제목</h2>
                     <h4 class="sub-title">지은이</h4>
@@ -46,10 +51,10 @@
                     <div class="main-info-container">
                         <div class="main-info">
                             <div class="post-info">
-                                <b>평점★</b><span class="post-rating">5.0</span> │ <b>조회</b> <span class="post-view">2577</span> │ <b>리뷰</b> <span class="post-review">0</span> │
+                                <b>평점<b style="color: coral;">★</b></b><span class="post-rating">없음</span> │ <b>조회</b> <span class="post-view">없음</span> │ <b>리뷰</b> <span class="post-review">없음</span> │
                             </div>
                             <div class="post-activity">
-                                <button type="button" class="like-button">♡좋아요(<span class="post-like">0</span>)</button>
+                                <button type="button" class="like-button">♥좋아요(<span class="post-like">0</span>)</button>
                             </div>
                         </div>
                     </div>
@@ -64,6 +69,7 @@
                     <div class="main-article">
                         
                     </div>
+
                     <div class="main-rule off">
                         <div class="main-map-container">
     
@@ -106,11 +112,126 @@
                         </div>
                     </div>
                     <div class="main-review off">
-    
+                        <header class="review-header">
+                            <h2 class="header-menu">여행후기 & 정보</h2>
+                            <button class="review-write-button" type="button">리뷰작성하기</button>
+                        </header>
+                        <div class="align-method-selector">
+                        </div>
+                        <div class="review-container">
+                            <div class="review-item">
+                                <div class="user-info">
+                                    <span class="user-name">이름</span>
+                                    <span class="create-date">날짜</span>
+                                    <span>★<b class="review-rating">1</b></span>
+                                </div>
+                                <div class="review-contents">
+                                    <span class="visit-status">방문여부</span>
+                                    <span class="review-content">
+                                        본문 텍스트 공간
+                                    </span>
+                                    <div class="review-img-container">
+                                        <div>
+                                            <img src="/static/image/no_img.png" alt="">
+                                        </div>
+                                        <div>
+                                            <img src="/static/image/no_img.png" alt="">
+                                        </div>
+                                        <div>
+                                            <img src="/static/image/no_img.png" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
+                    <div id="modal" class="modal-overlay not-display">
+                        <div class="inner-modal">
+                            <header class="modal-header">
+                                <h2 class="modal-title">리뷰 등록</h2>
+                            </header>
+                            <div class="modal-container">
+                                <div class="modal-items">
+                                    <span class="modal-column">리뷰 장소</span>
+                                    <span class="modal-value">장소이름</span>
+                                </div>
+                                <div class="modal-items">
+                                    <span class="modal-column">평가</span>
+                                    <span class="modal-value">
+                                        <span class="modal-rating">
+                                            <span class="star-one enable">
+                                                ★
+                                            </span>
+                                            <span class="star-two enable">
+                                                ★
+                                            </span>
+                                            <span class="star-three enable">
+                                                ★
+                                            </span>
+                                            <span class="star-four enable">
+                                                ★
+                                            </span>
+                                            <span class="star-five enable">
+                                                ★
+                                            </span>
+                                        </span>
+                                    </span>
+                                </div>
+                                <div class="modal-items">
+                                    <span class="modal-column">방문 여부</span>
+                                    <span class="modal-value">
+                                        <select class="visit-status-selector">
+                                            <option value="1">방문했어요</option>
+                                            <option value="2">방문전입니다</option>
+                                        </select> 
+                                    </span>
+                                </div>
+                                <div class="modal-items">
+                                    <span class="modal-column">여행사진</span>
+                                    <span class="modal-value">
+                                        <div class="modal-input-container">
+                                            <div class="modal-input-items">
+                                                <img src="/static/image/no_img.png" alt="#" class="modal-input-image image-one">
+                                                <form action="" class="form-one">
+                                                    <input type="file" name="file" class="modal-input input-one">
+                                                </form>
+                                            </div>
+                                            <div class="modal-input-items">
+                                                <img src="/static/image/no_img.png" alt="#" class="modal-input-image image-two">
+                                                <form action="" class="form-two">
+                                                    <input type="file" name="file" class="modal-input input-two">
+                                                </form>
+                                            </div>
+                                            <div class="modal-input-items">
+                                                <img src="/static/image/no_img.png" alt="#" class="modal-input-image image-three">
+                                                <form action="" class="form-three">
+                                                    <input type="file" name="file" class="modal-input input-three">
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </span>
+                                </div>
+                                <div class="modal-items">
+                                    <span class="modal-column">리뷰내용</span>
+                                    <span class="review-place">
+                                        <textarea class="review-content-input" cols="59" rows="5" wrap="hard" maxlength="300" required></textarea>
+                                    </span>
+                                </div>
+                            </div>
+                            <footer class="modal-footer">
+                                <div class="modal-buttons">
+                                    <button class="modal-submit">등록</button>
+                                    <button class="modal-cancel">취소</button>
+                                </div>
+                            </footer>
+                        </div>
+                    </div>
+                    
                 </div>
             </div>
         </main>
+        <script src="/static/js/account/principal.js"></script>
         <script src="/static/js/post/post.js"></script>
     </div>
 </body>

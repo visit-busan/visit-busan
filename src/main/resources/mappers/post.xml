@@ -4,12 +4,153 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.korit.visitbusan.repository.PostRepository">
+
+    <select id="getTourIdByTourId" resultType="com.korit.visitbusan.entity.TourMst">
+        select
+            tour_id as tourId
+        from
+            tour_mst
+        where
+            tour_id = #{tourId};
+    </select>
+
+    <select id="getPost" resultType="com.korit.visitbusan.entity.TourMst">
+        select
+            tm.tour_id as tourId,
+            tm.category_id as categoryId,
+            tm.user_id as userId,
+            tm.title,
+            tm.subtitle,
+            tm.contents,
+            tm.main_image as mainImage,
+            tm.thumbnail_image as thumbnailImage,
+            tm.view_count as viewCount,
+            tm.lat,
+            tm.lon,
+            tm.create_date as createDate,
+
+            tu.tell_number as tellNumber,
+            tu.homepage_url as homepageUrl,
+            tu.hldy_info as holidayInfo,
+            tu.handicapped_area as handicappedArea,
+            tu.usage_dayandtime as usageDayAndTime,
+            tu.usage_amount as usageAmount,
+            tu.rprsntv_menu as mainMenu,
+            tu.trfc_info as trafficInfo,
+            tu.etc_info as etcInfo,
+
+            avg(cm.rating) as rating
+        from
+            tour_mst tm
+            left outer join tour_usage tu on (tu.tour_id = tm.tour_id)
+            left outer join comment_mst cm on (tm.tour_id = cm.tour_id)
+        where
+            tm.tour_id = #{tourId};
+    </select>
+
+    <select id="getPostByStringTourId" resultType="com.korit.visitbusan.entity.TourMst">
+        select
+            tm.tour_id as tourId,
+            tm.category_id as categoryId,
+            tm.user_id as userId,
+            tm.title,
+            tm.subtitle,
+            tm.contents,
+            tm.main_image as mainImage,
+            tm.thumbnail_image as thumbnailImage,
+            tm.view_count as viewCount,
+            tm.lat,
+            tm.lon,
+            tm.create_date as createDate,
+
+            tu.tell_number as tellNumber,
+            tu.homepage_url as homepageUrl,
+            tu.hldy_info as holidayInfo,
+            tu.handicapped_area as handicappedArea,
+            tu.usage_dayandtime as usageDayAndTime,
+            tu.usage_amount as usageAmount,
+            tu.rprsntv_menu as mainMenu,
+            tu.trfc_info as trafficInfo,
+            tu.etc_info as etcInfo
+        from
+            tour_mst tm
+            left outer join tour_usage tu on (tu.tour_id = tm.tour_id)
+        where
+            tm.tour_id = #{tourId};
+    </select>
+
+    <resultMap id="ReviewRespDto" type="com.korit.visitbusan.web.dto.ReviewRespDto">
+        <result property="commentId" column="comment_id"></result>
+        <result property="userId" column="user_id"></result>
+        <result property="tourId" column="tour_id"></result>
+        <result property="visit" column="visit"></result>
+        <result property="reviewComment" column="review_comment"></result>
+        <result property="rating" column="rating"></result>
+        <result property="createDate" column="create_date"></result>
+        <result property="username" column="username"></result>
+        <collection property="commentDtl" javaType="list" resultMap="commentDtl"></collection>
+    </resultMap>
+
+    <resultMap id="commentDtl" type="com.korit.visitbusan.entity.CommentDtl">
+        <result property="commentDtlId" column="comment_dtl_id"></result>
+        <result property="commentId" column="comment_id"></result>
+        <result property="saveName" column="save_name"></result>
+        <result property="originName" column="origin_name"></result>
+    </resultMap>
+
+    <select id="getThumbnailByTourId" resultType="String">
+        select
+            thumbnail_image
+        from
+            tour_mst
+        where
+            tour_id = #{tourId};
+    </select>
+
+    <select id="getMainImgByTourId" resultType="String">
+        select
+            main_image
+        from
+            tour_mst
+        where
+            tour_id = #{tourId};
+    </select>
+
     <insert id="savePost" parameterType="com.korit.visitbusan.web.dto.TourReqDto" useGeneratedKeys="true" keyProperty="tourId">
         insert into
             tour_mst
         value
-            (0, #{tourCategory}, #{userId}, #{tourTitle}, #{tourSubTitle}, #{tourContents}, null, null, null, null, now(), now() );
+            (0, #{categoryId}, #{userId}, #{tourTitle}, #{tourSubTitle}, #{tourContents}, null, null, 0, null, null, now(), now() );
     </insert>
+
+    <insert id="saveTourUsage" parameterType="com.korit.visitbusan.web.dto.TourReqDto">
+        insert into
+            tour_usage
+        value(
+            0,
+            #{tourId},
+            #{usageNumber},
+            #{usageHomepage},
+            #{usageOffDay},
+            #{usageConvenient},
+            #{usageRuntime},
+            #{usageUsingFee},
+            #{usageMainMenu},
+            #{usageTraffic},
+            #{usageOther});
+    </insert>
+
+    <delete id="deletePost">
+        delete from tour_mst
+        where
+            tour_id = #{tourId};
+    </delete>
+
+    <delete id="deleteTourUsage">
+        delete from tour_usage
+        where
+            tour_id = #{tourId};
+    </delete>
 
     <update id="saveThumbnailImg">
         update
@@ -29,50 +170,185 @@
         where
             tour_id = #{tourId}
     </update>
-    
-    <select id="getPost" resultType="com.korit.visitbusan.entity.TourMst">
-        select
-            tm.tour_id as tourId,
-            tm.category_id as categoryId,
-            tm.user_id as userId,
-            tm.title,
-            tm.subtitle,
-            tm.contents,
-            tm.main_image as mainImage,
-            tm.thumbnail_image as thumbnailImage,
-            tm.lat,
-            tm.lng as lon,
-            tm.create_date as createDate,
 
-            tu.tell_number as tellNumber,
-            tu.homepage_url as homepageUrl,
-            tu.hldy_info as holidayInfo,
-            tu.handicapped_area as handicappedArea,
-            tu.usage_dayandtime as usageDayAndTime,
-            tu.usage_amount as usageAmount,
-            tu.rprsntv_menu as mainMenu,
-            tu.trfc_info as trafficInfo,
-            tu.etc_info as etcInfo
-        from
-            tour_mst tm
-            left outer join tour_usage tu on (tu.tour_id = tm.tour_id)
+    <update id="updateTourMst" parameterType="com.korit.visitbusan.web.dto.TourReqDto">
+        update
+            tour_mst
+        set
+            category_id = #{categoryId},
+            user_id = #{userId},
+            title = #{tourTitle},
+            subtitle = #{tourSubTitle},
+            contents = #{tourContents}
         where
-            tm.tour_id = #{tourId};
+            tour_id = #{tourId}
+    </update>
+
+    <update id="updateTourUsage" parameterType="com.korit.visitbusan.web.dto.TourReqDto">
+        update
+            tour_usage
+        set
+            tell_number = #{usageNumber},
+            homepage_url = #{usageHomepage},
+            hldy_info = #{usageOffDay},
+            handicapped_area = #{usageConvenient},
+            usage_dayandtime = #{usageRuntime},
+            usage_amount = #{usageUsingFee},
+            rprsntv_menu = #{usageMainMenu},
+            trfc_info = #{usageTraffic},
+            etc_info = #{usageOther}
+        where
+            tour_id = #{tourId}
+    </update>
+
+    <update id="updateViewCount">
+        update
+            tour_mst
+        set
+            view_count = view_count + 1
+        where
+            tour_id = #{tourId}
+    </update>
+
+    <select id="getReviewList" resultMap="ReviewRespDto">
+        select
+            cm.comment_id,
+            cm.user_id,
+            cm.tour_id,
+            cm.visit,
+            cm.review_comment,
+            cm.rating,
+            cm.create_date,
+
+            cd.save_name,
+            cd.origin_name,
+
+            um.username
+        from
+            comment_mst cm
+            left outer join comment_dtl cd on (cd.comment_id = cm.comment_id)
+            left outer join user_mst um on (um.user_id = cm.user_id)
+        where
+            tour_id = #{tourId};
     </select>
 
-    <insert id="saveTourRating" parameterType="com.korit.visitbusan.entity.TourRating">
-        insert into
-            tour_rating
+    <insert id="saveTourComment" parameterType="com.korit.visitbusan.entity.CommentMst" useGeneratedKeys="true" keyProperty="commentId">
+        insert into comment_mst
         value
-            (0, #{tourId}, #{userId}, #{ratingCount});
+            (0, #{userId}, #{tourId}, #{visit}, #{reviewComment}, #{rating}, now(), now());
     </insert>
 
-    <insert id="saveTourComment" parameterType="com.korit.visitbusan.entity.TourComment">
-        insert into
-            tour_comment
-        value
-            (0, #{tourId}, #{userId}, #{reviewComment});
+    <insert id="saveCommentDtl" parameterType="list">
+        insert into comment_dtl
+        values
+        <foreach collection="list" item="file" separator=",">
+            (0, #{file.commentId}, #{file.saveName}, #{file.originName})
+        </foreach>
     </insert>
 
+    <select id="exitReviewCheckByCommentIdAndUserId" resultType="integer" parameterType="com.korit.visitbusan.web.dto.DeleteReviewDto">
+        select
+            count(*)
+        from
+            comment_mst
+        where
+            comment_id = #{reviewId}
+        and user_id = #{userId};
+    </select>
 
+    <select id="getReviewImagePaths" resultType="String">
+        select
+            save_name
+        from
+            comment_dtl
+        where
+            comment_id = #{commentId}
+    </select>
+
+    <delete id="deleteReview">
+        delete from
+            comment_mst
+        where
+            comment_id = #{commentId}
+    </delete>
+
+    <delete id="deleteReviewImages">
+        delete from
+            comment_dtl
+        where
+            comment_id = #{commentId}
+    </delete>
+
+    <select id="getCategoryList" resultType="com.korit.visitbusan.entity.CategoryMst">
+        select
+            category_id as categoryId,
+            category_name as categoryName
+        from
+            tour_category
+    </select>
+
+    <select id="getTourTagList" resultType="com.korit.visitbusan.entity.TourTag">
+        select
+            tag_name as tagName,
+            tag_id as tagId
+        from
+            tour_tag
+        where
+            category_id = #{categoryId}
+    </select>
+
+    <select id="getPostTag" resultType="integer">
+        select
+            tag_id
+        from
+            tag_dtl
+        where
+            tour_id = #{tourId}
+    </select>
+
+    <insert id="registerTagDtl" parameterType="list">
+        insert into tag_dtl
+        values
+            <foreach collection="list" item="tag" separator=",">
+                (0,#{tag.tourId}, #{tag.tagId})
+            </foreach>
+    </insert>
+
+    <delete id="deleteTagDtl">
+        delete from tag_dtl
+        where
+            tour_id = #{tourId}
+    </delete>
+
+    <select id="getLikeCount" resultType="integer">
+        select
+            count(*)
+        from
+            tour_like
+        where
+            tour_id = #{tourId};
+    </select>
+
+    <select id="isLike" resultType="integer">
+        select
+            count(*)
+        from
+            tour_like
+        where
+            tour_id = #{tourId}
+        and user_id = #{userId}
+    </select>
+
+    <insert id="registerLike" parameterType="com.korit.visitbusan.web.dto.LikeReqDto">
+        insert into tour_like
+        value
+            (0, #{userId}, #{tourId})
+    </insert>
+
+    <delete id="deleteLike" parameterType="com.korit.visitbusan.web.dto.LikeReqDto">
+        delete from tour_like
+        where
+            tour_id = #{tourId}
+        and user_id = #{userId}
+    </delete>
 </mapper>

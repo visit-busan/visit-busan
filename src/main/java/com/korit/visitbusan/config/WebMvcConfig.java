@@ -11,7 +11,12 @@ import org.springframework.web.servlet.resource.PathResourceResolver;
 import java.io.IOException;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
-
+/*******************************************
+ *** 작성자 : 정순동
+ *  버전 : V0.1
+ *  내용 :  corsOrigin, image 관련 설정
+ *  작성일 : 2023.03.06
+ *******************************************/
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
 

@@ -6,6 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Search</title>
+  <script src="https://code.jquery.com/jquery-latest.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
     integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -41,11 +42,8 @@
               <i class="home-nth">></i>
               <a href="#" class="home-nth">부산에가면</a>
               <i class="home-nth">></i>
-              <a href="#" class="home-nth">명소</a>
+              <a href="#" class="home-nth">전체</a>
             </li>
-            <!-- <li class="depth">
-                <a href="">명소</a>
-              </li> -->
           </ul>
           <ul class="right-m">
             <li class="home-right">
@@ -59,10 +57,6 @@
       </section>
       <div class="category-container">
         <button class="category-item on">#전체</button>
-        <button class="category-item">#자연</button>
-        <button class="category-item">#역사</button>
-        <button class="category-item">#문화</button>
-        <button class="category-item">#공원</button>
       </div>
       <div class="input-container">
         <input type="text" class="search-value" />
@@ -70,7 +64,7 @@
       </div>
       <div class="search-container">
         <div class="content-header">
-          <b class="post-count">총(전체)<span> 123 </span>건</b>
+          <b class="post-count">총(전체)<span class="total-count"> err </span>건</b>
           <div class="sort-container">
             <div class="sort-item-group1">
               <div class="sort-item">
@@ -83,103 +77,38 @@
             </div>
             <div class="sort-item-group2">
               <div class="sort-item">
-                <span class="sort-value">평점순 ㅣ</span>
+                <span class="sort-value">조회순 ㅣ</span>
               </div>
               <div class="sort-item">
-                <span class="sort-value">리뷰순</span>
+                <span class="sort-value">좋아요순</span>
               </div>
             </div>
           </div>
         </div>
         <div class="search-content">
+
           <div class="search-item">
             <img src="/static/image/recommend.jpeg" alt="" class="search-img" />
-            <h2 class="search-name">빠르게 만나는 부산 봄여행 추천10</h2>
+            <h2 class="search-name">Example</h2>
             <div class="info-container">
-              <p class="view"><i class="fa-regular fa-eye"></i> 18</p>
-              <p class="comment"><i class="fa-regular fa-comments"></i> 0</p>
-              <p class="like"><i class="fa-regular fa-thumbs-up"></i> 0</p>
+              <p class="view"><i class="fa-regular fa-eye"></i> err</p>
+              <p class="comment"><i class="fa-regular fa-comments"></i> err</p>
+              <p class="like"><i class="fa-regular fa-thumbs-up"></i> err</p>
             </div>
           </div>
-          <div class="search-item">
-            <img src="/static/image/recommend.jpeg" alt="" class="search-img" />
-            <h2 class="search-name">빠르게 만나는 부산 봄여행 추천10</h2>
-            <div class="info-container">
-              <p class="view"><i class="fa-regular fa-eye"></i> 18</p>
-              <p class="comment"><i class="fa-regular fa-comments"></i> 0</p>
-              <p class="like"><i class="fa-regular fa-thumbs-up"></i> 0</p>
-            </div>
-          </div>
-          <div class="search-item">
-            <img src="/static/image/recommend.jpeg" alt="" class="search-img" />
-            <h2 class="search-name">빠르게 만나는 부산 봄여행 추천10</h2>
-            <div class="info-container">
-              <p class="view"><i class="fa-regular fa-eye"></i> 18</p>
-              <p class="comment"><i class="fa-regular fa-comments"></i> 0</p>
-              <p class="like"><i class="fa-regular fa-thumbs-up"></i> 0</p>
-            </div>
-          </div>
-          <div class="search-item">
-            <img src="/static/image/recommend.jpeg" alt="" class="search-img" />
-            <h2 class="search-name">빠르게 만나는 부산 봄여행 추천10</h2>
-            <div class="info-container">
-              <p class="view"><i class="fa-regular fa-eye"></i> 18</p>
-              <p class="comment"><i class="fa-regular fa-comments"></i> 0</p>
-              <p class="like"><i class="fa-regular fa-thumbs-up"></i> 0</p>
-            </div>
-          </div>
-          <div class="search-item">
-            <img src="/static/image/recommend.jpeg" alt="" class="search-img" />
-            <h2 class="search-name">빠르게 만나는 부산 봄여행 추천10</h2>
-            <div class="info-container">
-              <p class="view"><i class="fa-regular fa-eye"></i> 18</p>
-              <p class="comment"><i class="fa-regular fa-comments"></i> 0</p>
-              <p class="like"><i class="fa-regular fa-thumbs-up"></i> 0</p>
-            </div>
-          </div>
-          <div class="search-item">
-            <img src="/static/image/recommend.jpeg" alt="" class="search-img" />
-            <h2 class="search-name">빠르게 만나는 부산 봄여행 추천10</h2>
-            <div class="info-container">
-              <p class="view"><i class="fa-regular fa-eye"></i> 18</p>
-              <p class="comment"><i class="fa-regular fa-comments"></i> 0</p>
-              <p class="like"><i class="fa-regular fa-thumbs-up"></i> 0</p>
-            </div>
-          </div>
-          <div class="search-item">
-            <img src="/static/image/recommend.jpeg" alt="" class="search-img" />
-            <h2 class="search-name">빠르게 만나는 부산 봄여행 추천10</h2>
-            <div class="info-container">
-              <p class="view"><i class="fa-regular fa-eye"></i> 18</p>
-              <p class="comment"><i class="fa-regular fa-comments"></i> 0</p>
-              <p class="like"><i class="fa-regular fa-thumbs-up"></i> 0</p>
-            </div>
-          </div>
-          <div class="search-item">
-            <img src="/static/image/recommend.jpeg" alt="" class="search-img" />
-            <h2 class="search-name">빠르게 만나는 부산 봄여행 추천10</h2>
-            <div class="info-container">
-              <p class="view"><i class="fa-regular fa-eye"></i> 18</p>
-              <p class="comment"><i class="fa-regular fa-comments"></i> 0</p>
-              <p class="like"><i class="fa-regular fa-thumbs-up"></i> 0</p>
-            </div>
-          </div>
+
         </div>
-        <div class="index-container">
-          <!-- <button class="index-box" disabled>
-                        <
-                    </button> -->
-          <button class="index-box">1</button>
-          <button class="index-box">2</button>
-          <button class="index-box">3</button>
-          <button class="index-box">4</button>
-          <button class="index-box">5</button>
-          <button class="index-box" disabled>></button>
-          <button class="index-box" disabled>>l</button>
-        </div>
+
+        <div class="page-controller">
+          <a href="" class="disabled">이전</a>
+          <ul class="page-numbers">
+          </ul>
+          <a href="">다음</a>
+      </div>
       </div>
     </main>
   </div>
+  <script src="/static/js/search/search.js"></script>
 </body>
 
 </html>

@@ -11,24 +11,24 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="/static/css/reset.css">
     <link rel="stylesheet" href="/static/css/common.css">
-    <link rel="stylesheet" href="/static/css/header.css">
     <link rel="stylesheet" href="/static/css/post/modify-post.css">
     <script src="https://code.jquery.com/jquery-latest.min.js"></script>
-
+    
     <!-- include summernote css/js -->
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
-
+    
     <!-- include libraries(jQuery, bootstrap) -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/static/css/header.css">
 
     <script>
         $(document).ready(function () {
             $('#summernote').summernote({
-                height: 1500,                 // 에디터 높이
-                minHeight: null,             // 최소 높이
-                maxHeight: null,             // 최대 높이
+                height: 1440,                 // 에디터 높이
+                minHeight: 1440,             // 최소 높이
+                maxHeight: 1440,             // 최대 높이
                 focus: true,                  // 에디터 로딩후 포커스를 맞출지 여부
                 lang: "ko-KR",					// 한글 설정
                 callbacks: {	//여기 부분이 이미지를 첨부하는 부분
@@ -65,11 +65,7 @@
                     }
                 });
             }
-
-            
         });
-
-
     </script>
 </head>
 
@@ -93,42 +89,119 @@
             <header class="main-header">
                 <div class="category-container">
                     <i class="fa-solid fa-house"></i>
-                    <span><b>부산에 가면</b></span>
+                    <span><b>부산에 가면  >  <span class="category-monitor"></span></b></span>
                 </div>
                 <div class="header-title">
+                    <div class="category-tags-selector">
+                        <div class="category-selector-container">
+                            <h2>카테고리</h2>
+                            <select class="category-selector">
+                            </select>
+                        </div>
+                        <ul class="tags-selector-container">
+                            <h2>태그선택(중복가능)</h2>
+                        </ul>
+                    </div>
                     <input type="text" class="main-title" placeholder="제목">
                     <input type="text" class="sub-title" placeholder="부제목">
                 </div>
             </header>
+
             <div class="main-content">
-                <div class="img-container">
-                    <img src="" alt="no-img" class="main-img">
+                <div class="img-upload-container">
+                    <div class="thumbnail-upload-container">
+                        <h2><button class="thumbnail-toggle">링크로 썸네일 이미지 업로드</button></h2>
+                        <div class="thumbnail-with-form">
+                            <h2>썸네일 업로드 - 파일 직접 업로드</h2>
+                            <form action="" class="thumbnail-form">
+                                <input type="file" name="file" class="thumbnail-file">
+                                <div class="thumbnail-container">
+                                    <img src="/static/image/no_img.png" alt="no-img" class="thumbnail">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="thumbnail-with-link off">
+                            <h2 style="margin-top: 20px;">썸네일 업로드 - 썸네일로 사용할 링크 업로드</h2>
+                            <input type="text" class="thumbnail-link" placeholder="썸네일로 사용할 파일의 링크를 입력해주세요.">
+                        </div>
+                    </div>
+
+                    <div class="mainimg-upload-container">
+                        <h2><button class="mainimg-toggle">링크로 메인이미지 업로드</button></h2>
+                        <div class="mainimg-with-form">
+                            <h2>메인이미지 업로드 - 파일 직접 업로드</h2>
+                            <form action="" class="mainimg-form">
+                                <input type="file" name="file" class="mainimg-file">
+                                <div class="mainimg-container">
+                                    <img src="/static/image/no_img.png" alt="no-img" class="mainimg">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="mainimg-with-link off">
+                            <h2>메인이미지 업로드 - 메인이미지로 사용할 링크 업로드</h2>
+                            <input type="text" class="mainimg-link" placeholder="메인이미지로 사용할 파일의 링크를 입력해주세요.">
+                        </div>
+                    </div>
                 </div>
                 <ul class="main-navigation">
-                    <li><a href="#"><b>상세정보</b></a></li>
-                    <li><a href="#"><b>교통안내</b></a></li>
-                    <li><a href="#"><b>이용안내</b></a></li>
+                    <li><b class="article-button">상세정보</b></li>
+                    <li><b class="usage-button">이용/교통안내</b></li>
                 </ul>
-                <div class="main-article">
+
+                <div class="content-container">
+                    <div class="main-article">
+                        <form action="/uploadSummernoteImageFile" method="post">
+                            <textarea id="summernote" name="editordata"></textarea>
+                        </form>
+                    </div>
+
+                    <div class="main-usage-information off">
+                        <div class="information-container">
+                            <h2>홈페이지</h2>
+                            <input type="text" class="homepage-input">
+                        </div>
+                        <div class="information-container">
+                            <h2>연락처</h2>
+                            <input type="text" class="number-input">
+                        </div>
+                        <div class="information-container">
+                            <h2>휴무일</h2>
+                            <input type="text" class="offday-input">
+                        </div>
+                        <div class="information-container">
+                            <h2>운영 및 시간</h2>
+                            <input type="text" class="runtime-input">
+                        </div>
+                        <div class="information-container">
+                            <h2>이용요금</h2>
+                            <input type="text" class="usingfee-input">
+                        </div>
+                        <div class="information-container">
+                            <h2>대표메뉴</h2>
+                            <input type="text" class="mainmenu-input">
+                        </div>
+                        <div class="information-container">
+                            <h2>편의시설</h2>
+                            <input type="text" class="convenient-input">
+                        </div>
+                        <div class="information-container">
+                            <h2>기타정보</h2>
+                            <input type="text" class="other-input">
+                        </div>
+                        <div class="information-container">
+                            <h2>교통정보</h2>
+                            <input type="text" class="traffic-input">
+                        </div>
+                    </div>
                     <div class="buttons">
                         <button class="get-content-button">내용 다시 가져오기</button>
-                        <button class="summornote-submit-button">수정</button>
-                    </div>
-                    <form action="/uploadSummernoteImageFile" method="post">
-                        <textarea id="summernote" name="editordata"></textarea>
-                    </form>
-                </div>
-                <div class="main-location">
-
-                </div>
-                <div class="main-usage-information">
-                    <div class="">
-
+                        <button class="modify-button">수정</button>
                     </div>
                 </div>
             </div>
         </main>
     </div>
+    <script src="/static/js/account/principal.js"></script>
     <script src="/static/js/post/modify-post.js"></script>
 </body>
 
