@@ -29,7 +29,7 @@ public class AdminTagApi {
 
     @ParamsAspect
     @ValidAspect
-    @ApiOperation(value = "관광지 테그 조회", notes = "관광지 테그를 조회 설정값에 맞게 불러오는 API입니다.")
+    @ApiOperation(value = "관광지 태그 조회", notes = "관광지 태그를 조회 설정값에 맞게 불러오는 API입니다.")
     @GetMapping("/tags")
     public ResponseEntity<CMRespDto<List<AdminTagMst>>> searchTag(@Valid AdminSearchTagReqDto adminSearchTagReqDto, BindingResult bindingResult) {
 //        System.out.println(adminSearchTagReqDto);
