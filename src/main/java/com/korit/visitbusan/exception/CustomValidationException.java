@@ -4,7 +4,12 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import java.util.Map;
-
+/*******************************************
+ *** 작성자 : 이성욱
+ *  버전 : V0.1
+ *  내용 : 조회 실패시 사용할 Exception
+ *  작성일 : 2023.03.07
+ *******************************************/
 @Getter
 @AllArgsConstructor
 public class CustomValidationException extends RuntimeException {

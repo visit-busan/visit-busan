@@ -5,9 +5,9 @@ html {
 
 .main-container {
   padding-top: 100px;
-  height: 1300px;
+  height: 1500px;
   display: block;
-  background-size: 140%;
+  background-size: 160%;
 }
 
 body {
@@ -92,8 +92,7 @@ input {
   font-size: 15px;
   color: #8e8e8e;
 }
-
-.pswdImg {
+.pswdImg { 
   width: 18px;
   height: 20px;
   display: inline-block;
@@ -102,7 +101,33 @@ input {
   right: 16px;
   margin-top: -10px;
   cursor: pointer;
+  background: url("/static/image/m_icon_check_disable.png");
+  background-size: cover;
 }
+.pswdImg.on {
+  width: 18px;
+  height: 20px;
+  display: inline-block;
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  margin-top: -10px;
+  cursor: pointer;
+  background: url("/static/image/m_icon_check_enable.png");
+  background-size: cover;
+}
+/* #pswd_img {
+  width: 18px;
+  height: 20px;
+  display: inline-block;
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  margin-top: -10px;
+  cursor: pointer;
+  background: url("/static/image/m_icon_check_disable.png");
+  background-size: cover;
+} */
 
 .register-error {
   margin-top: 5px;

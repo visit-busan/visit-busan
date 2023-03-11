@@ -6,6 +6,10 @@ window.onload = () => {
     ComponentEvent.getInstance().clickOrderButtons();
     ComponentEvent.getInstance().clickSearchButton();
     ComponentEvent.getInstance().clickTagButton();
+
+    HeaderService.getInstance().loadHeader();
+    HeaderService.getInstance().Categoryload();
+    FooterService.getInstance().loadFooter();
 }
 // -----------------------------------------
 //                   Objs

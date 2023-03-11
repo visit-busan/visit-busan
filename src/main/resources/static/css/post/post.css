@@ -1,9 +1,13 @@
+body {
+    background-color: white;
+}
 #container {
-    background-color: rgb(249, 249, 249);
+    background-color: white;
     position: relative;
 }
 
 .main-container {
+
     display: flex;
     flex-direction: column;
     align-items: center;

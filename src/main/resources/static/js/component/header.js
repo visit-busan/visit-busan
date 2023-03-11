@@ -7,6 +7,29 @@ class HeaderService {
     return this.#instance;
   }
 
+  Categoryload() {
+    let responseData = null;
+    $.ajax({
+      async: false,
+      type: "get",
+      url: "/api/post/categories",
+      dataType: "json",
+      success: response => {
+        responseData = response.data;
+      },
+      error: error => {
+
+      }
+    })
+    const category = document.querySelector(".category");
+    responseData.forEach(data => {
+      category.innerHTML +=
+        `
+      <li><a href="http://localhost:8000/search?categoryId=${data.categoryId}" style="text-align: left;">${data.categoryName}</a></li>
+      `;
+    });
+  }
+
   loadHeader() {
     const headerContainer = document.querySelector(".header-container");
     const principal = PrincipalApi.getInstance().getPrincipal();
@@ -17,17 +40,12 @@ class HeaderService {
       <div class="menu-container">
         <ul class="all-menu">
           <li class="sub-menu">
-            <a href="/templates/index.html">HOME</a>
+            <a href="http://localhost:8000">HOME</a>
           </li>
           <li class="sub-menu">
             <a href="#">부산에가면<i class="fa fa-angle-down"></i></a>
-            <ul>
-              <li><a href="#">명소</a></li>
-              <li><a href="#">음식</a></li>
-              <li><a href="#">숙박</a></li>
-              <li><a href="#">쇼핑</a></li>
-              <li><a href="#">축제</a></li>
-              <li><a href="#">내주변</a></li>
+            <ul class="category">
+              
             </ul>
           </li>
           <li class="sub-menu">

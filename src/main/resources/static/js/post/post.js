@@ -9,6 +9,10 @@ window.onload = () => {
     ComponentEvent.getInstance().addChangeEventModalInput();
     ComponentEvent.getInstance().clickReviewDelete();
     ComponentEvent.getInstance().clickModifyButtons();
+
+    HeaderService.getInstance().loadHeader();
+    HeaderService.getInstance().Categoryload();
+    FooterService.getInstance().loadFooter();
 }
 
 // -----------------------------------------
@@ -16,6 +20,7 @@ window.onload = () => {
 // -----------------------------------------
 let tourId = null;
 let principalData = null;
+
 
 let reviewObj = {
     reviewId : 0,
@@ -280,7 +285,7 @@ class PostService {
             tourId = id;
         }
 
-        principalData = PrincipalApi.getInstance().getPrincipal();
+        const principalData = PrincipalApi.getInstance().getPrincipal();
         const responseData = PostApi.getInstance().getPost();
         console.log(principalData);
         console.log(responseData);
@@ -300,7 +305,7 @@ class PostService {
                     authorityFlag = true;
                 }});
 
-            if(principalData.user.userId == responseData.data.userId  || authorityFlag) {
+            if(principalData.userMst.userId == responseData.data.userId  || authorityFlag) {
                 const modifyButton = document.querySelector(".modify-buttons");
                 modifyButton.innerHTML = `
                     <ul>
@@ -457,7 +462,7 @@ class PostService {
                             <span>★<b class="review-rating">${data.rating}</b></span>
                         </div>
                         <div class="review-contents">
-                            <span class="visit-status">${data.visit == 1 ? "방문했음" : "방문하지 않음"}${principalData.user.userId == data.userId ? '<b class="review-delete">X</b>' :""}</span>
+                            <span class="visit-status">${data.visit == 1 ? "방문했음" : "방문하지 않음"}${principalData.userMst.userId == data.userId ? '<b class="review-delete">X</b>' :""}</span>
                             <textarea class="review-content" readonly>${data.reviewComment}</textarea>
                             <div class="review-img-container">
                                 ${data.commentDtl[0].saveName != null ?
@@ -482,7 +487,7 @@ class PostService {
         if(principalData == null) {
             return;
         }
-        likeObj.userId = principalData.user.userId;
+        likeObj.userId = principalData.userMst.userId;
         const likeButton = document.querySelector(".like-button");
         let isLike = PostApi.getInstance().getIsLike();
         
@@ -501,7 +506,7 @@ class PostService {
         let visitStatusSelector = document.querySelector(".visit-status-selector");
         let reviewInput = document.querySelector(".review-content-input");
         reviewObj.visitStatus = visitStatusSelector.value;
-        reviewObj.userId = principalData.user.userId;
+        reviewObj.userId = principalData.userMst.userId;
         reviewObj.reviewContent = reviewInput.value;
                 
         if(reviewImgObj.fileOne != null) {
@@ -520,7 +525,7 @@ class PostService {
     }
 
     deleteReview(e) {
-        deleteReviewObj.userId = principalData.user.userId;
+        deleteReviewObj.userId = principalData.userMst.userId;
         deleteReviewObj.reviewId = e.target.parentElement.parentElement.parentElement.children[0].children[0].value;
         if(confirm("정말 리뷰를 삭제하시겠습니까?")) {
             PostApi.getInstance().deleteReview();

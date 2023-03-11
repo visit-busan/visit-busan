@@ -11,10 +11,10 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 /*******************************************
- *** 작성자 : 정순동
+ *** 작성자 : 정순동, 이성욱
  *  버전 : V0.1
  *  내용 :  Security 관련 설정 configuration
- *  작성일 : 2023.03.07
+ *  최근작성일 : 2023.03.09
  *******************************************/
 @EnableWebSecurity
 @Configurable

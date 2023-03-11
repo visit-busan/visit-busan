@@ -15,6 +15,6 @@ public class SearchController {
 
     @GetMapping("")
     public String searchTourByCategoryName() {
-        return "search/search";
+            return "search/search";
     }
 }

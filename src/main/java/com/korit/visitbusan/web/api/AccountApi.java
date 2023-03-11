@@ -24,7 +24,12 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.net.URI;
-
+/*******************************************
+ *** 작성자 : 이성욱
+ *  버전 : V0.5
+ *  내용 :  로그인을  Api
+ *  작성일 : 2023.03.10
+ *******************************************/
 @Api(tags = "Account Rest API Controller")
 @RestController
 @RequiredArgsConstructor
@@ -59,9 +64,6 @@ public class AccountApi {
                 .created(URI.create("/api/account/user/" + user.getUserId()))
                 .body(new CMRespDto<>(HttpStatus.CREATED.value(), "회원가입 완료", user));
     }
-
-    //  user객체 가져오는 방법
-
 
     @ApiOperation(value = "Get userid", notes = "회원정보 가져오기")
     @GetMapping("/user/{userId}")

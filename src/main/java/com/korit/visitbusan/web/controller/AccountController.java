@@ -4,7 +4,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+/*******************************************
+ *** 작성자 : 이성욱
+ *  버전 : V0.5
+ *  내용 :  로그인 관련기능 controller
+ *  최근작성일 : 2023.03.11
+ *******************************************/
 @Controller
 @RequestMapping("/account")
 public class AccountController {

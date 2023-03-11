@@ -14,7 +14,12 @@ import org.springframework.stereotype.Service;
 
 import java.util.Map;
 import java.util.UUID;
-
+/*******************************************
+ *** 작성자 : 이성욱
+ *  버전 : V0.1
+ *  내용 :  구글 회원가입 관련기능 principal service
+ *  작성일 : 2023.03.09
+ *******************************************/
 @Slf4j
 @Service
 @RequiredArgsConstructor

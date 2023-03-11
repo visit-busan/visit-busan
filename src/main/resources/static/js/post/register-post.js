@@ -228,7 +228,7 @@ class RegisterService {
         principalData = PrincipalApi.getInstance().getPrincipal();
         console.log(principalData);
         if(principalData != null) {
-            registerObj.userId = principalData.user.userId;
+            registerObj.userId = principalData.userMst.userId;
         }
         let categories = RegisterApi.getInstance().getCategories().data;
         const categorySelector = document.querySelector(".category-selector");
