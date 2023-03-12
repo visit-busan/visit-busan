@@ -244,7 +244,7 @@ class RegisterEvent {
 
                 // reigster value값 
                 const usernameValue = document.querySelector(".register-input-username").value;
-                const subscriptionValue = document.querySelector(".register-input-subscription").value;
+                // const subscriptionValue = document.querySelector(".register-input-subscription").value;
                 const passwordValue = document.querySelector(".register-input-password").value;
                 const repasswordValue = document.querySelector(".register-input-repassword").value;
                 const nameValue = document.querySelector(".register-input-name").value;
@@ -258,7 +258,7 @@ class RegisterEvent {
 
                 const user = new User(
                     usernameValue
-                    , subscriptionValue
+                    // , subscriptionValue
                     , passwordValue
                     , repasswordValue
                     , nameValue
@@ -279,7 +279,7 @@ class RegisterEvent {
 // console.log(`${principal.userMst.roleDtl.roleId}`);
 class User {
     username = null;
-    roleId = null;
+    // roleId = null;
     password = null;
     repassword = null;
     name = null;
@@ -292,9 +292,9 @@ class User {
     userMarketing = null;
 
 
-    constructor(username, roleId, password, repassword, name, birth, gender, email, tellNumber, userLat, userLng, userMarketing) {
+    constructor(username, password, repassword, name, birth, gender, email, tellNumber, userLat, userLng, userMarketing) {
         this.username = username;
-        this.roleId = roleId;
+        // this.roleId = roleId;
         this.password = password;
         this.repassword = repassword;
         this.name = name;

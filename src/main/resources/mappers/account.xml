@@ -81,26 +81,18 @@
             um.user_id = #{userId}
     </select>
 
-<!--    <insert id="registerUserRoles" parameterType="list">-->
-<!--        insert into role_dtl-->
-<!--        values-->
-<!--        <foreach collection="list" item="roleId" open="(" close=")" separator=",">-->
-<!--            (0, #{userId}, #{roleId}, now(), now())-->
-<!--        </foreach>-->
-<!--    </insert>-->
-
     <insert id="saveUser"
             parameterType="com.korit.visitbusan.entity.UserMst"
             useGeneratedKeys="true"
             keyProperty="userId">
         insert into user_mst
-        values(0, #{roleId}, #{username}, #{password}, #{name}, #{gender}, #{birth}, #{tellNumber}, #{email}, #{provider}, #{userLng}, #{userLat}, #{userMarketing}, now(), now())
+        values(0, #{username}, #{password}, #{name}, #{gender}, #{birth}, #{tellNumber}, #{email}, #{provider}, #{userLng}, #{userLat}, #{userMarketing}, now(), now())
     </insert>
 
     <insert id="saveRole" parameterType="com.korit.visitbusan.entity.UserMst">
         insert into role_dtl
-<!--        values(0, #{userId}, 2, now(), now())-->
-        values(0, #{userId}, #{roleId}, now(), now())
+        values(0, #{userId}, 2, now(), now())
+<!--        values(0, #{userId}, #{roleId}, now(), now())-->
     </insert>
 
 <!--    <insert id="saveRoleId" parameterType="com.korit.visitbusan.entity.UserMst">-->
