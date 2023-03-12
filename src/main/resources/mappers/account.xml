@@ -7,7 +7,6 @@
     <resultMap id="userMst" type="com.korit.visitbusan.entity.UserMst">
         <result property="userId" column="user_id"></result>
         <result property="username" column="username"></result>
-        <result property="roleId" column="role_id"></result>
         <result property="password" column="password"></result>
         <result property="name" column="name"></result>
         <result property="gender" column="gender"></result>
