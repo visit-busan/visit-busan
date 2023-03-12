@@ -5,13 +5,13 @@
     width: 100%;
 }
 
-.create-button {
+.register-button {
     border:  1px solid #1a73e8;
     padding: 5px 10px;
     color: #202020;
 }
 
-.create-button:hover {
+.register-button:hover {
     background-color: #1a73e8;
     color: white;
 }

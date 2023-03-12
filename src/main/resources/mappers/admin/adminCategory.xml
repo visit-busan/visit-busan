@@ -62,7 +62,7 @@
         insert into
             tour_category
         values
-            (0, #{categoryName}, #{registrant}, #{createDate}, #{updateDate})
+            (0, #{userId}, #{categoryName}, now(), now())
     </insert>
 
     <!--  카테고리 정보 수정하기 (null이나 공백이 없을 경우)  -->

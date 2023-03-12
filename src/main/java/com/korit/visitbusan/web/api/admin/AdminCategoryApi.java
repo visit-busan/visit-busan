@@ -40,6 +40,7 @@ public class AdminCategoryApi {
                 .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully",adminCategoryService.searchCategory(adminSearchCategoryReqDto)));
     }
 
+    @ApiOperation(value = "관광지 분류 건수", notes = "관광지 분류를 페이지네이션을 위한 API입니다.")
     @GetMapping("/category/totalcount")
     public ResponseEntity<CMRespDto<?>> getCategoryTotalCount(AdminSearchCategoryListDto adminSearchCategoryListDto) {
         return ResponseEntity
@@ -49,6 +50,7 @@ public class AdminCategoryApi {
 
     @ParamsAspect
     @ValidAspect
+    @ApiOperation(value = "관광지 분류 등록", notes = "관광지 분류를 등록하기 위한 API입니다.")
     @PostMapping("/category")
     public ResponseEntity<CMRespDto<?>> registerCategory(@Valid @RequestBody AdminCategoryReqDto adminCategoryReqDto, BindingResult bindingResult) {
         adminCategoryService.registerCategory(adminCategoryReqDto);
@@ -60,6 +62,7 @@ public class AdminCategoryApi {
 
     @ParamsAspect
     @ValidAspect
+    @ApiOperation(value = "관광지 분류 수정", notes = "관광지 분류를 수정하기 위한 API입니다.")
     @PutMapping("/category/{categoryId}")
     public ResponseEntity<CMRespDto<?>> modifyCategory(@PathVariable int categoryId, @Valid @RequestBody AdminCategoryReqDto adminCategoryReqDto, BindingResult bindingResult) {
         adminCategoryService.modifyCategory(adminCategoryReqDto);
@@ -69,6 +72,7 @@ public class AdminCategoryApi {
     }
 
     @ParamsAspect
+    @ApiOperation(value = "관광지 분류 삭제", notes = "관광지 분류를 삭제하기 위한 API입니다.")
     @DeleteMapping("/category/{categoryId}")
     public ResponseEntity<CMRespDto<?>> removeCategory(@PathVariable int categoryId) {
         adminCategoryService.removeCategory(categoryId);
@@ -78,6 +82,7 @@ public class AdminCategoryApi {
     }
 
     @ParamsAspect
+    @ApiOperation(value = "관광지 분류 일괄삭제", notes = "관광지 분류를 일괄 삭제하기 위한 API입니다.")
     @DeleteMapping("/categories")
     public ResponseEntity<CMRespDto<?>> removeCategories(@RequestBody AdminDeleteCategoriesReqDto adminDeleteCategoriesReqDto) {
         adminCategoryService.removeCategories(adminDeleteCategoriesReqDto);

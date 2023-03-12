@@ -17,8 +17,8 @@ public class AdminCategoryReqDto {
     @NotBlank
     private String categoryName;
 
-    @ApiModelProperty(value = "등록자", example = "admin")
-    private String registrant;
+    @ApiModelProperty(value = "userId", example = "1")
+    private int userId;
 
     @ApiModelProperty(value = "등록일", example = "2023-03-02")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-mm-dd", timezone = "Asia/Seoul")

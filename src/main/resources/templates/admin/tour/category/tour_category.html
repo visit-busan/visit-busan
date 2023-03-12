@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>visit-busan 관리자 페이지</title>
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="/static/css/admin/reset.css">
     <link rel="stylesheet" href="/static/css/admin/common.css">
@@ -54,8 +55,8 @@
                 <div class="content-main">
                     <div class="content-items">
                         <div class="left-items">
-                            <button type="button" class="regist-button">등록</button>
-                            <button type="button" class="delete-button">삭제</button>
+                            <button type="button" class="register-button">등록</button>
+                            <button type="button" class="delete-all">삭제</button>
                         </div>
                         <div class="right-items">
                             <input type="search" class="search-input" placeholder="목적지 분류를 입력하세요.">
@@ -64,13 +65,43 @@
                     </div>
                     <!-- 관광지 분류 등록 모달 -->
                     <div id="modal" class="modal-overlay">
-                        <div class="modal-window regist">
+                        <div class="modal-window-register">
                             <div class="modal-header">
                                 <h2 class="modal-title">관광지 분류 등록</h2>
                                 <button class="close-button">x</button>
                             </div>
                             <div class="modal-body">
-                                <form>
+                                <form class="modal-form-register">
+                                    <table>
+                                        <colgroup>
+                                            <col>
+                                            <col>
+                                        </colgroup>
+                                        <tr>
+                                            <th>카테고리명</th>
+                                            <td >
+                                                <input type="text" class="register-category name" placeholder="관광지명을 입력해주세요." maxlength="20">
+                                                <div class="error-message"></div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="modal-register-button">등록</button>
+                                <button class="modal-cancel-button">취소</button>
+                            </div>
+                        </div>                                            
+                    </div>
+                    <!-- 관광지 분류 수정 모달 -->
+                    <div id="modal" class="modal-overlay">
+                        <div class="modal-window-modify">
+                            <div class="modal-header">
+                                <h2 class="modal-title">관광지 분류 수정</h2>
+                                <button class="close-button">x</button>
+                            </div>
+                            <div class="modal-body">
+                                <form class="modal-form-modify">
                                     <table>
                                         <colgroup>
                                             <col>
@@ -83,26 +114,14 @@
                                         <tr>
                                             <th>관광지 분류명</th>
                                             <td >
-                                                <input type="text" class="regist-category-name" placeholder="관광지명을 입력해주세요.">
-                                                <input type="text" class="regist-category-name" placeholder="관광지명을 입력해주세요.">
+                                                <input type="text" class="register-category name" placeholder="관광지명을 입력해주세요.">
+                                                <div class="error-message"></div>
                                             </td>
                                         </tr>
                                         <tr>
                                             <th>작성자</th>
                                             <td >
-                                                <select class="register-category-select">
-                                                    <option value="">전체조회</option>
-                                                    <option value="명소">명소</option>
-                                                    <option value="맛집">맛집</option>
-                                                </select>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th>대표 이미지</th>
-                                            <td>
-                                                <!-- 이미지 왜 밀리는지 모르겠음... -->
-                                                <img src="/static/image/indexbackground-1.jpg">
-                                                <input type="file" class="regist-category-img" accept=".png, .jpg">
+                                                <input type="text" class="register-category username" disabled>
                                             </td>
                                         </tr>
                                         <tr>
@@ -117,24 +136,20 @@
                                 </form>
                             </div>
                             <div class="modal-footer">
-                                <button class="regist-button">등록</button>
-                                <button class="cancel-button">취소</button>
+                                <button class="modal-modify-button">수정</button>
+                                <button class="modal-cancel-button">취소</button>
                             </div>
-                        </div>                                            
-                    </div>
-                    <!-- 관광지 분류 수정 모달
-                    <div id="modal" class="modal-overlay">
-                        <div class="modal-window regist">
                         </div>
-                    </div> -->
+                    </div>
                     <div class="table-container">
                         <table class="content-table">
                             <thead>
                                 <tr>
                                     <th><input type="checkbox" class="delete-checkall"></th>
                                     <th>카테고리 아이디</th>
-                                    <th>관광지 분류명</th>
+                                    <th>관광지 카테고리명</th>
                                     <th>등록자</th>
+                                    <th>최종수정일</th>
                                     <th>관리</th>
                                 </tr>
                             </thead>
@@ -157,6 +172,6 @@
             </div>
         </main>
     </div>
-    <script src="/static/js/admin/tour/category/modal_test.js"></script>
+    <script src="/static/js/admin/tour/category/tour_category.js"></script>
 </body>
 </html>

@@ -8,7 +8,7 @@
     background: rgba(0, 0, 0, 0.5);
 }
 
-.modal-window {
+.modal-window-register, .modal-window-modify {
     overflow-y: initial;
     position: fixed;
     top: 50%;
@@ -106,19 +106,19 @@
     text-align: center;
 }
 
-.modal-footer .regist-button {
+.modal-footer .modal-register-button {
     padding: 5px 10px;
     color: white;
     background-color: #1a73e8;
 }
 
-.modal-footer .modify-button {
+.modal-footer .modal-modify-button {
     padding: 5px 10px;
     color: white;
     background-color: #1a73e8;
 }
 
-.modal-footer .cancel-button {
+.modal-footer .modal-cancel-button {
     padding: 5px 10px;
     color: white;
     background-color:  #202020;

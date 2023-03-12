@@ -21,8 +21,8 @@ public class AdminTourReqDto {
     @NotBlank
     private String title;
 
-    @ApiModelProperty(value = "작성자 ID", example = "sundong")
-    private String writer;
+    @ApiModelProperty(value = "userId", example = "1")
+    private int userId;
 
     @ApiModelProperty(value = "등록일", example = "2023-03-02")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-mm-dd", timezone = "Asia/Seoul")

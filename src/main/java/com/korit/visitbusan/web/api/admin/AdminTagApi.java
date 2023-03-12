@@ -38,6 +38,7 @@ public class AdminTagApi {
                 .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully",adminTagService.searchTag(adminSearchTagReqDto)));
     }
 
+    @ApiOperation(value = "관광지 태그 개수조회", notes = "관광지 태그 페이지네이션을 위한 API입니다.")
     @GetMapping("/tag/totalcount")
     public ResponseEntity<CMRespDto<?>> getTagTotalCount(AdminSearchTagListDto adminSearchTagListDto) {
         return ResponseEntity
@@ -47,6 +48,7 @@ public class AdminTagApi {
 
     @ParamsAspect
     @ValidAspect
+    @ApiOperation(value = "관광지 태그 등록", notes = "관광지 태그 등록을 위한 API입니다.")
     @PostMapping("/tag")
     public ResponseEntity<CMRespDto<?>> registerTag(@Valid @RequestBody AdminTagReqDto adminTagReqDto, BindingResult bindingResult) {
         adminTagService.registerTag(adminTagReqDto);
@@ -57,6 +59,7 @@ public class AdminTagApi {
 
     @ParamsAspect
     @ValidAspect
+    @ApiOperation(value = "관광지 태그 수정", notes = "관광지 태그 수정을 위한 API입니다.")
     @PutMapping("/tag/{tagId}")
     public ResponseEntity<CMRespDto<?>> modifyTag(@PathVariable int tagId, @Valid @RequestBody AdminTagReqDto adminTagReqDto, BindingResult bindingResult) {
         adminTagService.modifyTag(adminTagReqDto);
@@ -66,6 +69,7 @@ public class AdminTagApi {
     }
 
     @ParamsAspect
+    @ApiOperation(value = "관광지 태그 삭제", notes = "관광지 태그 삭제를 위한 API입니다.")
     @DeleteMapping("/tag/{tagId}")
     public ResponseEntity<CMRespDto<?>> removeTag(@PathVariable int tagId) {
         adminTagService.removeTag(tagId);
@@ -75,6 +79,7 @@ public class AdminTagApi {
     }
 
     @ParamsAspect
+    @ApiOperation(value = "관광지 태그 일괄삭제", notes = "관광지 태그 일괄삭제를 위한 API입니다.")
     @DeleteMapping("/tags")
     public ResponseEntity<CMRespDto<?>> removeTags(@RequestBody AdminDeleteTagsReqDto adminDeleteTagsReqDto) {
         adminTagService.removeTags(adminDeleteTagsReqDto);

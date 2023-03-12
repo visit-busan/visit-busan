@@ -36,6 +36,7 @@ public interface AdminCategoryRepository {
     /*카테고리 데이터 조회*/
     public List<AdminCategoryMst> searchCategory(AdminSearchCategoryReqDto adminSearchCategoryReqDto);
 
+    /*카테고리 이름으로 데이터 조회*/
     public AdminCategoryMst findCategoryByCategoryName(String categoryName);
 
     /*카테고리 저장*/

@@ -67,7 +67,7 @@
         insert into
             tour_tag
         values
-            (0, #{tagName}, #{registrant}, #{createDate}, #{updateDate})
+            (0, #{tagName}, #{userId}, now(), now())
     </insert>
 
     <!--  테그 정보 수정하기 (null이나 공백이 없을 경우)  -->
