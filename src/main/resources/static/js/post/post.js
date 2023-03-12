@@ -8,7 +8,6 @@ window.onload = () => {
     ComponentEvent.getInstance().clickReviewSubmit();
     ComponentEvent.getInstance().addChangeEventModalInput();
     ComponentEvent.getInstance().clickReviewDelete();
-    ComponentEvent.getInstance().clickModifyButtons();
 
     HeaderService.getInstance().loadHeader();
     HeaderService.getInstance().Categoryload();
@@ -285,7 +284,8 @@ class PostService {
             tourId = id;
         }
 
-        const principalData = PrincipalApi.getInstance().getPrincipal();
+        principalData = PrincipalApi.getInstance().getPrincipal();
+        
         const responseData = PostApi.getInstance().getPost();
         console.log(principalData);
         console.log(responseData);
@@ -296,11 +296,10 @@ class PostService {
             window.location.href='http://www.localhost:8000/';
         }
 
-        if(principalData !== null) {
+        if(principalData != null) {
             let authorityFlag = false;
 
             principalData.authorities.forEach(authority => {
-                console.log(authority.authority);
                 if(authority.authority == "ROLE_ADMIN") {
                     authorityFlag = true;
                 }});
@@ -313,6 +312,7 @@ class PostService {
                         <li class="delete-button">삭제</li>
                     </ul>
                 `;
+                ComponentEvent.getInstance().clickModifyButtons();
             }
         }
             
