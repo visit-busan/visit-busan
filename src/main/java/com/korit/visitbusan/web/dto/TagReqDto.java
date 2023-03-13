@@ -1,5 +1,6 @@
 package com.korit.visitbusan.web.dto;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,5 +19,6 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TagReqDto {
+    @ApiModelProperty(name="tagList", value = "태그Id값을 담은 List", example = "[1,2,3,4]")
     private List<Integer> tagList;
 }

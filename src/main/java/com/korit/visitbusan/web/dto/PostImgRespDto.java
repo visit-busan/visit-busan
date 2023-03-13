@@ -1,5 +1,6 @@
 package com.korit.visitbusan.web.dto;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,7 +16,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PostImgRespDto {
-
+    @ApiModelProperty(hidden = true)
     private String url;
 
 }

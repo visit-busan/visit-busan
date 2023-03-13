@@ -50,14 +50,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest()
                 .permitAll()
                 .and()
-
                 .formLogin()
                 .loginPage("/account/login")
                 .loginProcessingUrl("/account/login")
                 .successForwardUrl("/index")
                 .failureForwardUrl("/account/login/error")
                 .defaultSuccessUrl("/index")
-
                 .and()
                 .oauth2Login()
                 .userInfoEndpoint()

@@ -1,5 +1,6 @@
 package com.korit.visitbusan.web.dto;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,5 +16,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class LinkImg {
+    @ApiModelProperty(name="link", value = "메인이미지, 썸네일 링크로 등록", example = "https://www.visitbusan.net/uploadImgs/files/cntnts/20191225163741459_ttiel")
     private String link;
 }
