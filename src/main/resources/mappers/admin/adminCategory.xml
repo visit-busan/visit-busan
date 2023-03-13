@@ -3,10 +3,11 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.korit.visitbusan.repository.admin.AdminSearchCategoryRepository">
+<mapper namespace="com.korit.visitbusan.repository.admin.AdminCategoryRepository">
+
     <!--검색조건에 의한 관광지 분류 전체 개수 불러오기-->
-    <select id="getTourCategoryTotalCount"
-            parameterType="com.korit.visitbusan.web.dto.admin.AdminSearchCategoryReqDto"
+    <select id="getCategoryTotalCount"
+            parameterType="com.korit.visitbusan.web.dto.admin.AdminSearchCategoryListDto"
             resultType="Integer">
         select
             count(*)
@@ -18,9 +19,83 @@
             and (category_name concat('%', #{searchValue}, '%'))
         </if>
     </select>
-    <!--    -->
-    <select id="userSearchCategory"
-            parameterType="com.korit.visitbusan.web.dto.admin.AdminSearchCategoryReqDto"
-            resultType=""
 
+    <select id="findCategoryByCategoryName" resultType="com.korit.visitbusan.entity.admin.AdminCategoryMst">
+        select
+            tc.category_id as categoryId,
+            tc.category_name as categoryName,
+            tc.create_date as createDate,
+            tc.update_date as updateDate,
+            um.username
+        from
+            tour_category tc left outer join user_mst um on (tc.user_id = um.user_id)
+        where
+            tc.category_name = #{categoryName};
+    </select>
+
+    <!--  검색 조건에 의한 카테고리 정보 불러오기  -->
+    <select id="searchCategory"
+            parameterType="com.korit.visitbusan.web.dto.admin.AdminSearchCategoryReqDto"
+            resultType="com.korit.visitbusan.entity.admin.AdminCategoryMst">
+        select
+            tc.category_id as categoryId,
+            tc.category_name as categoryName,
+            tc.create_date as createDate,
+            tc.update_date as updateDate,
+            um.username
+        from
+            tour_category tc left outer join user_mst um on (tc.user_id = um.user_id)
+        where
+            1=1
+        <if test = 'searchValue != null and searchValue != ""'>
+        and tc.category_name like concat('%', #{searchValue}, '%')
+        </if>
+        order by
+            tc.category_id
+        <if test = 'limit == "Y"'>
+            limit #{index}, #{count}
+        </if>
+    </select>
+
+    <!--  신규 카테고리 정보 등록하기  -->
+    <insert id="registerCategory" parameterType="com.korit.visitbusan.web.dto.admin.AdminCategoryReqDto">
+        insert into
+            tour_category
+        values
+            (0, #{userId}, #{categoryName}, now(), now())
+    </insert>
+
+    <!--  카테고리 정보 수정하기 (null이나 공백이 없을 경우)  -->
+    <update id="updateCategoryByCategoryId" parameterType="com.korit.visitbusan.web.dto.admin.AdminCategoryReqDto">
+        update
+        set
+            tc.category_name = #{categoryName}
+            tc.update_date = #{updateDate}
+            um.username = #{username}
+        from
+            tour_category tc left outer join user_mst um on (tc.user_id = um.user_id)
+        where
+            tc.category_id = #{categoryId}
+    </update>
+
+    <!--  카테고리 정보 삭제하기  -->
+    <delete id="deleteCategory">
+        delete
+        from
+            tour_category
+        where
+            category_id = #{categoryId}
+    </delete>
+
+    <!--  카테고리 일괄 정보 삭제하기  -->
+    <delete id="deleteCategories" parameterType="list">
+        delete
+        from
+            tour_category
+        where
+            category_id in
+            <foreach collection="list" item="categoryId" open="(" close=")" separator=",">
+                #{categoryId}
+            </foreach>
+    </delete>
 </mapper>

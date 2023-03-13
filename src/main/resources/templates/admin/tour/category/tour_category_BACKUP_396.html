@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>visit-busan 관리자 페이지</title>
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/static/css/admin/reset.css">
+    <link rel="stylesheet" href="/static/css/admin/common.css">
+    <link rel="stylesheet" href="/static/css/admin/gnb.css">
+    <link rel="stylesheet" href="/static/css/admin/lnb.css">
+    <link rel="stylesheet" href="/static/css/admin/tour/tour_common.css">
+    <link rel="stylesheet" href="/static/css/admin/tour/category/tour_category.css">
+    <link rel="stylesheet" href="/static/css/admin/modal.css">
+    
+</head>
+<body>
+    <div id="container">
+        <header class="header-container">
+            <div class="brand-logo">
+                <a href="/admin/dashboard"><img src="/static/image/logo.png" alt=""></a>
+            </div>
+            <ul class="account-container">
+                <li><a href="/logout">로그아웃</a></li>
+            </ul>
+        </header>
+        
+        <main class="main-container">
+            <aside class="left-aside">
+                <div class="aside-title">
+                    <h1 class="title-text-h1">관리자 시스템</h1>
+                </div>
+                <nav class="main-menu">
+                    <h2 class="title-text-h2">대시보드</h2>
+                    <ul class="sub-menu">
+                        <a href="/admin/dashboard"><li>대시보드</li></a>
+                    </ul>
+                    <h2 class="title-text-h2">관광정보 관리</h2>
+                    <ul class="sub-menu">
+                        <a href="/admin/tour/category"><li>관광지 분류</li></a>
+                        <a href="/admin/tour/manage/tour_search"><li>관광정보 관리</li></a>
+                        <a href="/admin/tour/manage/tour_tag"><li>관광태그 관리</li></a>
+                    </ul>
+                    <h2 class="title-text-h2">사용자 관리</h2>
+                    <ul class="sub-menu">
+                        <a href="/admin/user/info"><li>사용자 정보 관리</li></a>
+                        <a href="/admin/user/role"><li>사용자 권한 관리</li></a>
+                    </ul>
+                </nav>
+            </aside>    
+            <div class="content-container">
+                <h1 class="content-title">관광지 분류</h1>
+                <div class="content-main">
+                    <div class="content-items">
+                        <div class="left-items">
+                            <button type="button" class="register-button">등록</button>
+                            <button type="button" class="delete-all">삭제</button>
+                        </div>
+                        <div class="right-items">
+                            <input type="search" class="search-input" placeholder="목적지 분류를 입력하세요.">
+                            <button type="button" class="search-button">검색</button>
+                        </div>
+                    </div>
+                    <!-- 관광지 분류 등록 모달 -->
+                    <div id="modal" class="modal-overlay">
+                        <div class="modal-window-register">
+                            <div class="modal-header">
+                                <h2 class="modal-title">관광지 분류 등록</h2>
+                                <button class="close-button">x</button>
+                            </div>
+                            <div class="modal-body">
+                                <form class="modal-form-register">
+                                    <table>
+                                        <colgroup>
+                                            <col>
+                                            <col>
+                                        </colgroup>
+                                        <tr>
+                                            <th>카테고리명</th>
+                                            <td >
+                                                <input type="text" class="register-category name" placeholder="관광지명을 입력해주세요." maxlength="20">
+                                                <div class="error-message"></div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="modal-register-button">등록</button>
+                                <button class="modal-cancel-button">취소</button>
+                            </div>
+                        </div>                                            
+                    </div>
+                    <!-- 관광지 분류 수정 모달 -->
+                    <div id="modal" class="modal-overlay">
+                        <div class="modal-window-modify">
+                            <div class="modal-header">
+                                <h2 class="modal-title">관광지 분류 수정</h2>
+                                <button class="close-button">x</button>
+                            </div>
+                            <div class="modal-body">
+                                <form class="modal-form-modify">
+                                    <table>
+                                        <colgroup>
+                                            <col>
+                                            <col>
+                                        </colgroup>
+                                        <tr>
+                                            <th>번호</th>
+                                            <td >1</td>
+                                        </tr>
+                                        <tr>
+                                            <th>관광지 분류명</th>
+                                            <td >
+                                                <input type="text" class="register-category name" placeholder="관광지명을 입력해주세요.">
+                                                <div class="error-message"></div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>작성자</th>
+                                            <td >
+                                                <input type="text" class="register-category username" disabled>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>등록일</th>
+                                            <td >2023-02-27 14:00:00</td>
+                                        </tr>
+                                        <tr>
+                                            <th>수정일</th>
+                                            <td >2023-02-27 14:00:00</td>
+                                        </tr>
+                                    </table>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="modal-modify-button">수정</button>
+                                <button class="modal-cancel-button">취소</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-container">
+                        <table class="content-table">
+                            <thead>
+                                <tr>
+                                    <th><input type="checkbox" class="delete-checkall"></th>
+<<<<<<< HEAD
+                                    <th>카테고리 아이디</th>
+                                    <th>관광지 카테고리명</th>
+                                    <th>등록자</th>
+                                    <th>최종수정일</th>
+=======
+                                    <th>관광지 분류명</th>
+                                    <th>작성자</th>
+>>>>>>> c00088ce41812f6deaeea3b6aed67b30c9924d36
+                                    <th>관리</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="page-controller">
+                        <a href="" class="disabled">이전</a>
+                        <ul class="page-numbers">
+                            <a href=""><li>1</li></a>
+                            <a href=""><li>2</li></a>
+                            <a href=""><li>3</li></a>
+                            <a href=""><li>4</li></a>
+                            <a href=""><li>5</li></a>
+                        </ul>
+                        <a href="">다음</a>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="/static/js/admin/tour/category/tour_category.js"></script>
+</body>
+</html>

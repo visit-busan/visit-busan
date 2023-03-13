@@ -1,6 +1,9 @@
 package com.korit.visitbusan.repository.admin;
 
-import com.korit.visitbusan.entity.admin.AdminTourCategoryMst;
+import com.korit.visitbusan.entity.admin.AdminCategoryMst;
+import com.korit.visitbusan.web.dto.admin.AdminCategoryReqDto;
+import com.korit.visitbusan.web.dto.admin.AdminSearchCategoryListDto;
+import com.korit.visitbusan.web.dto.admin.AdminSearchCategoryReqDto;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -27,8 +30,25 @@ public interface AdminCategoryRepository {
      D: 카테고리 삭제
      */
 
-    public int getcategoryTotalCount();
-    public List<AdminTourCategoryMst> searchCategory();
+    /*카테고리 전체 개수*/
+    public int getCategoryTotalCount(AdminSearchCategoryListDto adminSearchCategoryListDto);
 
+    /*카테고리 데이터 조회*/
+    public List<AdminCategoryMst> searchCategory(AdminSearchCategoryReqDto adminSearchCategoryReqDto);
+
+    /*카테고리 이름으로 데이터 조회*/
+    public AdminCategoryMst findCategoryByCategoryName(String categoryName);
+
+    /*카테고리 저장*/
+    public int registerCategory(AdminCategoryReqDto adminCategoryReqDto);
+
+    /*카테고리 수정 put*/
+    public int updateCategoryByCategoryId(AdminCategoryReqDto adminCategoryReqDto);
+
+    /*카테고리 삭제*/
+    public int deleteCategory(int categoryId);
+
+    /*카테고리 일괄삭제*/
+    public int deleteCategories(List<Integer> categoryIds);
 
 }

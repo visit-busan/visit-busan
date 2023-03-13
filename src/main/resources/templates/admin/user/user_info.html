@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>시립도서관</title>
+  <title>visit-busan 관리자 페이지</title>
   <script src="https://code.jquery.com/jquery-latest.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
     integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
@@ -16,7 +16,7 @@
   <link rel="stylesheet" href="/static/css/admin/lnb.css">
   <link rel="stylesheet" href="/static/css/admin/user/user_common.css">
   <link rel="stylesheet" href="/static/css/admin/user/manage/user_info.css">
-  <link rel="stylesheet" href="/static/css/admin/user_info_modal.css">
+  <link rel="stylesheet" href="/static/css/admin/user/user_info_modal.css">
 
 </head>
 
@@ -24,45 +24,36 @@
   <div id="container">
     <header class="header-container">
       <div class="brand-logo">
-        <a href="/templates/admin/dashboard/tour_dashboard.html"><img src="/static/image/logo.png" alt=""></a>
+        <a href="/admin/dashboard"><img src="/static/image/logo.png" alt=""></a>
       </div>
       <ul class="account-container">
-        <li><a href="/account/logout">로그아웃</a></li>
+        <li><a href="/logout">로그아웃</a></li>
       </ul>
     </header>
 
     <main class="main-container">
       <aside class="left-aside">
         <div class="aside-title">
-          <h1 class="title-text-h1">관리자 시스템</h1>
+            <h1 class="title-text-h1">관리자 시스템</h1>
         </div>
         <nav class="main-menu">
-          <h2 class="title-text-h2">대시보드</h2>
-          <ul class="sub-menu">
-            <a href="/templates/admin/dashboard/tour_dashboard.html">
-              <li>대시보드</li>
-            </a>
-          </ul>
-          <h2 class="title-text-h2">관광정보 관리</h2>
-          <ul class="sub-menu">
-            <a href="/templates/admin/tour/category/tour_category.html">
-              <li>관광지 분류</li>
-            </a>
-            <a href="/templates/admin/tour/manage/tour_search.html">
-              <li>관광정보 관리</li>
-            </a>
-          </ul>
-          <h2 class="title-text-h2">사용자 관리</h2>
-          <ul class="sub-menu">
-            <a href="/admin/user/info">
-              <li>사용자 정보 관리</li>
-            </a>
-            <a href="/admin/user/role">
-              <li>사용자 권한 관리</li>
-            </a>
-          </ul>
+            <h2 class="title-text-h2">대시보드</h2>
+            <ul class="sub-menu">
+                <a href="/admin/dashboard"><li>대시보드</li></a>
+            </ul>
+            <h2 class="title-text-h2">관광정보 관리</h2>
+            <ul class="sub-menu">
+                <a href="/admin/tour/category"><li>관광지 분류</li></a>
+                <a href="/admin/tour/manage/tour_search"><li>관광정보 관리</li></a>
+                <a href="/admin/tour/manage/tour_tag"><li>관광태그 관리</li></a>
+            </ul>
+            <h2 class="title-text-h2">사용자 관리</h2>
+            <ul class="sub-menu">
+                <a href="/admin/user/info"><li>사용자 정보 관리</li></a>
+                <a href="/admin/user/role"><li>사용자 권한 관리</li></a>
+            </ul>
         </nav>
-      </aside>
+    </aside> 
       <div class="content-container">
         <h1 class="content-title">사용자 정보 관리</h1>
         <div class="content-main">
@@ -101,35 +92,36 @@
                       <col>
                       <col>
                     </colgroup>
-                    <tr class="modification-name">
+                    <tr>
                       <th>사용자 이름</th>
-                      <td class="modification-role select-name" value="" disabled>1</td>
+                      <td class="modification-role" disabled>1</td>
                     </tr>
                     <tr>
                       <th>수정할 권한</th>
                       <td>
-                        <select id="updateAdmin" class="roles-select modification-role">
+                        <select id="updateAdmin" class="role-select modification-role">
                           <option value="">선택</option>
                           <option value="">없음</option>
                           <option value="1">ADMIN</option>
                         </select>
-                        <select id="updateWriter" class="roles-select modification-role">
+                        <select id="updateWriter" class="role-select modification-role">
                           <option value="">선택</option>
                           <option value="">없음</option>
                           <option value="3">WRITER</option>
                         </select>
-                        <select id="updateUser" class="roles-select modification-role">
+                        <select id="updateUser" class="role-select modification-role">
                           <option value="2">USER</option>
                         </select>
                       </td>
                     </tr>
-                    <tr class="date-time">
+
+                    <tr>
                       <th>등록일</th>
-                      <td class="create-date" disabled>2023-02-27 14:00:00</td>
+                      <td disabled>2023-02-27 14:00:00</td>
                     </tr>
-                    <tr class="date-time">
+                    <tr>
                       <th>수정일</th>
-                      <td class="update-date" disabled>2023-02-27 14:00:00</td>
+                      <td disabled>2023-02-27 14:00:00</td>
                     </tr>
                   </table>
                 </form>
@@ -158,7 +150,7 @@
                   <th>테스터</th>
                   <th>writer</th>
                   <th>
-                    <button type="button" class="table-button modification-button">권한수정</button>
+                    <button class="table-button modification-button" onclick="onDisplay()">권한수정</button>
                     <button type="button" class="table-button delete-buttons">삭제</button>
                   </th>
                 </tr>
@@ -180,8 +172,8 @@
       </div>
     </main>
   </div>
-  <script src="/static/js/admin/user/user_info.js"></script>
-  <script src="/static/js/admin/user/update_role.js"></script>
+  <script src="/static/js/admin/user/manage/user_info.js"></script>
+  <script src="/static/js/admin/user/manage/update_role.js"></script>
 </body>
 
 </html>

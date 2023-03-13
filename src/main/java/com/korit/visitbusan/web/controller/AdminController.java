@@ -17,15 +17,18 @@ public class AdminController {
         return "/admin/tour/category/tour_category";
     }
 
-    @GetMapping("/tour/search")
+    @GetMapping("/tour/manage/tour_search")
     public String tourSearch() {
         return "/admin/tour/manage/tour_search";
     }
 
-    @GetMapping("/user/info")
-    public String userInfo() {
-        return "/admin/user/user_info";
+    @GetMapping("/tour/manage/tour_tag")
+    public String tourTag() {
+        return "/admin/tour/manage/tour_tag";
     }
+
+    @GetMapping("/user/info")
+    public String userInfo() { return "/admin/user/user_info"; }
 
     @GetMapping("/user/role")
     public String userRole() {

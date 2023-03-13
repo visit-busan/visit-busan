@@ -1,6 +1,18 @@
 package com.korit.visitbusan.service.admin;
 
+import com.korit.visitbusan.entity.admin.AdminCategoryMst;
+import com.korit.visitbusan.entity.admin.AdminTourMst;
+import com.korit.visitbusan.exception.CustomValidationException;
+import com.korit.visitbusan.repository.admin.AdminCategoryRepository;
+import com.korit.visitbusan.repository.admin.AdminTourRepository;
+import com.korit.visitbusan.web.dto.admin.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /*******************************************
  *** 작성자 : 권오광
@@ -11,4 +23,35 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class AdminTourService {
+
+    @Value("${file.path}")
+    private String filePath;
+
+    @Autowired
+    private AdminTourRepository adminTourRepository;
+
+    public int getTourTotalCount(AdminSearchTourListDto adminSearchTourListDto) {
+        return adminTourRepository.getTourTotalCount(adminSearchTourListDto);
+    }
+
+    public List<AdminTourMst> searchTour(AdminSearchTourReqDto adminSearchTourReqDto) {
+        adminSearchTourReqDto.setIndex();
+        return adminTourRepository.searchTour(adminSearchTourReqDto);
+    }
+
+    public void registerTour(AdminTourReqDto adminTourReqDto) {
+        adminTourRepository.registerTour(adminTourReqDto);
+    }
+
+    public void modifyTour(AdminTourReqDto adminTourReqDto) {
+        adminTourRepository.updateTourByTourId(adminTourReqDto);
+    }
+
+    public void removeTour(int tourId) {
+        adminTourRepository.deleteTour(tourId);
+    }
+
+    public void removeTours(AdminDeleteToursReqDto adminDeleteToursReqDto) {
+        adminTourRepository.deleteTours(adminDeleteToursReqDto.getTourIds());
+    }
 }

@@ -41,6 +41,7 @@ spring:
 mybatis:
   mapper-locations:
     - /mappers/*.xml
+    - /mappers/admin/*.xml
 
 file:
   path: C:/project/upload/

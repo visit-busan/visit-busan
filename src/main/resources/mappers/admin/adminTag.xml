@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.korit.visitbusan.repository.admin.AdminTagRepository">
+
+    <!--검색조건에 의한 테그 전체 개수 불러오기-->
+    <select id="getTagTotalCount"
+            parameterType="com.korit.visitbusan.web.dto.admin.AdminSearchTagListDto"
+            resultType="Integer">
+        select
+            count(*)
+        from
+            tour_tag
+        where
+        1=1
+        <if test="searchValue != null and searchValue !=''">
+            and (tag_name concat('%', #{searchValue}, '%'))
+        </if>
+    </select>
+
+    <!--  테그 이름으로 테그 정보 불러오기  -->
+    <select id="findTagByTagName" resultType="com.korit.visitbusan.entity.admin.AdminTagMst">
+        select
+            tt.tag_id as tagId,
+            tc.category_name as categoryName,
+            tt.create_date as createDate,
+            tt.update_date as updateDate,
+            um.username
+        from
+            tour_tag tt
+            left outer join tour_category tc on (tt.category_id = tc.category_id)
+            left outer join user_mst um on (tt.user_id = um.user_id)
+        where
+            tt.tag_name = #{tagName};
+    </select>
+
+    <!--  검색 조건에 의한 테그 정보 불러오기  -->
+    <select id="searchTag"
+            parameterType="com.korit.visitbusan.web.dto.admin.AdminSearchTagReqDto"
+            resultType="com.korit.visitbusan.entity.admin.AdminTagMst">
+        select
+            tt.tag_id as tagId,
+            tc.category_name as categoryName,
+            tt.create_date as createDate,
+            tt.update_date as updateDate,
+            um.username
+        from
+            tour_tag tt
+            left outer join tour_category tc on (tt.category_id = tc.category_id)
+            left outer join user_mst um on (tt.user_id = um.user_id)
+        where
+            1=1
+        <if test = 'searchValue != null and searchValue != ""'>
+        and tt.tag_name like concat('%', #{searchValue}, '%')
+        </if>
+        order by
+            tc.tag_id
+        <if test = 'limit == "Y"'>
+            limit #{index}, #{count}
+        </if>
+    </select>
+
+    <!--  신규 테그 정보 등록하기  -->
+    <insert id="registerTag" parameterType="com.korit.visitbusan.web.dto.admin.AdminTagReqDto">
+        insert into
+            tour_tag
+        values
+            (0, #{tagName}, #{userId}, now(), now())
+    </insert>
+
+    <!--  테그 정보 수정하기 (null이나 공백이 없을 경우)  -->
+    <update id="updateTagByTagId" parameterType="com.korit.visitbusan.web.dto.admin.AdminTagReqDto">
+        update
+        set
+            tt.tag_name = #{tagName}
+            tt.update_date = #{updateDate}
+            um.username = #{username}
+        from
+            tour_tag tt
+            left outer join tour_category tc on (tt.category_id = tc.category_id)
+            left outer join user_mst um on (tt.user_id = um.user_id)
+        where
+            tt.tag_id = #{tagId}
+    </update>
+
+    <!--  테그 정보 삭제하기  -->
+    <delete id="deleteTag">
+        delete
+        from
+            tour_tag
+        where
+            tag_id = #{tagId}
+    </delete>
+
+    <!--  카테고리 일괄 정보 삭제하기  -->
+    <delete id="deleteTags" parameterType="list">
+        delete
+        from
+            tour_tag
+        where
+            tag_id in
+            <foreach collection="list" item="tagId" open="(" close=")" separator=",">
+                #{tagId}
+            </foreach>
+    </delete>
+</mapper>
