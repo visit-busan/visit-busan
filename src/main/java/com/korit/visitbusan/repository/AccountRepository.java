@@ -4,6 +4,12 @@ import com.korit.visitbusan.entity.UserMst;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
+/*******************************************
+ *** 작성자 : 이성욱
+ *  버전 : V0.1
+ *  내용 :  회원정보를 CRUD 하기 위한 Repository
+ *  작성일 : 2023.03.09
+ *******************************************/
 public interface AccountRepository {
 
     public UserMst findUserByUserId(int userId);

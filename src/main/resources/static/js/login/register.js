@@ -2,6 +2,7 @@ window.onload = () => {
     // PrincipalApi.getInstance().getPrincipal();
     RegisterEvent.getInstance().addRegisterSubmitOnclickEvent();
     HeaderService.getInstance().loadHeader();
+    HeaderService.getInstance().Categoryload();
     FooterService.getInstance().loadFooter();
     RegisterService.getInstance().addEventToUsernameInput();
     RegisterService.getInstance().addEventToPasswordInput();

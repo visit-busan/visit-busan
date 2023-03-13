@@ -109,8 +109,12 @@ body {
 }
 
 .caption {
+  display: flex;
   margin-top: 20px;
   text-align: center;
+}
+.google {
+  margin-right: 10px;
 }
 
 .caption a {

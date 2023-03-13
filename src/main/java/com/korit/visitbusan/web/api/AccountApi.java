@@ -40,7 +40,7 @@ public class AccountApi {
     @Autowired
     private final AccountService accountService;
     private final AccountRepository accountRepository;
-
+    @ApiOperation(value = "username 중복확인", notes = "가입가능한 username 확인 요청")
     @GetMapping("/username")
     public ResponseEntity<?> duplicateUsername(@Valid UserMst userMst, BindingResult bindingResult) {
         System.out.println(bindingResult.getErrorCount());
@@ -65,12 +65,12 @@ public class AccountApi {
                 .body(new CMRespDto<>(HttpStatus.CREATED.value(), "회원가입 완료", user));
     }
 
-    @ApiOperation(value = "Get userid", notes = "회원정보 가져오기")
+    @ApiOperation(value = "회원정보 조회", notes = "회원정보 가져오기")
     @GetMapping("/user/{userId}")
     public ResponseEntity<? extends CMRespDto<? extends UserMst>> getUser(@PathVariable int userId) {
         return ResponseEntity.ok().body(new CMRespDto<>(HttpStatus.OK.value(), "회원 정보 조회", accountService.getUser(userId)));
     }
-    @ApiOperation(value = "Get Principal", notes = "로그인된 사용자 정보 가져오기")
+    @ApiOperation(value = "사용자정보 조회", notes = "로그인된 상태에서 사용자 정보 가져오기")
     @GetMapping("/principal")
     public ResponseEntity<CMRespDto<? extends PrincipalDetails>> getPrincipalDetails(@AuthenticationPrincipal PrincipalDetails principalDetails) {
         if(principalDetails != null) {
@@ -83,7 +83,7 @@ public class AccountApi {
                 .ok()
                 .body(new CMRespDto<>(HttpStatus.OK.value(), "로그인된 사용자 정보 가져오기 완료", principalDetails));
     }
-    @ApiOperation(value = "post username", notes = "사용자 아이디 찾기")
+    @ApiOperation(value = "아이디 찾기", notes = "사용자 아이디 찾기")
     @PostMapping("/find/username")
     public ResponseEntity<?> findUsername (@RequestBody FindUsername findUsername) {
         System.out.println(findUsername);
@@ -94,7 +94,7 @@ public class AccountApi {
                         , accountService.findUsername(findUsername.getName(), findUsername.getTellNumber()).getUsername()));
     }
 
-    @ApiOperation(value = "post username", notes = "사용자 비밀번호 찾기")
+    @ApiOperation(value = "비밀번호 찾기", notes = "사용자 비밀번호 찾기")
     @PostMapping("/find/password")
     public ResponseEntity<?> findPassword (@RequestBody FindPassword findPassword) {
         System.out.println(findPassword);
@@ -106,7 +106,7 @@ public class AccountApi {
                         , "사용자 비밀번호 가져오기 완료"
                         , accountService.findPassword(findPassword.getUsername(), findPassword.getName(), findPassword.getTellNumber()).getPassword()));
     }
-    @ApiOperation(value = "change password", notes = "사용자 비밀번호 변경")
+    @ApiOperation(value = "비밀번호 변경", notes = "사용자 비밀번호 변경")
     @PatchMapping("/change/password")
     public ResponseEntity<?> changePassword (@RequestBody ChangePassword changePassword) {
         System.out.println(changePassword);
@@ -121,7 +121,7 @@ public class AccountApi {
                 .body(new CMRespDto<>(HttpStatus.OK.value(), "비밀번호 변경완료"
                 , userMst));
     }
-    @ApiOperation(value = "delete User", notes = "회원탈퇴")
+    @ApiOperation(value = "회원탈퇴", notes = "회원정보 삭제")
     @DeleteMapping("/delete/{userId}")
     public ResponseEntity<?> deleteUser(@PathVariable int userId) {
         accountService.deleteUser(userId);

@@ -199,7 +199,7 @@ class ModifyApi {
             data: mainImgObj.formData,
             dataType: 'json',
             success: response => {
-                location.reload();
+                window.location.href=`http://localhost:8000/post?tourId=${modifyObj.tourId}`;
             },
             error: error => {
                 console.log(error);
@@ -218,7 +218,7 @@ class ModifyApi {
                 "link" : mainImageUrl
             }),
             success: response => {
-                location.reload();
+                window.location.href=`http://localhost:8000/post?tourId=${modifyObj.tourId}`;
             },
             error: error => {
                 console.log(error);

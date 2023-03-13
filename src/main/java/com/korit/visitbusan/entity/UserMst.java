@@ -26,10 +26,10 @@ public class UserMst {
     private String username;
 
     @NotBlank
-    @ApiModelProperty(name = "password", value = "사용자 비밀번호", example = "1q2w3e4r!", required = true)
+    @ApiModelProperty(name = "password", value = "사용자 비밀번호", example = "Q1w2e3r4!", required = true)
     private String password;
     @NotBlank
-    @ApiModelProperty(name = "repassword", value = "사용자 비밀번호 재입력", example = "1q2w3e4r!", required = true)
+    @ApiModelProperty(name = "repassword", value = "사용자 비밀번호 재입력", example = "Q1w2e3r4!", required = true)
     private String repassword;
 
     @NotBlank

@@ -21,6 +21,7 @@ btn.addEventListener("click", () => {
 window.onload = () => {
   ComponentEvent.getInstance().clickFindId();
   HeaderService.getInstance().loadHeader();
+  HeaderService.getInstance().Categoryload();
   FooterService.getInstance().loadFooter();
   ComponentEvent.getInstance().addClickEventSearchButton();
 }

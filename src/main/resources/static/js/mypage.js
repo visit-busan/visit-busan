@@ -5,7 +5,6 @@ window.onload = () => {
 }
 window.onclick = () => {
     MypageService.getInstance().clickDeleteButton();
-    // MypageService.getInstance().deleteUser();
     }
 
     class ComponentEvent {

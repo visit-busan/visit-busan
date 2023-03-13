@@ -40,7 +40,20 @@
   display: flex;
 }
 
-.category {
+.category-option {
+  width: 100px;
+  height: 60px;
+  margin-right: 20px;
+
+  text-align: center;
+
+  color: #000000;
+  border-style: none;
+  font-size: 20px;
+  font-weight: 600;
+  background-color: rgba(255, 255, 255, 0.217);
+}
+.category-option > option {
   width: 100px;
   height: 60px;
   margin-right: 20px;
@@ -54,7 +67,7 @@
   background-color: rgba(255, 255, 255, 0.217);
 }
 
-.category > ul {
+.category-option > ul {
   background-color: rgba(255, 255, 255);
   opacity: 0.3;
 }

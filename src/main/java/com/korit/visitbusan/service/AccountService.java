@@ -16,6 +16,12 @@ import java.util.Map;
 @Service
 @Slf4j
 @RequiredArgsConstructor
+/*******************************************
+ *** 작성자 : 이성욱
+ *  버전 : V0.1
+ *  내용 :  회원정보 관리를 위한 Service
+ *  최종작성일 : 2023.03.11
+ *******************************************/
 public class AccountService {
 
     @Autowired

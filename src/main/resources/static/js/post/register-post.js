@@ -20,7 +20,7 @@ let thumbnailFormFlag = true;
 let mainImageFormFlag = true;
 
 let registerObj = {
-    tourId : 530,
+    tourId : 0,
     categoryId : 1,
     userId: null,
     tourTitle : "",
@@ -94,7 +94,6 @@ class RegisterApi {
             }),
             dataType: "json",
             success: response => {
-                alert("태그등록완료");
             },error: error => {
                 console.log(error);
             }
@@ -112,7 +111,6 @@ class RegisterApi {
             data: thumbnailObj.formData,
             dataType: 'json',
             success: response => {
-                alert("썸네일 파일 등록 완료!");
             },
             error: error => {
                 console.log(error);
@@ -131,7 +129,6 @@ class RegisterApi {
                 "link" : thumbnailUrl
             }),
             success: response => {
-                alert("링크로 썸네일 등록 완료!");
             },
             error: error => {
                 console.log(error);
@@ -150,8 +147,7 @@ class RegisterApi {
             data: mainImgObj.formData,
             dataType: 'json',
             success: response => {
-                alert("메인이미지 파일 등록 완료!");
-                location.reload();
+                window.location.href=`http://localhost:8000/post?tourId=${registerObj.tourId}`;
             },
             error: error => {
                 console.log(error);
@@ -170,8 +166,7 @@ class RegisterApi {
                 "link" : mainImageUrl
             }),
             success: response => {
-                alert("링크로 메인이미지 등록 완료!");
-                location.reload();
+                window.location.href=`http://localhost:8000/post?tourId=${registerObj.tourId}`;
             },
             error: error => {
                 console.log(error);

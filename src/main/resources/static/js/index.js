@@ -2,31 +2,40 @@ window.onload = () => {
     HeaderService.getInstance().loadHeader();
     HeaderService.getInstance().Categoryload();
     FooterService.getInstance().loadFooter();
-    ComponentEvent.getInstance().addClickEventSearchButton();
+    IndexService.getInstance().Categoryload();
+
+
 }
 
-class ComponentEvent {
+class IndexService {
     static #instance = null;
     static getInstance() {
-        if(this.#instance == null) {
-            this.#instance = new ComponentEvent();
+        if (this.#instance == null) {
+            this.#instance = new IndexService();
         }
         return this.#instance
     }
+    Categoryload() {
+        let responseData = null;
+        $.ajax({
+            async: false,
+            type: "get",
+            url: "/api/post/categories",
+            dataType: "json",
+            success: response => {
+                responseData = response.data;
+            },
+            error: error => {
 
-    // addClickEventSearchButton() {
-    //     const searchButton = document.querySelector(".search-button");
-    //     const searchInput = document.querySelector(".search-input");
-    //     searchButton.onclick = () => {
-    //        location.href = `http://localhost:8000/search?searchValue=${searchInput.value}`;
-    //     }
-
-    //     searchInput.onkeyup = () => {
-    //         console.log(window.event.keyCode);
-    //         if(window.event.keyCode == 13) {
-    //             searchButton.click();
-    //         }
-    //     }
-    // }
+            }
+        })
+        const category = document.querySelector(".category-option");
+        responseData.forEach((data,value) => {
+            value = 1;
+            category.innerHTML +=
+                `
+                <option value="${value++}" style="width:100px; height:60px;">${data.categoryName}</option>
+                 `;
+        });
+    }
 }
-

@@ -1,5 +1,6 @@
 package com.korit.visitbusan.entity;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,14 +19,20 @@ import java.time.LocalDateTime;
 @Builder
 public class RoleDtl {
 
+    @ApiModelProperty(hidden = true)
     private int roleDtlId;
 
+    @ApiModelProperty(name = "username", value = "사용자 아이디", example = "abc123", required = true)
     private int userId;
 
+    @ApiModelProperty(name = "roleId", value = "권한", example = "1", required = true)
     private int roleId;
 
+    @ApiModelProperty(hidden = true)
     private RoleMst roleMst;
 
+    @ApiModelProperty(hidden = true)
     private LocalDateTime createDate;
+    @ApiModelProperty(hidden = true)
     private LocalDateTime updateDate;
 }
