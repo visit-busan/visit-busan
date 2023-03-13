@@ -4,6 +4,7 @@ import com.korit.visitbusan.aop.annotation.ParamsAspect;
 import com.korit.visitbusan.aop.annotation.ValidAspect;
 import com.korit.visitbusan.service.PostService;
 import com.korit.visitbusan.web.dto.*;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -22,6 +23,7 @@ import java.util.List;
  *******************************************/
 @RestController
 @RequiredArgsConstructor
+@Api(tags = {"게시글,리뷰,평점관련 API"})
 public class PostApi {
 
     private final PostService postService;

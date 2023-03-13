@@ -3,6 +3,7 @@ package com.korit.visitbusan.web.api;
 import com.korit.visitbusan.service.SearchService;
 import com.korit.visitbusan.web.dto.CMRespDto;
 import com.korit.visitbusan.web.dto.SearchReqDto;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
  *  작성일 : 2023.03.09
  *******************************************/
 @RestController
+@Api(tags = {"검색관련 API"})
 @RequestMapping("/api/search")
 @RequiredArgsConstructor
 public class SearchApi {

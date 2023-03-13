@@ -46,7 +46,6 @@ public class AdminUserRoleApi {
 
     // 유저찾기
     @ParamsAspect
-    @ValidAspect
     @GetMapping("/users")
     public ResponseEntity<CMRespDto<List<AdminUserRoleDto>>> searchUsers(AdminUserRoleDto adminUserRoleDto) {
         return ResponseEntity.ok()

@@ -67,13 +67,12 @@ class ChangePasswordApi {
       data: JSON.stringify(ChangePasswordObj),
       dataType: "json",
       success: response => {
-        // console(response.data.password.value);
-        // var a =  response.data.password;
-        // a = sha256(password.value);
-        // alert("회원의 변경된 비밀번호는: "+ response.data.password);
         alert("비밀번호 변경완료.");
         alert("로그인 페이지로 이동합니다");
-        window.location.href = "http://localhost:8000/account/login";
+        window.location.href = "";
+        // window.location.href = 'http://localhost:8000/account/login';
+        window.location.assign('http://localhost:8000/account/login');
+        // window.location.replace('http://localhost:8000/account/login');
       },
       error: error => {
         console.log(error);
