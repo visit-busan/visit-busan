@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.korit.visitbusan.repository.admin.AdminUserRoleRepository">
+
+    <resultMap id="userMst" type="com.korit.visitbusan.entity.UserMst">
+        <result property="userId" column="user_id"></result>
+        <result property="username" column="username"></result>
+        <result property="password" column="password"></result>
+        <result property="name" column="name"></result>
+        <result property="gender" column="gender"></result>
+        <result property="birth" column="birth"></result>
+        <result property="tellNumber" column="tell_number"></result>
+        <result property="email" column="email"></result>
+        <result property="userLng" column="user_lng"></result>
+        <result property="userLat" column="user_lat"></result>
+        <result property="provider" column="provider"></result>
+        <result property="userMarketing" column="user_marketing"></result>
+        <result property="createDate" column="create_date"></result>
+        <result property="updateDate" column="update_date"></result>
+        <collection property="roleDtl" javaType="list" resultMap="roleDtl"></collection>
+    </resultMap>
+
+    <resultMap id="roleMst" type="com.korit.visitbusan.entity.RoleMst">
+        <result property="roleId" column="role_id"></result>
+        <result property="roleName" column="role_name"></result>
+        <result property="createDate" column="create_date"></result>
+        <result property="updateDate" column="update_date"></result>
+    </resultMap>
+
+    <resultMap id="roleDtl" type="com.korit.visitbusan.entity.RoleDtl">
+        <result property="roleDtlId" column="role_dtl_id"></result>
+        <result property="userId" column="user_id"></result>
+        <result property="roleId" column="role_id"></result>
+        <result property="createDate" column="create_date"></result>
+        <result property="updateDate" column="update_date"></result>
+        <collection property="roleMst" resultMap="roleMst"></collection>
+    </resultMap>
+
+    <select id="getUserTotalCount" parameterType="com.korit.visitbusan.web.dto.admin.AdminUserRoleDto"
+            resultType="Integer">
+        select
+        count(*)
+        from
+        user_mst um
+        left outer join role_dtl rd on (rd.user_id = um.user_id)
+        left outer join role_mst rm on (rm.role_id = rd.role_id)
+        where
+        1 = 1
+        <if test='searchValue != null and searchValue != ""'>
+            and (
+            um.username like CONCAT('%', #{searchValue}, '%')
+            or um.name like CONCAT('%', #{searchValue}, '%')
+            or rm.role_name like CONCAT('%', #{searchValue}, '%')
+            )
+        </if>
+        <if test='roleName != null and roleName != ""'>
+            and role_name = #{roleName}
+        </if>
+    </select>
+
+    <select id="getRoleTotalCount" parameterType="com.korit.visitbusan.web.dto.admin.AdminUserRoleDto"
+            resultType="Integer">
+        select
+        count(*)
+        from
+        role_mst
+        where
+        1 = 1
+        <if test='searchValue != null and searchValue != ""'>
+            and (
+            role_id like CONCAT('%', #{searchValue}, '%')
+            or role_name like CONCAT('%', #{searchValue}, '%')
+            )
+        </if>
+        <if test='roleId != null and roleId != ""'>
+            and role_id = #{roleId}
+        </if>
+        <if test='roleName != null and roleName != ""'>
+            and role_name = #{roleName}
+        </if>
+    </select>
+
+    <select id="searchUser" parameterType="string" resultType="com.korit.visitbusan.web.dto.admin.AdminUserRoleDto">
+        select
+        um.user_id as userId,
+        um.username,
+        um.name,
+
+        rd.user_id as userId,
+        rd.role_id as roleId,
+
+        rm.role_id as roleId,
+        rm.role_name as roleName
+        from
+        user_mst um
+        left outer join role_dtl rd on(rd.user_id = um.user_id)
+        left outer join role_mst rm on(rm.role_id = rd.role_id)
+        where
+        1 = 1
+        <if test='searchValue != null and searchValue != ""'>
+            and (
+            um.username like CONCAT('%', #{searchValue}, '%')
+            or um.name like CONCAT('%', #{searchValue}, '%')
+            or rm.role_name like CONCAT('%', #{searchValue}, '%')
+            )
+        </if>
+        <if test='username != null and username != ""'>
+            and um.username = #{username}
+        </if>
+        <if test='name != null and name != ""'>
+            and um.name = #{name}
+        </if>
+        <if test='roleName != null and roleName != ""'>
+            and rm.role_name = #{roleName}
+        </if>
+        order by
+        <choose>
+            <when test='order == "username"'>um.username,</when>
+            <when test='order == "name"'>um.name,</when>
+            <when test='order == "roleName"'>rm.role_name</when>
+        </choose>
+        um.user_id
+        <if test='limit == "Y"'>
+            limit #{index}, #{count}
+        </if>
+    </select>
+
+    <select id="findUsers" parameterType="string" resultType="com.korit.visitbusan.web.dto.admin.AdminUserDto">
+        select
+        um.user_id as userId,
+        um.name,
+        um.create_date as createDate,
+        um.update_date as updateDate,
+
+        rd.user_id as userId,
+        rd.role_id as roleId,
+        rd.update_date as updateDate,
+
+        rm.role_id as roleId,
+        rm.role_name as roleName
+        from
+        user_mst um
+        left outer join role_dtl rd on(rd.user_id = um.user_id)
+        left outer join role_mst rm on(rm.role_id = rd.role_id)
+        where
+        1 =1
+        <if test='selectValue != null and selectValue != ""'>
+            and (
+            um.name like CONCAT('%', #{selectValue}, '%')
+            or rm.role_name like CONCAT('%', #{selectValue}, '%')
+            or um.create_date like CONCAT('%', #{selectValue}, '%')
+            or rd.update_date like CONCAT('%', #{selectValue}, '%')
+            )
+        </if>
+    </select>
+
+    <select id="findUserTotalCount" parameterType="com.korit.visitbusan.web.dto.admin.AdminUserDto"
+            resultType="Integer">
+        select
+        count(*)
+        from
+        user_mst um
+        left outer join role_dtl rd on (rd.user_id = um.user_id)
+        left outer join role_mst rm on (rm.role_id = rd.role_id)
+        where
+        1 = 1
+        <if test='selectValue != null and selectValue != ""'>
+            and (
+            um.name like CONCAT('%', #{selectValue}, '%')
+            or rm.role_name like CONCAT('%', #{selectValue}, '%')
+            or um.update_date like CONCAT('%', #{selectValue}, '%')
+            or rd.update_date like CONCAT('%', #{selectValue}, '%')
+            )
+        </if>
+        <if test='roleName != null and roleName != ""'>
+            and role_name = #{roleName}
+        </if>
+    </select>
+
+    <select id="searchRole" parameterType="com.korit.visitbusan.web.dto.admin.AdminUserRoleDto"
+            resultType="com.korit.visitbusan.entity.RoleMst">
+        SELECT
+        role_id as roleId,
+        role_name as roleName
+        from
+        role_mst
+        where
+        1 = 1
+        <if test='searchValue != null and searchValue != ""'>
+            and (
+            role_id like CONCAT('%', #{searchValue}, '%')
+            or role_name like CONCAT('%', #{searchValue}, '%')
+            )
+        </if>
+        <if test='roleId != null and roleId != ""'>
+            and role_id = #{roleId}
+        </if>
+        <if test='roleName != null and roleName != ""'>
+            and role_name = #{roleName}
+        </if>
+        order by
+        <choose>
+            <when test='order == "roleId"'>role_id,</when>
+            <when test='order == "roleName"'>role_name</when>
+        </choose>
+        role_id
+        <if test='limit == "Y"'>
+            limit #{index}, #{count}
+        </if>
+    </select>
+
+    <select id="searchRoles" parameterType="com.korit.visitbusan.web.dto.admin.AdminUserDto"
+            resultType="com.korit.visitbusan.entity.RoleMst">
+        SELECT
+            role_id as roleId,
+            role_name as roleName
+        from
+            role_mst
+        where
+        1 = 1
+        <if test='searchValue != null and searchValue != ""'>
+            and (
+            role_id like CONCAT('%', #{selectValue}, '%')
+            or role_name like CONCAT('%', #{selectValue}, '%')
+            )
+        </if>
+        <if test='roleId != null and roleId != ""'>
+            and role_id = #{roleId}
+        </if>
+        <if test='roleName != null and roleName != ""'>
+            and role_name = #{roleName}
+        </if>
+    </select>
+
+
+    <select id="findUserByUsername" resultMap="userMst">
+        SELECT
+        um.user_id as userId,
+        um.username,
+        um.name,
+
+        rd.user_id as userId,
+
+        rm.role_id as roleId,
+        rm.role_name as roleName
+        from
+        user_mst um
+        left outer join role_dtl rd on (rd.user_id = um.user_id)
+        left outer join role_mst rm on (rm.role_id = rd.role_id)
+        where
+        um.username = #{username};
+    </select>
+
+    <select id="findUserByName" resultType="com.korit.visitbusan.entity.UserMst" parameterType="list">
+        SELECT
+        user_id as userId,
+        username,
+        name
+        from
+        user_mst
+        where
+        name = #{name};
+    </select>
+
+    <select id="findUserByUserId" resultType="com.korit.visitbusan.entity.UserMst" parameterType="list">
+        SELECT
+        um.user_id as userId,
+        um.username,
+        um.name,
+        um.create_date as createDate,
+        um.update_date as updateDate,
+
+        rd.user_id as userId,
+        rd.role_id as roleId,
+
+        rm.role_id as roleId,
+        rm.role_name as roleName
+        from
+        user_mst um
+        left outer join role_dtl rd on (rd.user_id = um.user_id)
+        left outer join role_mst rm on (rm.role_id = rd.role_id)
+        where
+        um.user_id = #{userId};
+    </select>
+
+    <select id="findUserRoleByUserId" resultType="com.korit.visitbusan.entity.RoleDtl" parameterType="list">
+        SELECT
+        um.user_id as userId,
+        um.name,
+
+        rd.user_id as userId,
+        rd.role_id as roleId,
+        rd.create_date as createDate,
+        rd.update_date as updateDate,
+
+        rm.role_id as roleId,
+        rm.role_name as roleName
+        from
+        role_mst rm
+        left outer join role_dtl rd on(rd.role_id = rm.role_id)
+        left outer join user_mst um on(um.user_id = rd.user_id)
+        where
+        um.user_id = #{userId};
+    </select>
+
+    <select id="findAllRoleName" parameterType="com.korit.visitbusan.web.dto.admin.AdminUserRoleDto"
+            resultType="com.korit.visitbusan.entity.RoleMst">
+        select
+        rm.role_id as roleId,
+        rm.role_name as roleName,
+        rd.role_id as roleId,
+        rd.user_id as userId,
+        um.user_id as userId,
+        um.username,
+        um.name
+        from
+        role_mst rm
+        left outer join role_dtl rd on(rd.role_id = rm.role_id)
+        left outer join user_mst um on(um.user_id = rd.user_id)
+        where
+        rm.role_id = #{roleId}
+    </select>
+
+    <select id="findAllName" resultType="com.korit.visitbusan.entity.UserMst">
+        select
+        user_id as userId,
+        username,
+        name
+        from
+        user_mst
+    </select>
+
+    <update id="updateRoleByUserName" parameterType="com.korit.visitbusan.web.dto.admin.AdminUserRoleDto">
+        update
+        (select
+        um.user_id as userId,
+        um.username,
+        um.name,
+
+        rd.user_id as userId,
+
+        rm.role_id as roleId,
+        rm.role_name as roleName
+        from
+        role_mst rm
+        left outer join role_dtl rd on (rd.role_id = rm.role_id)
+        left outer join user_mst um on (um.user_id = rd.user_id)
+        )
+        set
+        rm.role_name = #{roleName}
+        where
+        um.username = #{username}
+    </update>
+
+    <update id="maintainUpdateRoleByUsername" parameterType="com.korit.visitbusan.web.dto.admin.AdminUserRoleDto">
+        update role_mst
+        set
+        role_name = #{roleName},
+        <if test='username != null and username != ""'>username = #{username},</if>
+        <if test='name != null and name != ""'>name = #{name},</if>
+        <if test='roleName != null and roleName != ""'>role_name = #{roleName},</if>
+        where
+        username = #{username}
+    </update>
+
+    <update id="updateRoleByName" parameterType="com.korit.visitbusan.web.dto.admin.AdminUserRoleDto">
+        update
+        (select
+        um.user_id as userId,
+        um.username,
+        um.name,
+
+        rd.user_id as userId,
+
+        rm.role_id as roleId,
+        rm.role_name as roleName
+        from
+        role_mst rm
+        left outer join role_dtl rd on (rd.role_id = rm.role_id)
+        left outer join user_mst um on (um.user_id = rd.user_id)
+        )
+        set
+        rm.role_name = #{roleName}
+        where
+        um.name = #{name}
+    </update>
+
+    <delete id="deleteUserByUsername">
+        delete
+        from
+        user_mst
+        where
+        username = #{username}
+    </delete>
+
+    <delete id="deleteUserByName">
+        delete
+        from
+        user_mst
+        where
+        name = #{name}
+    </delete>
+
+    <delete id="deleteUsers" parameterType="list">
+        delete
+        from
+        user_mst
+        where
+        username in
+        <foreach collection="list" item="bookId" open="(" close=")" separator=",">
+            #{username}
+        </foreach>
+    </delete>
+
+    <insert id="registerUserRoles" parameterType="list">
+        insert into role_dtl
+        values
+        <foreach collection="list" item="roleId" open="(" close=")" separator=",">
+            (0, #{userId}, #{roleId}, now(), now())
+        </foreach>
+    </insert>
+
+    <delete id="deleteUserRoles">
+        delete
+        from role_dtl
+        where
+        user_id = #{userId}
+    </delete>
+
+
+</mapper>
