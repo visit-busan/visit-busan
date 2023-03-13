@@ -9,9 +9,9 @@ import java.time.LocalDateTime;
 import java.util.List;
 /*******************************************
  *** 작성자 : 이성욱
- *  버전 : V0.1
+ *  버전 : V0.2
  *  내용 :  UserMst 테이블 CRUD시 사용할 entity
- *  작성일 : 2023.03.06
+ *  작성일 : 2023.03.12
  *******************************************/
 @Data
 @NoArgsConstructor
@@ -24,8 +24,7 @@ public class UserMst {
     @NotBlank
     @ApiModelProperty(name = "username", value = "사용자 아이디", example = "abc123", required = true)
     private String username;
-    @ApiModelProperty(name = "roleId", value = "권한", example = "2", hidden = true)
-    private int roleId;
+
     @NotBlank
     @ApiModelProperty(name = "password", value = "사용자 비밀번호", example = "1q2w3e4r!", required = true)
     private String password;

@@ -14,9 +14,9 @@
   <link rel="stylesheet" href="/static/css/admin/common.css">
   <link rel="stylesheet" href="/static/css/admin/gnb.css">
   <link rel="stylesheet" href="/static/css/admin/lnb.css">
-  <link rel="stylesheet" href="/static/css/admin/user/user_common.css">
-  <link rel="stylesheet" href="/static/css/admin/user/manage/user_info.css">
-  <link rel="stylesheet" href="/static/css/admin/user_info_modal.css">
+  <link rel="stylesheet" href="/static/css/admin/tour/tour_common.css">
+  <link rel="stylesheet" href="/static/css/admin/tour/category/tour_category.css">
+  <link rel="stylesheet" href="/static/css/admin/modal.css">
 
 </head>
 
@@ -54,17 +54,17 @@
           </ul>
           <h2 class="title-text-h2">사용자 관리</h2>
           <ul class="sub-menu">
-            <a href="/admin/user/info">
+            <a href="/templates/admin/user/user_info.html">
               <li>사용자 정보 관리</li>
             </a>
-            <a href="/admin/user/role">
+            <a href="/templates/admin/user/user_role.html">
               <li>사용자 권한 관리</li>
             </a>
           </ul>
         </nav>
       </aside>
       <div class="content-container">
-        <h1 class="content-title">사용자 정보 관리</h1>
+        <h1 class="content-title">관광지 분류</h1>
         <div class="content-main">
           <div class="content-items">
             <div class="left-items">
@@ -92,7 +92,12 @@
             <div class="modal-window regist">
               <div class="modal-header">
                 <h2 class="modal-title">사용자 권한 수정</h2>
-                <button class="close-button" onclick="offDisplay()">x</button>
+                <button class="close-button">x
+                  <script>
+                    opener.parent.location = "admin/user/info";
+                  </script>
+
+                </button>
               </div>
               <div class="modal-body">
                 <form>
@@ -101,42 +106,43 @@
                       <col>
                       <col>
                     </colgroup>
-                    <tr class="modification-name">
-                      <th>사용자 이름</th>
-                      <td class="modification-role select-name" value="" disabled>1</td>
+                    <tr>
+                      <th>사용자 번호</th>
+                      <td>1</td>
                     </tr>
                     <tr>
                       <th>수정할 권한</th>
                       <td>
-                        <select id="updateAdmin" class="roles-select modification-role">
+                        <select class="role-select">
                           <option value="">선택</option>
                           <option value="">없음</option>
-                          <option value="1">ADMIN</option>
+                          <option value="관리자">ADMIN</option>
                         </select>
-                        <select id="updateWriter" class="roles-select modification-role">
+                        <select class="role-select">
                           <option value="">선택</option>
                           <option value="">없음</option>
-                          <option value="3">WRITER</option>
+                          <option value="작가">WRITER</option>
                         </select>
-                        <select id="updateUser" class="roles-select modification-role">
-                          <option value="2">USER</option>
+                        <select class="role-select">
+                          <option value="일반">USER</option>
                         </select>
                       </td>
                     </tr>
-                    <tr class="date-time">
+
+                    <tr>
                       <th>등록일</th>
-                      <td class="create-date" disabled>2023-02-27 14:00:00</td>
+                      <td>2023-02-27 14:00:00</td>
                     </tr>
-                    <tr class="date-time">
+                    <tr>
                       <th>수정일</th>
-                      <td class="update-date" disabled>2023-02-27 14:00:00</td>
+                      <td>2023-02-27 14:00:00</td>
                     </tr>
                   </table>
                 </form>
               </div>
               <div class="modal-footer">
                 <button class="update-button">등록</button>
-                <button class="cancel-button" onclick="offDisplay()">취소</button>
+                <button class="cancel-button">취소</button>
               </div>
             </div>
           </div>
@@ -168,11 +174,21 @@
           <div class="page-controller">
             <a href="" class="disabled">이전</a>
             <ul class="page-numbers">
-              <a href=""><li>1</li></a>
-              <a href=""><li>2</li></a>
-              <a href=""><li>3</li></a>
-              <a href=""><li>4</li></a>
-              <a href=""><li>5</li></a>
+              <a href="">
+                <li>1</li>
+              </a>
+              <a href="">
+                <li>2</li>
+              </a>
+              <a href="">
+                <li>3</li>
+              </a>
+              <a href="">
+                <li>4</li>
+              </a>
+              <a href="">
+                <li>5</li>
+              </a>
             </ul>
             <a href="">다음</a>
           </div>
@@ -180,8 +196,7 @@
       </div>
     </main>
   </div>
-  <script src="/static/js/admin/user/user_info.js"></script>
-  <script src="/static/js/admin/user/update_role.js"></script>
+  <script src="/static/js/admin/user/user_info copy.js"></script>
 </body>
 
 </html>
