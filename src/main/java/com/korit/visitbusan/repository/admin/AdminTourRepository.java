@@ -17,7 +17,7 @@ import java.util.List;
 @Mapper
 public interface AdminTourRepository {
 
-        /*
+    /*
     C: FRONT 페이지로 연결
     R: 1. 관광지 전체 조회
             1. 검색

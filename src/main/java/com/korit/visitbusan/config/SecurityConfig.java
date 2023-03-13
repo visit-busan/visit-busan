@@ -9,7 +9,12 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
+/*******************************************
+ *** 작성자 : 정순동
+ *  버전 : V0.1
+ *  내용 :  Security 관련 설정 configuration
+ *  작성일 : 2023.03.07
+ *******************************************/
 @EnableWebSecurity
 @Configurable
 @RequiredArgsConstructor
@@ -31,12 +36,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
         http.httpBasic().disable();
         http.authorizeRequests()
-                .antMatchers("/mypage/**", "/security/**")
+                .antMatchers("/mypage/**", "/security/**", "/write")
                 .authenticated()
                 .antMatchers("/admin/**")
                 .hasRole("ADMIN")
-                .antMatchers("/post/write/**")
-                .hasRole("writer")
+                .antMatchers("/post/modify/**")
+                .hasRole("WRITER")
+                .antMatchers("/post/register/**")
+                .hasRole("WRITER")
                 .anyRequest()
                 .permitAll()
                 .and()

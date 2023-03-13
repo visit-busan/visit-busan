@@ -89,9 +89,19 @@
             <header class="main-header">
                 <div class="category-container">
                     <i class="fa-solid fa-house"></i>
-                    <span><b>부산에 가면 > </b></span>
+                    <span><b>부산에 가면  >  <span class="category-monitor"></span></b></span>
                 </div>
                 <div class="header-title">
+                    <div class="category-tags-selector">
+                        <div class="category-selector-container">
+                            <h2>카테고리</h2>
+                            <select class="category-selector">
+                            </select>
+                        </div>
+                        <ul class="tags-selector-container">
+                            <h2>태그선택(중복가능)</h2>
+                        </ul>
+                    </div>
                     <input type="text" class="main-title" placeholder="제목">
                     <input type="text" class="sub-title" placeholder="부제목">
                 </div>
@@ -100,24 +110,38 @@
             <div class="main-content">
                 <div class="img-upload-container">
                     <div class="thumbnail-upload-container">
-                        <h2>썸네일 업로드</h2>
-                        <form action="" class="thumbnail-form">
-                            <input type="file" name="file" style="display: none;" class="thumbnail-file">
-                            <div class="thumbnail-container">
-                                <img src="/static/image/no_img.png" alt="no-img" class="thumbnail">
-                            </div>
-                        </form>
-                    </div>
-                    <div class="mainimg-upload-container">
-                        <h2>메인이미지 업로드</h2>
-                        <form action="" class="mainimg-form">
-                            <input type="file" name="file" style="display: none;" class="mainimg-file">
-                            <div class="mainimg-container">
-                                <img src="/static/image/no_img.png" alt="no-img" class="mainimg">
-                            </div>
-                        </form>
+                        <h2><button class="thumbnail-toggle">링크로 썸네일 이미지 업로드</button></h2>
+                        <div class="thumbnail-with-form">
+                            <h2>썸네일 업로드 - 파일 직접 업로드</h2>
+                            <form action="" class="thumbnail-form">
+                                <input type="file" name="file" class="thumbnail-file">
+                                <div class="thumbnail-container">
+                                    <img src="/static/image/no_img.png" alt="no-img" class="thumbnail">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="thumbnail-with-link off">
+                            <h2 style="margin-top: 20px;">썸네일 업로드 - 썸네일로 사용할 링크 업로드</h2>
+                            <input type="text" class="thumbnail-link" placeholder="썸네일로 사용할 파일의 링크를 입력해주세요.">
+                        </div>
                     </div>
 
+                    <div class="mainimg-upload-container">
+                        <h2><button class="mainimg-toggle">링크로 메인이미지 업로드</button></h2>
+                        <div class="mainimg-with-form">
+                            <h2>메인이미지 업로드 - 파일 직접 업로드</h2>
+                            <form action="" class="mainimg-form">
+                                <input type="file" name="file" class="mainimg-file">
+                                <div class="mainimg-container">
+                                    <img src="/static/image/no_img.png" alt="no-img" class="mainimg">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="mainimg-with-link off">
+                            <h2>메인이미지 업로드 - 메인이미지로 사용할 링크 업로드</h2>
+                            <input type="text" class="mainimg-link" placeholder="메인이미지로 사용할 파일의 링크를 입력해주세요.">
+                        </div>
+                    </div>
                 </div>
                 <ul class="main-navigation">
                     <li><b class="article-button">상세정보</b></li>
@@ -133,23 +157,12 @@
 
                     <div class="main-usage-information off">
                         <div class="information-container">
-                            <h2>카테고리</h2>
-                            <select class="category-selector">
-                                <option value="1">맛집</option>
-                                <option value="2">숙소</option>
-                            </select>
-                        </div>
-                        <div class="information-container">
                             <h2>홈페이지</h2>
                             <input type="text" class="homepage-input">
                         </div>
                         <div class="information-container">
                             <h2>연락처</h2>
                             <input type="text" class="number-input">
-                        </div>
-                        <div class="information-container">
-                            <h2>운영일</h2>
-                            <input type="text" class="runday-input">
                         </div>
                         <div class="information-container">
                             <h2>휴무일</h2>
@@ -181,13 +194,13 @@
                         </div>
                     </div>
                     <div class="buttons">
-                        <button class="initialize-button">내용 초기화 하기</button>
-                        <button class="register-button">게시글 등록</button>
+                        <button class="register-button">업로드</button>
                     </div>
                 </div>
             </div>
         </main>
     </div>
+    <script src="/static/js/account/principal.js"></script>
     <script src="/static/js/post/register-post.js"></script>
 </body>
 

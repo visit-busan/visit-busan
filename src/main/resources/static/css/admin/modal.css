@@ -9,6 +9,7 @@
 }
 
 .modal-window-register, .modal-window-modify {
+    display: none;
     overflow-y: initial;
     position: fixed;
     top: 50%;

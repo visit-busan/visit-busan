@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Visit Busan login page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+        integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/static/css/reset.css" />
+    <link rel="stylesheet" href="/static/css/common.css" />
+    <link rel="stylesheet" href="/static/css/header.css" />
+    <link rel="stylesheet" href="/static/css/index.css" />
+    <link rel="stylesheet" href="/static/css/login/mypage.css" />
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+</head>
+
+<body>
+    <div id="container">
+        <header class="header-container">
+
+        </header>
+
+        <main class="main-container">
+            <div class="con-wrap">
+                <div class="title-area">
+                    <h2>My Page</h2>
+                </div>
+                <div class="con-area">
+                    <div class="my-info-box">
+                        <ul>
+                            <li>
+                                <div class="box1">
+
+                                </div>
+                                <a href="https://localhost:8000/account/find/username" class="flt-bt">프로필 수정</a>
+                            </li>
+                            <li>
+                                <div class="password">
+                                    <i class="fa-solid fa-lock fa-4x"></i>
+                                    <p class="tit">비밀번호 변경</p>
+                                    <p class="txt">
+                                        주기적으로 비밀번호를 변경하여<br>
+                                        계정을 보호하세요.
+                                    </p>
+                                </div>
+                                <div class="pass-modify-state">
+                                    <p class="use-noti type1"><i class="fa-regular fa-square-check"
+                                            style="margin-right: 5px;"></i>비밀번호 변경이 가능합니다</p>
+                                    <button href="http://localhost:8000/account/find/password" class="modify-bt">비밀번호 변경</button>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="box3">
+
+                                </div>
+                            </li>
+                            <li>
+                                <div class="box4">
+                                    <div class="sns-list">
+                                        <img src="/static/image/sns_list_icon1.jpg" alt="" onclick="location.href= '/oauth2/authorization/naver'">
+                                        <img src="/static/image/sns_list_icon2.jpg" alt="" onclick="location.href= '/oauth2/authorization/kakao'">
+                                        <img src="/static/image/sns_list_icon3.jpg" alt="" onclick="location.href= '/oauth2/authorization/facebook'">
+                                        <img src="/static/image/sns_list_icon4.jpg" alt="" onclick="location.href= '/oauth2/authorization/google'">
+                                    </div>
+                                </div>
+                                <p class="sns-list-info">SNS 아이콘을 눌러 SNS 로그인을 연동하실 수 있습니다.</p>
+                            </li>
+                            <li class="last-li">
+                                <div class="box6">
+                                    <img src="/static/image/info_box6_icon.png" alt="">
+                                    <p class="tit">정말 탈퇴하시겠습니까?</p>
+                                    <p class="txt">
+                                        탈퇴 시 기존의 정보 등이 절대 복구 <br>
+                                        되지 않습니다.
+                                    </p>
+                                </div>
+                                <button class="flt-bt delete-button">탈퇴하기</button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <div class="footer-top">
+      
+        </div>
+        <footer class="footer-container">
+          
+        </footer>
+
+    </div>
+    <script src="/static/js/account/principal.js"></script>
+    <script src="/static/js/component/header.js"></script>
+    <script src="/static/js/component/footer.js"></script>
+    <script src="/static/js/component/mypage.js"></script>
+    <script src="/static/js/mypage.js"></script>
+    <script>
+        $(".menu-container li").hover(
+            function () {
+                $("ul", this).stop().slideDown(200);
+            },
+            function () {
+                $("ul", this).stop().slideUp(200);
+            }
+        );
+    </script>
+</body>
+
+</html>

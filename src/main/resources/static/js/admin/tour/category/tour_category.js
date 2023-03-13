@@ -25,6 +25,8 @@ const categoryObj = {
     updateDate: "",
 }
 
+const principalData = PrincipalApi.getInstance().getPrincipal();
+
 class CategoryApi {
     static #instance = null;
     static getInstance() {
@@ -205,12 +207,28 @@ class CategoryService {
         ComponentEvent.getInstance().addClickEventDeleteCheckbox();
     }
 
-    // 이부분 수정이... 필요함... value가 왜 안 들어오니... ㅠㅠ
+    loadModifyCategoryList() {
+        const responseData = CategoryApi.getInstance().getCategoryList(searchObj);
+
+        if(responseData == null) {
+            alert("해당 관광분류 코드는 등록되지 않은 코드입니다.")
+            history.back();
+            return;
+        }
+
+        const modalModifyCategory = document.querySelectorAll(".modify-category");
+        modalModifyCategory[0].value = responseData.categoryId;
+        modalModifyCategory[1].value = responseData.categoryName;
+        modalModifyCategory[0].value = responseData.username;
+        modalModifyCategory[0].value = responseData.createDate;
+        modalModifyCategory[0].value = responseData.updateDate;
+    }
+
     setCategoryRegisterValues() {
         const registerCategoryInputs = document.querySelectorAll(".modal-form-register input");
-        // categoryObj.userId = ${} <- 현재 로그인 사용자 ID를 어째 불러오지...
-        console.log(registerCategoryInputs[0].value);
-        categoryObj.userId = "6";
+        // console.log(registerCategoryInputs[0].value);
+        // console.log(principalData.user.userId);
+        categoryObj.userId = principalData.user.userId;
         categoryObj.categoryName = registerCategoryInputs[0].value;
     }
 
@@ -240,11 +258,12 @@ class CategoryService {
     setCategoryModifyValues() {
         const responseData = CategoryApi.getInstance().getCategoryList(searchObj);
         const modifyCategoryInputs = document.querySelectorAll(".modal-form-modify input");
-        // categoryObj.userId = ${} <- 현재 로그인 사용자 ID를 어째 불러오지...
-        console.log(modifyCategoryInputs[0].value);
-        categoryObj.userId = "6";
-        categoryObj.createDate = responseData.createDate;
+        // console.log(registerCategoryInputs[0].value);
+        // console.log(responseData.createDate);
+        // console.log(principalData.user.userId);
+        categoryObj.userId = principalData.user.userId;
         categoryObj.categoryName = modifyCategoryInputs[0].value;
+        categoryObj.createDate = responseData.createDate;
     }
 
     setModifyErrors(errors) {
@@ -372,15 +391,16 @@ class ComponentEvent {
     addClickEventRegisterButton() {
         const registerButton = document.querySelector(".register-button");
         const modal = document.querySelector("#modal");
-        // const modalRegisterWindow = document.querySelector(".modal-window-register");
+        const modalRegisterWindow = document.querySelector(".modal-window-register");
 
         registerButton.onclick = () => {
             modal.style.display = "flex";
-            // modalRegisterWindow.style.display = "flex";
+            modalRegisterWindow.style.display = "block";
         }
     }
 
     addClickEventModalRegisterButton() {
+        const modalRegisterInput = document.querySelector(".modal-form-register input");
         const modalRegisterButton = document.querySelector(".modal-register-button");
 
         modalRegisterButton.onclick = () => {
@@ -393,6 +413,12 @@ class ComponentEvent {
 
             CategoryService.getInstance().clearRegisterErrors();
             location.reload();
+        }
+
+        modalRegisterInput.onkeyup = () => {
+            if(window.event.keyCode == 13) {
+                modalRegisterButton.click();
+            }
         }
 
     }
@@ -414,12 +440,12 @@ class ComponentEvent {
     addClickEventModifyButton() {
         const modifyButton = document.querySelector(".modify-button");
         const modal = document.querySelector("#modal");
-        const modalRegisterWindow = document.querySelector(".modal-window-register");
         const modalModifyWindow = document.querySelector(".modal-window-modify");
 
         modifyButton.onclick = () => {
             modal.style.display = "flex";
-            modalRegisterWindow.style.display = "none";
+            modalModifyWindow.style.display = "block";
+            CategoryService.getInstance().loadModifyCategoryList();
         }
     }
 

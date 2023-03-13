@@ -19,35 +19,35 @@ public interface AdminTagRepository {
 
     /*
     C: 태그등록 등록
-    R: 1. 테그 전체 조회
+    R: 1. 태그 전체 조회
             1. 검색
                 1. 테그명
             2. 카테고리
                 1. 전체조회
                 2. 20개씩 가져오기
-     U: 테그 수정
-     D: 테그 삭제
+     U: 태그 수정
+     D: 태그 삭제
      */
 
-    /*테그 전체 개수*/
+    /*태그 전체 개수*/
     public int getTagTotalCount(AdminSearchTagListDto adminSearchTagListDto);
 
-    /*테그 데이터 조회*/
+    /*태그 데이터 조회*/
     public List<AdminTagMst> searchTag(AdminSearchTagReqDto adminSearchTagReqDto);
 
-    /*테그 이름으로 데이터 조회*/
+    /*태그 이름으로 데이터 조회*/
     public AdminTagMst findTagByTagName(String tagName);
 
-    /*테그 등록*/
+    /*태그 등록*/
     public int registerTag(AdminTagReqDto adminTagReqDto);
 
-    /*테그 수정 put*/
+    /*태그 수정 put*/
     public int updateTagByTagId(AdminTagReqDto adminTagReqDto);
 
-    /*테그 삭제*/
+    /*태그 삭제*/
     public int deleteTag(int tagId);
 
-    /*테그 일괄삭제*/
+    /*태그 일괄삭제*/
     public int deleteTags(List<Integer> tagIds);
 
 }

@@ -35,24 +35,98 @@
     font-size: 20px;
 }
 
-.category-container span b {
+.category-container a b {
+    font-size: 20px;
+}
+
+.category-monitor {
     font-size: 20px;
 }
 
 .header-title {
     margin-top: 80px;
+    width: 100%;    
+}
+
+.category-tags-selector {
+    display: flex;
+
+    width: 100%;
+    height: 50px;
+
+    border: 1px solid black;
+    border-radius: 3px;
+}
+
+.category-selector-container {
+    display: flex;
+    align-items: center;
+    width: 25%;
+}
+
+.category-selector-container h2 {
+    height: 100%;
+    margin: 0;
+    line-height: 50px;
+}
+
+.category-selector-container select {
+    margin-left: 20px;
+    height: 30px;
+}
+
+.tags-selector-container {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 75%;
+    height: 100%;
+
+}
+
+.tags-selector-container h2 {
+    height: 100%;
+    width: 70px;
+
+    margin: 0 10px 0 0;
+    
+    text-align: center;
+    line-height: 24px;
+    font-size: 15px;
+}
+
+.tag-button {
+    border: 1px solid black;
+    border-radius: 15px;
+
+    height: 30px;
+    padding: 0 10px;
+    margin-right: 5px;
+    background-color: azure;
+    
+    text-align: center;
+    line-height: 30px;
+    cursor: pointer;
+}
+
+.selected {
+    background-color: rgb(198, 255, 255);
 }
 
 .main-title {
+    width: 100%;
     font-size: 40px;
     display: block;
     margin: 0 auto;
+    text-align: center;
 }
 
 .sub-title  {
+    width: 100%;
     font-size: 15px;
     display: block;
     margin: 0 auto;
+    text-align: center;
 }
 
 .main-content {
@@ -60,8 +134,67 @@
     height: 100%;
 }
 
-.img-container {
-    position: relative;
+.thumbnail-with-form {
+    border: 1px solid black;
+    border-radius: 5px;
+    width: 1000px;
+    height: 350px;
+}
+
+.thumbnail-form {
+    width: 1000px;
+    height: 240px;
+}
+
+.thumbnail-with-link {
+    border: 1px solid black;
+    border-radius: 5px;
+    width: 1000px;
+    height: 100px;
+}
+
+.thumbnail-link {
+    width: 100%;
+}
+
+.thumbnail-container {
+    display: flex;
+    justify-content: center;
+
+    border-radius: 4px;
+
+    background-color: rgba(242, 242, 242, 0.806);
+    width: 340px;
+    height: 240px;
+}
+
+.thumbnail {
+    width: 340px;
+    height: 240px;
+}
+
+.thumbnail-file {
+}
+
+.mainimg-with-form {
+    border: 1px solid black;
+    border-radius: 5px;
+    width: 1000px;
+    height: 570px;
+}
+
+.mainimg-with-link {
+    border: 1px solid black;
+    border-radius: 5px;
+    width: 1000px;
+    height: 100px;
+}
+
+.mainimg-link {
+    width: 100%;
+}
+
+.mainimg-container {
     display: flex;
     justify-content: center;
 
@@ -72,9 +205,12 @@
     height: 450px;
 }
 
-.main-img {
+.mainimg {
     width: 100%;
     height: 100%;
+}
+
+.mainimg-file {
 }
 
 .main-navigation {
@@ -90,11 +226,12 @@
     border-bottom: 2px solid #858585;
 }
 
-.main-navigation li a {
+.main-navigation li b{
     font-size: 16px;
+    cursor: default;
 }
 
-.main-navigation li a:hover {
+.main-navigation li b:hover {
     color: blue;
 }
 
@@ -104,7 +241,23 @@
     height: 1500px;
 }
 
-.ck-editor__editable { height: 400px; }
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.initialize-button {
+    background-color: red;
+    color: rgb(242, 255, 0);
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.register-button {
+    font-size: 20px;
+    font-weight: 600;
+}
 
 .tools {
     width: 100%;
@@ -121,8 +274,41 @@
     height: 100%;
 }
 
+.main-location-information {
+    width: 100%;
+    height: 700px;
+    background-color: aqua;
+}
+
 .main-usage-information {
+    display: flex;
+    flex-direction: column;
+
+    border: 1px solid black;
+    border-radius: 10px;
     width: 100%;
     height: 100%;
-    background-color: aqua;
+
+    overflow: hidden;
+}
+
+.information-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+    padding: 20px;
+    border-bottom: 1px solid black;
+}
+
+.information-container:last-child {
+    border: none;
+}
+
+.information-container input {
+    width: 800px;
+}
+
+.off {
+    display: none;
 }
