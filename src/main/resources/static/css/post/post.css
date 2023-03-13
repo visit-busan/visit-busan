@@ -29,7 +29,7 @@ body {
     align-items: center;
     justify-content: space-between;
 
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(250, 250, 250);
 
     width: 1000px;
     height: 70px;
@@ -39,8 +39,6 @@ body {
 .category-navigator {
     display: flex;
     align-items: center;
-
-    background-color: white;
 
     width: 700px;
     height: 100%;
@@ -63,7 +61,7 @@ body {
 }
 
 .modify-buttons ul li {
-    width: 45px;
+    width: 40px;
     height: 20px;
     border: 1px solid black;
     border-radius: 5px;

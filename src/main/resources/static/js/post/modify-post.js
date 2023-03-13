@@ -7,12 +7,15 @@ window.onload = () => {
     ComponentEvents.getInstance().addChangeEventMainImgFile();
 
     ModifyService.getInstance().loadPage();
+
+    HeaderService.getInstance().loadHeader();
+    HeaderService.getInstance().Categoryload();
 }
 
 // -----------------------------------------
 //                  Object
 // -----------------------------------------
-let principalData = null;
+let principalData = PrincipalApi.getInstance().getPrincipal();
 let thumbnailFormFlag = true;
 let mainImageFormFlag = true;
 
@@ -125,7 +128,6 @@ class ModifyApi {
             url:`/api/post/${modifyObj.tourId}/tag`,
             dataType: "json",
             success: response => {
-                alert(response.data + " 개 태그 삭제 완료");
             },
             error: error => {
                 console.log(error)
@@ -144,7 +146,6 @@ class ModifyApi {
             }),
             dataType: "json",
             success: response => {
-                alert("태그등록완료");
             },error: error => {
                 console.log(error);
             }
@@ -162,7 +163,6 @@ class ModifyApi {
             data: thumbnailObj.formData,
             dataType: 'json',
             success: response => {
-                alert("썸네일 파일 등록 완료!");
             },
             error: error => {
                 console.log(error);
@@ -181,7 +181,6 @@ class ModifyApi {
                 "link" : thumbnailUrl
             }),
             success: response => {
-                alert("링크로 썸네일 등록 완료!");
             },
             error: error => {
                 console.log(error);
@@ -200,7 +199,6 @@ class ModifyApi {
             data: mainImgObj.formData,
             dataType: 'json',
             success: response => {
-                alert("메인이미지 파일 등록 완료!");
                 location.reload();
             },
             error: error => {
@@ -220,7 +218,6 @@ class ModifyApi {
                 "link" : mainImageUrl
             }),
             success: response => {
-                alert("링크로 메인이미지 등록 완료!");
                 location.reload();
             },
             error: error => {
@@ -280,10 +277,9 @@ class ModifyService {
     loadPage() {
         let url = location.href; 
         let subUrl = url.substring(url.lastIndexOf("/")+1);
-        
+
         modifyObj.tourId = subUrl;
-        
-        principalData = PrincipalApi.getInstance().getPrincipal();
+
         const responseData = ModifyApi.getInstance().getPost();
         
         modifyObj.categoryId = responseData.data.categoryId;
@@ -302,7 +298,7 @@ class ModifyService {
 
         if(responseData == null) {
             alert("존재하지 않는 게시글입니다.");
-            window.location.href='http://www.localhost:8000/';
+            window.location.href='http://localhost:8000/';
         }
         
         if(responseData.data.thumbnailImage != null) {
@@ -427,7 +423,7 @@ class ModifyService {
         let otherInput = document.querySelector(".other-input");
         let trafficInput = document.querySelector(".traffic-input");
 
-        
+        modifyObj.userId = principalData.userMst.userId;
         modifyObj.tourTitle = mainTitle.value;
         modifyObj.tourSubTitle = subTitle.value;
         modifyObj.tourContents = $('#summernote').summernote('code');
@@ -455,13 +451,10 @@ class ModifyService {
         
         if(tagList.length > 0) {
             ModifyApi.getInstance().modifyPostTags();
-        } else {
-            alert("태그 등록 없이 게시글 등록.");
         }
 
         if(thumbnailFormFlag) {
             if(thumbnailObj.files[0] == null) {
-                alert("썸네일 이미지가 없습니다!");
             } else {
                 thumbnailObj.formData.append("files", thumbnailObj.files[0]);
                 ModifyApi.getInstance().modifyThumbnail();
@@ -472,7 +465,6 @@ class ModifyService {
         
         if(mainImageFormFlag) {
             if(mainImgObj.files[0] == null) {
-                alert("메인이미지가 없습니다!");
                 location.reload();
             } else {
                 mainImgObj.formData.append("files", mainImgObj.files[0]);
