@@ -133,6 +133,7 @@ class SearchService {
 
     loadSearchResult() {
         const URLSearch = new URLSearchParams(location.search);
+
         if(URLSearch.has("categoryId")) {
             const id = URLSearch.get("categoryId");
             if(id == "") {
@@ -140,6 +141,7 @@ class SearchService {
             }
             searchObj.categoryId = id;
         }
+
         if(searchObj.categoryId != 0) {
             let categoryName = SearchApi.getInstance().getCategoryName();
             if(categoryName.data != null){
@@ -278,7 +280,7 @@ class SearchService {
                     this.loadSearchResult();
                 }
             }
-        })
+        });
     }
 
     loadPostRegisterButton() {
