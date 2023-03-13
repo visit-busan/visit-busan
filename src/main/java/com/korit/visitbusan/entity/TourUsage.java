@@ -1,6 +1,7 @@
 package com.korit.visitbusan.entity;
 
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,15 +17,15 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class TourUsage {
-
+    @ApiModelProperty(hidden = true)
     private int usageId;
-
+    @ApiModelProperty(name="tourId", value = "게시글Id값", example = "59")
     private int tourId;
-
+    @ApiModelProperty(name="tellNumber", value = "게시글 장소의 전화번호", example = "051-610-7111")
     private String tellNumber;
-
+    @ApiModelProperty(name="tagName", value = "태그이름", example = "자연")
     private String homepageUrl;
-
+    @ApiModelProperty(name="tagName", value = "태그이름", example = "자연")
     private String holidayInfo;
 
     private String handicappedArea;
@@ -33,7 +34,7 @@ public class TourUsage {
 
     private String usageAmount;
 
-    private String rprsntbMenu;
+    private String rprsntvMenu;
 
     private String transportInfo;
 

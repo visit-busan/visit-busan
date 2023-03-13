@@ -7,6 +7,9 @@ window.onload = () => {
     ComponentEvents.getInstance().addChangeEventThumbnailFile();
     ComponentEvents.getInstance().addChangeEventMainImgFile();
     ComponentEvents.getInstance().addChangeEventCategorySelector();
+
+    HeaderService.getInstance().loadHeader();
+    HeaderService.getInstance().Categoryload();
 }
 
 // -----------------------------------------

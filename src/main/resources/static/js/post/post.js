@@ -253,7 +253,7 @@ class PostApi {
             dataType: 'json',
             success: response => {
                 alert("게시글 삭제 완료!");
-                window.location.href='http://www.localhost:8000/search?categoryId=0';
+                window.location.href='http://localhost:8000/search?categoryId=0';
             },
             error: error => {
                 console.log(error);
@@ -293,7 +293,7 @@ class PostService {
 
         if(responseData == null) {
             alert("존재하지 않는 게시글입니다.");
-            window.location.href='http://www.localhost:8000/';
+            window.location.href='http://localhost:8000/';
         }
 
         if(principalData != null) {
@@ -685,7 +685,7 @@ class ComponentEvent {
         const modifyButton = document.querySelector(".modify-button");
         const deleteButton = document.querySelector(".delete-button");
         modifyButton.onclick = () => {
-            window.location.href=`http://www.localhost:8000/post/modify/${tourId}`;
+            window.location.href=`http://localhost:8000/post/modify/${tourId}`;
         }
 
         deleteButton.onclick = () => {

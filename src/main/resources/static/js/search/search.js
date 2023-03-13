@@ -1,11 +1,13 @@
 window.onload = () => {
     SearchService.getInstance().loadSearchResult();
     SearchService.getInstance().getTags();
+    SearchService.getInstance().loadPostRegisterButton();
 
     ComponentEvent.getInstance().clickSearchItem();
     ComponentEvent.getInstance().clickOrderButtons();
     ComponentEvent.getInstance().clickSearchButton();
     ComponentEvent.getInstance().clickTagButton();
+    
 
     HeaderService.getInstance().loadHeader();
     HeaderService.getInstance().Categoryload();
@@ -277,9 +279,24 @@ class SearchService {
                 }
             }
         })
+    }
 
-        
-
+    loadPostRegisterButton() {
+        let principalData = PrincipalApi.getInstance().getPrincipal();
+        console.log(principalData);
+        if(principalData == null) {
+            return;
+        }
+        principalData.authorities.forEach(authority => {
+            if(authority.authority == "ROLE_WRITER") {
+                let postRegister = document.querySelector(".post-register");
+                postRegister.innerHTML += `
+                    <a href="http://localhost:8000/post/register" class="post-register-button">
+                        글쓰기
+                    </a>
+                `;
+            }
+        });
     }
 }
 // -----------------------------------------

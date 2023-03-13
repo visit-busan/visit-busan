@@ -255,6 +255,22 @@ span {
   padding: 5px 20px;
 }
 
+.post-register {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.post-register-button {
+  width: 60px;
+  height: 30px;
+  padding: 5px;
+  border: 1px solid #dbdbdbdb;
+
+  margin-top: 5px;
+  margin-right: 20px;
+}
+
 .page-controller {
   margin: 0 auto;
 
