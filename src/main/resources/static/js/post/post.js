@@ -284,7 +284,6 @@ class PostService {
             tourId = id;
         }
 
-        principalData = PrincipalApi.getInstance().getPrincipal();
         
         const responseData = PostApi.getInstance().getPost();
         console.log(principalData);
@@ -295,6 +294,8 @@ class PostService {
             alert("존재하지 않는 게시글입니다.");
             window.location.href='http://localhost:8000/';
         }
+
+        principalData = PrincipalApi.getInstance().getPrincipal();
 
         if(principalData != null) {
             let authorityFlag = false;

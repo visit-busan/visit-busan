@@ -51,8 +51,8 @@ let mainImgObj = {
 }
 
 let tagList = new Array();
-let tagIdList = new Array();
 
+let tagIdList = new Array();
 // -----------------------------------------
 //                   APIs
 // -----------------------------------------
@@ -284,12 +284,14 @@ class RegisterService {
                 tagList.push(tagIdList[index]);
             }
         });
+
         RegisterApi.getInstance().registerPost();
         if(tagList.length > 0) {
             RegisterApi.getInstance().registerPostTags();
         } else {
             alert("태그 등록 없이 게시글 등록.");
         }
+        
         if(thumbnailFormFlag) {
             if(thumbnailObj.files[0] == null) {
                 alert("썸네일 이미지가 없습니다!");
