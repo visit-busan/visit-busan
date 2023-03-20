@@ -21,6 +21,7 @@ import java.util.List;
  *  내용 :  게시글 관련 RestController
  *  작성일 : 2023.03.03
  *******************************************/
+@Api(tags = {"게시글,리뷰,평점관련 API"})
 @RestController
 @RequiredArgsConstructor
 @Api(tags = {"게시글,리뷰,평점관련 API"})

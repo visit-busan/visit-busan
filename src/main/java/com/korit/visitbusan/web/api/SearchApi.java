@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
  *  내용 :  검색을 위한 Api
  *  작성일 : 2023.03.09
  *******************************************/
+@Api(tags = {"검색기능 API"})
 @RestController
 @Api(tags = {"검색관련 API"})
 @RequestMapping("/api/search")

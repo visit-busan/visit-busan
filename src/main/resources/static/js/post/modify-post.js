@@ -156,7 +156,7 @@ class ModifyApi {
         $.ajax({
             async: false,
             type: "post",
-            url: `http://localhost:8000/api/post/modify/${modifyObj.tourId}/thumbnail`,
+            url: `/api/post/modify/${modifyObj.tourId}/thumbnail`,
             encType: "multipart/form-data",
             contentType: false,
             processData: false,
@@ -174,7 +174,7 @@ class ModifyApi {
         $.ajax({
             async: false,
             type: "post",
-            url: `http://localhost:8000/api/post/modify/${modifyObj.tourId}/thumbnail/link`,
+            url: `/api/post/modify/${modifyObj.tourId}/thumbnail/link`,
             contentType: 'application/json',
             dataType:'json',
             data: JSON.stringify({
@@ -192,14 +192,14 @@ class ModifyApi {
         $.ajax({
             async: false,
             type: "post",
-            url: `http://localhost:8000/api/post/modify/${modifyObj.tourId}/mainimg`,
+            url: `/api/post/modify/${modifyObj.tourId}/mainimg`,
             encType: "multipart/form-data",
             contentType: false,
             processData: false,
             data: mainImgObj.formData,
             dataType: 'json',
             success: response => {
-                window.location.href=`http://localhost:8000/post?tourId=${modifyObj.tourId}`;
+                window.location.href=`/post?tourId=${modifyObj.tourId}`;
             },
             error: error => {
                 console.log(error);
@@ -211,14 +211,14 @@ class ModifyApi {
         $.ajax({
             async: false,
             type: "post",
-            url: `http://localhost:8000/api/post/modify/${modifyObj.tourId}/mainimg/link`,
+            url: `/api/post/modify/${modifyObj.tourId}/mainimg/link`,
             contentType: 'application/json',
             dataType:'json',
             data: JSON.stringify({
                 "link" : mainImageUrl
             }),
             success: response => {
-                window.location.href=`http://localhost:8000/post?tourId=${modifyObj.tourId}`;
+                window.location.href=`/post?tourId=${modifyObj.tourId}`;
             },
             error: error => {
                 console.log(error);
@@ -298,7 +298,7 @@ class ModifyService {
 
         if(responseData == null) {
             alert("존재하지 않는 게시글입니다.");
-            window.location.href='http://localhost:8000/';
+            window.location.href='/';
         }
         
         if(responseData.data.thumbnailImage != null) {
@@ -345,10 +345,10 @@ class ModifyService {
         // `http://localhost:8000/image/book/${responseData.bookImage.saveName}`;
         
         if(thumbnailFormFlag && responseData.data.thumbnailImage != null) {
-            thumbnail.src = `http://localhost:8000/image/${responseData.data.thumbnailImage}`;
+            thumbnail.src = `/image/${responseData.data.thumbnailImage}`;
         }
         if(mainImageFormFlag && responseData.data.mainImage != null) {
-            mainImage.src = `http://localhost:8000/image/${responseData.data.mainImage}`;
+            mainImage.src = `/image/${responseData.data.mainImage}`;
         }
 
         mainTitle.value = responseData.data.title;

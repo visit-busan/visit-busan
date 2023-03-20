@@ -149,7 +149,7 @@ class SearchService {
                 categoryContainer.innerHTML = `
                 <i class="fa-solid fa-house home-nth"></i>
                 <i class="home-nth">></i>
-                <a href="http://localhost:8000/search?categoryId=0" class="home-nth">부산에가면</a>
+                <a href="/search?categoryId=0" class="home-nth">부산에가면</a>
                 <i class="home-nth">></i>
                 <a href="#" class="home-nth">${categoryName.data}</a>
                 `;
@@ -166,7 +166,7 @@ class SearchService {
             searchContent.innerHTML += `
             <div class="search-item">
                 <textarea class="result-id" readonly style="display:none;">${data.tourId}</textarea>
-                <img src="${data.thumbnailImage != null ? data.thumbnailImage.indexOf("http") < 0 ? 'http://localhost:8000/image/' + data.thumbnailImage : data.thumbnailImage : ''}" alt="" class="search-img" />
+                <img src="${data.thumbnailImage != null ? data.thumbnailImage.indexOf("http") < 0 ? '/image/' + data.thumbnailImage : data.thumbnailImage : ''}" alt="" class="search-img" />
                 <h2 class="search-name">${data.title}</h2>
                 <div class="info-container">
                     <p class="view"><i class="fa-regular fa-eye"></i> ${data.viewCount}</p>
@@ -293,7 +293,7 @@ class SearchService {
             if(authority.authority == "ROLE_WRITER") {
                 let postRegister = document.querySelector(".post-register");
                 postRegister.innerHTML += `
-                    <a href="http://localhost:8000/post/register" class="post-register-button">
+                    <a href="/post/register" class="post-register-button">
                         글쓰기
                     </a>
                 `;
@@ -318,7 +318,7 @@ class ComponentEvent {
         let searchItems = document.querySelectorAll(".search-item");
         searchItems.forEach(item => {
             item.onclick = () => {
-                window.location.href=`http://localhost:8000/post?tourId=${item.children[0].value}`;
+                window.location.href=`/post?tourId=${item.children[0].value}`;
             }
         });
     }

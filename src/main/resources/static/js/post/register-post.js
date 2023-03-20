@@ -104,7 +104,7 @@ class RegisterApi {
         $.ajax({
             async: false,
             type: "post",
-            url: `http://localhost:8000/api/post/register/${registerObj.tourId}/thumbnail`,
+            url: `/api/post/register/${registerObj.tourId}/thumbnail`,
             encType: "multipart/form-data",
             contentType: false,
             processData: false,
@@ -122,7 +122,7 @@ class RegisterApi {
         $.ajax({
             async: false,
             type: "post",
-            url: `http://localhost:8000/api/post/register/${registerObj.tourId}/thumbnail/link`,
+            url: `/api/post/register/${registerObj.tourId}/thumbnail/link`,
             contentType: 'application/json',
             dataType:'json',
             data: JSON.stringify({
@@ -140,14 +140,14 @@ class RegisterApi {
         $.ajax({
             async: false,
             type: "post",
-            url: `http://localhost:8000/api/post/register/${registerObj.tourId}/mainimg`,
+            url: `/api/post/register/${registerObj.tourId}/mainimg`,
             encType: "multipart/form-data",
             contentType: false,
             processData: false,
             data: mainImgObj.formData,
             dataType: 'json',
             success: response => {
-                window.location.href=`http://localhost:8000/post?tourId=${registerObj.tourId}`;
+                window.location.href=`/post?tourId=${registerObj.tourId}`;
             },
             error: error => {
                 console.log(error);
@@ -159,14 +159,14 @@ class RegisterApi {
         $.ajax({
             async: false,
             type: "post",
-            url: `http://localhost:8000/api/post/register/${registerObj.tourId}/mainimg/link`,
+            url: `/api/post/register/${registerObj.tourId}/mainimg/link`,
             contentType: 'application/json',
             dataType:'json',
             data: JSON.stringify({
                 "link" : mainImageUrl
             }),
             success: response => {
-                window.location.href=`http://localhost:8000/post?tourId=${registerObj.tourId}`;
+                window.location.href=`/post?tourId=${registerObj.tourId}`;
             },
             error: error => {
                 console.log(error);
