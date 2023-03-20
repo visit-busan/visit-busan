@@ -253,7 +253,7 @@ class PostApi {
             dataType: 'json',
             success: response => {
                 alert("게시글 삭제 완료!");
-                window.location.href='http://localhost:8000/search?categoryId=0';
+                window.location.href='/search?categoryId=0';
             },
             error: error => {
                 console.log(error);
@@ -292,7 +292,7 @@ class PostService {
 
         if(responseData == null) {
             alert("존재하지 않는 게시글입니다.");
-            window.location.href='http://localhost:8000/';
+            window.location.href='/';
         }
 
         principalData = PrincipalApi.getInstance().getPrincipal();
@@ -342,7 +342,7 @@ class PostService {
         categories.data.forEach(category => {
             if(category.categoryId == responseData.data.categoryId) {
                 categoryNavigator.innerHTML += `
-                <a href="http://localhost:8000/search?categoryId=${category.categoryId}"><b>${category.categoryName}</b></a>
+                <a href="/search?categoryId=${category.categoryId}"><b>${category.categoryName}</b></a>
                 `;
             }
         });
@@ -364,7 +364,7 @@ class PostService {
             if(responseData.data.mainImage.indexOf("mainimage") < 0) 
                 mainImg.src = `${responseData.data.mainImage}`;
             else 
-                mainImg.src = `http://localhost:8000/image/${responseData.data.mainImage}`;
+                mainImg.src = `/image/${responseData.data.mainImage}`;
         }
 
         if(responseData.data.tellNumber == "") 
@@ -440,13 +440,13 @@ class PostService {
                             <textarea class="review-content" readonly>${data.reviewComment}</textarea>
                             <div class="review-img-container">
                                 ${data.commentDtl[0].saveName != null ?
-                                    '<img src="http://localhost:8000/image/review/' + data.commentDtl[0].saveName + '"alt="">' : ""}
+                                    '<img src="/image/review/' + data.commentDtl[0].saveName + '"alt="">' : ""}
         
                                 ${data.commentDtl[0].saveName != null && data.commentDtl.length > 1 ?
-                                    '<img src="http://localhost:8000/image/review/' + data.commentDtl[1].saveName + '"alt="">' : ""}
+                                    '<img src="/image/review/' + data.commentDtl[1].saveName + '"alt="">' : ""}
         
                                 ${data.commentDtl[0].saveName != null && data.commentDtl.length > 2 ?
-                                    '<img src="http://localhost:8000/image/review/' + data.commentDtl[2].saveName + '"alt="">' : ""}
+                                    '<img src="/image/review/' + data.commentDtl[2].saveName + '"alt="">' : ""}
                             </div>
                         </div>
                     </div>
@@ -467,13 +467,13 @@ class PostService {
                             <textarea class="review-content" readonly>${data.reviewComment}</textarea>
                             <div class="review-img-container">
                                 ${data.commentDtl[0].saveName != null ?
-                                    '<img src="http://localhost:8000/image/review/' + data.commentDtl[0].saveName + '"alt="">' : ""}
+                                    '<img src="/image/review/' + data.commentDtl[0].saveName + '"alt="">' : ""}
         
                                 ${data.commentDtl[0].saveName != null && data.commentDtl.length > 1 ?
-                                    '<img src="http://localhost:8000/image/review/' + data.commentDtl[1].saveName + '"alt="">' : ""}
+                                    '<img src="/image/review/' + data.commentDtl[1].saveName + '"alt="">' : ""}
         
                                 ${data.commentDtl[0].saveName != null && data.commentDtl.length > 2 ?
-                                    '<img src="http://localhost:8000/image/review/' + data.commentDtl[2].saveName + '"alt="">' : ""}
+                                    '<img src="/image/review/' + data.commentDtl[2].saveName + '"alt="">' : ""}
                             </div>
                         </div>
                     </div>
@@ -686,7 +686,7 @@ class ComponentEvent {
         const modifyButton = document.querySelector(".modify-button");
         const deleteButton = document.querySelector(".delete-button");
         modifyButton.onclick = () => {
-            window.location.href=`http://localhost:8000/post/modify/${tourId}`;
+            window.location.href=`/post/modify/${tourId}`;
         }
 
         deleteButton.onclick = () => {

@@ -36,6 +36,12 @@ public class PostService {
     //tourId로 게시글 Read ----------------------------------------------------------
     public PostRespDto getPostByTourId(int tourId) {
         TourMst tourMst = postRepository.getPost(tourId);
+        if(tourMst == null) {
+            Map<String, String> errorMap = new HashMap<String, String>();
+            errorMap.put("UnknownPost", "게시글Id를 확인해주세요");
+            throw new CustomUnknownPostException(errorMap);
+        }
+
         PostRespDto postRespDto = new PostRespDto(tourMst.getTourId(),
                 tourMst.getCategoryId(),
                 tourMst.getUserId(),

@@ -4,6 +4,7 @@ import com.korit.visitbusan.aop.annotation.ParamsAspect;
 import com.korit.visitbusan.aop.annotation.ValidAspect;
 import com.korit.visitbusan.service.PostService;
 import com.korit.visitbusan.web.dto.*;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -20,6 +21,7 @@ import java.util.List;
  *  내용 :  게시글 관련 RestController
  *  작성일 : 2023.03.03
  *******************************************/
+@Api(tags = {"게시글,리뷰,평점관련 API"})
 @RestController
 @RequiredArgsConstructor
 public class PostApi {
