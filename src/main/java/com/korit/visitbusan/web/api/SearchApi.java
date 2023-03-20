@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.*;
  *******************************************/
 @Api(tags = {"검색기능 API"})
 @RestController
-@Api(tags = {"검색관련 API"})
 @RequestMapping("/api/search")
 @RequiredArgsConstructor
 public class SearchApi {
