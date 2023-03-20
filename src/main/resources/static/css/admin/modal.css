@@ -8,7 +8,7 @@
     background: rgba(0, 0, 0, 0.5);
 }
 
-.modal-window-register {
+.modal-window-register, .modal-window-modify {
     display: none;
     overflow-y: initial;
     position: fixed;
@@ -20,20 +20,6 @@
     border-radius: 10px;
     background: white;
 }
-
-.modal-window-modify {
-    display: none;
-    overflow-y: initial;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    z-index: 2;
-    transform: translate(-50%, -50%);
-    width: 700px;
-    border-radius: 10px;
-    background: white;
-}
-
 
 .modal-header {
     display: flex;
@@ -68,30 +54,30 @@
     max-height: 700px;
 }
 
-.modal-body form {
+.modal-body>div {
     padding: 10px;
 }
 
-.modal-body form table{
+.modal-body>div table{
     width: 100%;
     border: 1px solid #101010;
     border-collapse: collapse;
 }
 
-.modal-body form table th{
+.modal-body>div table th{
     border: 1px solid #202020;
     background-color: #b1b1b1;
     width: 100px;
     border-radius: 0;
 }
 
-.modal-body form table td{
+.modal-body>div table td{
     padding: 10px;
     vertical-align: middle;
     border: 1px solid #202020;
 }
 
-.modal-body form table input {
+.modal-body>div table input {
     display: block;
     width: 100%;
     font-size: 14px;
@@ -102,13 +88,13 @@
     padding: 7px;
 }
 
-.modal-body form table select {
+.modal-body>div table select {
     width: 100%;
     height: auto;
     padding: 8px;
 }
 
-.modal-body form table img {
+.modal-body>div table img {
     /* display: block; */
     max-width: 30%;
     max-height: 30%;
@@ -137,4 +123,10 @@
     padding: 5px 10px;
     color: white;
     background-color:  #202020;
+}
+
+.error-message {
+    margin-left: 5px;
+    color: red;
+    font-size: 12px;
 }

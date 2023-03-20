@@ -1,6 +1,7 @@
 package com.korit.visitbusan.repository.admin;
 
 import com.korit.visitbusan.entity.admin.AdminCategoryMst;
+import com.korit.visitbusan.entity.admin.AdminCategoryView;
 import com.korit.visitbusan.entity.admin.AdminTagMst;
 import com.korit.visitbusan.web.dto.admin.*;
 import org.apache.ibatis.annotations.Mapper;
@@ -37,6 +38,9 @@ public interface AdminTagRepository {
 
     /*태그 이름으로 데이터 조회*/
     public AdminTagMst findTagByTagName(String tagName);
+
+    /*태그 아이디로 데이터 조회*/
+    public AdminTagMst findTagByTagId(int tagId);
 
     /*태그 등록*/
     public int registerTag(AdminTagReqDto adminTagReqDto);

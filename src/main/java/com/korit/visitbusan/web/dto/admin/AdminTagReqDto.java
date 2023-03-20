@@ -6,6 +6,7 @@ import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 public class AdminTagReqDto {
@@ -13,11 +14,13 @@ public class AdminTagReqDto {
     @ApiModelProperty(value = "관광지 태그 ID", example = "1")
     private int tagId;
 
-    @ApiModelProperty(value = "카테고리명", example = "명소", required = true)
-    @NotBlank
+    @ApiModelProperty(value = "카테고리 ID", example = "1")
+    private int categoryId;
+
+    @ApiModelProperty(value = "카테고리명", example = "명소")
     private String categoryName;
 
-    @ApiModelProperty(value = "태그명", example = "자연")
+    @ApiModelProperty(value = "태그명", example = "자연", required = true)
     @NotBlank
     private String tagName;
 
@@ -25,10 +28,10 @@ public class AdminTagReqDto {
     private int userId;
 
     @ApiModelProperty(value = "등록일", example = "2023-03-02")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-mm-dd", timezone = "Asia/Seoul")
-    private LocalDate createDate;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
+    private LocalDateTime createDate;
 
     @ApiModelProperty(value = "수정일", example = "2023-03-02")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-mm-dd", timezone = "Asia/Seoul")
-    private LocalDate updateDate;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
+    private LocalDateTime updateDate;
 }

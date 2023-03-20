@@ -1,8 +1,10 @@
 package com.korit.visitbusan.service.admin;
 
 import com.korit.visitbusan.entity.admin.AdminCategoryMst;
+import com.korit.visitbusan.entity.admin.AdminCategoryView;
 import com.korit.visitbusan.exception.CustomValidationException;
 import com.korit.visitbusan.repository.admin.AdminCategoryRepository;
+import com.korit.visitbusan.web.dto.ReviewRespDto;
 import com.korit.visitbusan.web.dto.admin.AdminCategoryReqDto;
 import com.korit.visitbusan.web.dto.admin.AdminDeleteCategoriesReqDto;
 import com.korit.visitbusan.web.dto.admin.AdminSearchCategoryListDto;
@@ -38,6 +40,14 @@ public class AdminCategoryService {
     public List<AdminCategoryMst> searchCategory(AdminSearchCategoryReqDto adminSearchCategoryReqDto) {
         adminSearchCategoryReqDto.setIndex();
         return adminCategoryRepository.searchCategory(adminSearchCategoryReqDto);
+    }
+
+    public List<AdminCategoryView> getCategories() {
+        return adminCategoryRepository.findAllCategory();
+    }
+
+    public AdminCategoryMst getCategoryByCategoryId(int categoryId) {
+        return adminCategoryRepository.findCategoryByCategoryId(categoryId);
     }
 
     public void registerCategory(AdminCategoryReqDto adminCategoryReqDto) {

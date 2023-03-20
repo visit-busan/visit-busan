@@ -1,73 +1,55 @@
 window.onload = () => {
-    CategoryService.getInstance().loadCategoryList();
+    TagService.getInstance().loadTagList();
+    TagService.getInstance().loadCategories();
     ComponentEvent.getInstance().addClickEventSearchButton();
+    ComponentEvent.getInstance().addClickEventDeleteOne();
     ComponentEvent.getInstance().addClickEventDeleteAll();
     ComponentEvent.getInstance().addClickEventDeleteCheckAll();
     ComponentEvent.getInstance().addClickEventRegisterButton();
     ComponentEvent.getInstance().addClickEventModalRegisterButton();
     ComponentEvent.getInstance().addClickEventModalRegisterCancelButton();
-    ComponentEvent.getInstance().addClickEventModifyButtons();
+    ComponentEvent.getInstance().addClickEventModifyButton();
     ComponentEvent.getInstance().addClickEventModalModifyButton();
     ComponentEvent.getInstance().addClickEventModalModifyCancelButton();
-    ComponentEvent.getInstance().addClickEventDeleteOne();
 }
 
 const searchObj = {
     page: 1,
+    categoryName : "",
     searchValue : "",
     limit: "Y",
     count: 20
 }
 
-const categoryObj = {
-    categoryId: "",
+const tagObj = {
+    tagId: "",
     categoryName: "",
+    tagName: "",
     userId: "",
     createDate: "",
     updateDate: "",
 }
 
-// 현재시간을 가져오는 Date 객체 생성
-const now = new Date();
-
-// 각 요소별로 날짜와 시간을 추출
-let year = now.getFullYear();
-let month = now.getMonth() + 1;
-let day = now.getDate();
-let hour = now.getHours();
-let minute = now.getMinutes();
-let second = now.getSeconds();
-
-// 월, 일, 시, 분, 초의 자릿수가 1자리면 앞에 0을 추가
-if (month < 10) {month = "0" + month};
-if (day < 10) {day = "0" + day};
-if (hour < 10) {hour = "0" + hour};
-if (minute < 10) {minute = "0" + minute};
-if (second < 10) {second = "0" + second};
-
-// 날짜와 시간을 문자열로 합쳐서 "yyyy-MM-dd HH:mm:ss" pattern에 맞게 출력
-let formattedDate = year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + second;
-
-
 const principalData = PrincipalApi.getInstance().getPrincipal();
 
-class CategoryApi {
+class TagApi {
     static #instance = null;
     static getInstance() {
         if(this.#instance == null) {
-            this.#instance = new CategoryApi();
+            this.#instance = new TagApi();
         }
         return this.#instance;
     }
 
-    getCategoryTotalCount(searchObj) {
+    getTagTotalCount(searchObj) {
         let returnData = null;
 
         $.ajax({
             async: false,
             type: "get",
-            url: "http://localhost:8000/api/admin/category/totalcount",
+            url: "http://localhost:8000/api/admin/tag/totalcount",
             data: {
+                "categoryName" : searchObj.categoryName,
                 "searchValue" : searchObj.searchValue
             },
             dataType: "json",
@@ -83,13 +65,13 @@ class CategoryApi {
         return returnData;
     }
 
-    getCategoryList(searchObj) {
+    getTagList(searchObj) {
         let returnData = null;
 
         $.ajax({
             async: false,
             type: "get",
-            url: "http://localhost:8000/api/admin/category",
+            url: "http://localhost:8000/api/admin/tags",
             data: searchObj,
             dataType: "json",
             success: response => {
@@ -100,16 +82,36 @@ class CategoryApi {
                 console.log(error);
             }
         })
+
         return returnData;
     }
 
-    getCategoryListByCategoryId(categoryId) {
+    getCategories() {
         let returnData = null;
 
         $.ajax({
             async: false,
             type: "get",
-            url: `http://localhost:8000/api/admin/category/${categoryId}`,
+            url: "http://localhost:8000/api/admin/categories",
+            dataType: "json",
+            success: response => {
+                console.log(response);
+                returnData = response.data;
+            },
+            error : error => {
+                console.log(error);
+            }
+        });
+        return returnData;
+    }
+
+    getTagListbytagId(tagId) {
+        let returnData = null;
+
+        $.ajax({
+            async: false,
+            type: "get",
+            url: `http://localhost:8000/api/admin/tag/${tagId}`,
             dataType: "json",
             success: response => {
                 console.log(response);
@@ -119,25 +121,26 @@ class CategoryApi {
                 console.log(error);
             }
         })
+
         return returnData;
     }
 
-    registerCategory() {
+    registerTag() {
         let successFlag = false;
 
         $.ajax({
             async: false,
             type: "post",
-            url: "http://127.0.0.1:8000/api/admin/category",
+            url: "http://127.0.0.1:8000/api/admin/tag",
             contentType: "application/json",
-            data: JSON.stringify(categoryObj),
+            data: JSON.stringify(tagObj),
             dataType: "json",
             success: response => {
                 successFlag = true;
             },
             error: error => {
                 console.log(error);
-                CategoryService.getInstance().setRegisterErrors(error.responseJSON.data);
+                TagService.getInstance().setRegisterErrors(error.responseJSON.data);
             }
 
         });
@@ -145,35 +148,35 @@ class CategoryApi {
         return successFlag;
     }
 
-    modifyCategory(categoryId) {
+    modifyTag(tagId) {
         let successFlag = false;
 
         $.ajax({
             async: false,
             type: "put",
-            url: `http://localhost:8000/api/admin/category/${categoryId}`,
+            url: `http://localhost:8000/api/admin/tag/${tagId}`,
             contentType: "application/json",
-            data: JSON.stringify(categoryObj),
+            data: JSON.stringify(tagObj),
             dataType: "json",
             success: response => {
                 successFlag = true;
             },
             error: error => {
                 console.log(error);
-                CategoryService.getInstance().setModifyErrors(error.responseJSON.data);
+                TagService.getInstance().setModifyErrors(error.responseJSON.data);
             }
         })
 
         return successFlag;
     }
 
-    deleteCategory(categoryId) {
+    deleteTag(tagId) {
         let returnFlag = false;
 
         $.ajax({
             async: false,
             type: "delete",
-            url: `http://localhost:8000/api/admin/category/${categoryId}`,
+            url: `http://localhost:8000/api/admin/tag/${tagId}`,
             dataType: "json",
             success: response => {
                 returnFlag = true;
@@ -186,17 +189,17 @@ class CategoryApi {
         return returnFlag;
     }
 
-    deleteCategories(deleteArray) {
+    deleteTags(deleteArray) {
         let returnFlag = false;
 
         $.ajax({
             async: false,
             type: "delete",
-            url: `http://localhost:8000/api/admin/categories`,
+            url: `http://localhost:8000/api/admin/tags`,
             contentType: "application/json",
             data: JSON.stringify(
                 {
-                    categoryIds: deleteArray
+                    tagIds: deleteArray
                 }
             ),
             dataType: "json",
@@ -212,31 +215,30 @@ class CategoryApi {
     }
 }
 
-class CategoryService {
+class TagService {
     static #instance = null;
     static getInstance() {
         if(this.#instance == null) {
-            this.#instance = new CategoryService();
+            this.#instance = new TagService();
         }
         return this.#instance;
     }
 
-    loadCategoryList() {
-        const responseData = CategoryApi.getInstance().getCategoryList(searchObj);
+    loadTagList() {
+        const responseData = TagApi.getInstance().getTagList(searchObj);
         const checkAll = document.querySelector(".delete-checkall");
         checkAll.checked = false;
 
-        const categoryListBody = document.querySelector(".content-table tbody");
-        categoryListBody.innerHTML = "";
-
-        // console.log(responseData);
+        const tagListBody = document.querySelector(".content-table tbody");
+        tagListBody.innerHTML = "";
 
         responseData.forEach((data, index) => {
-            categoryListBody.innerHTML += `
+            tagListBody.innerHTML += `
                 <tr>
                     <td><input type="checkbox" class="delete-checkbox"></td>
-                    <td class="category-id">${data.categoryId}</td>
+                    <td class="tag-id">${data.tagId}</td>
                     <td>${data.categoryName}</td>
+                    <td>${data.tagName}</td>
                     <td>${data.username}</td>
                     <td>${data.updateDate}</td>
                     <td>
@@ -249,27 +251,71 @@ class CategoryService {
             `;
         });
 
-        this.loadCategoryNumberList();
+        this.loadTagNumberList();
         ComponentEvent.getInstance().addClickEventDeleteCheckbox();
     }
 
-    loadModifyCategoryList(categoryId) {
-        const responseData = CategoryApi.getInstance().getCategoryListByCategoryId(categoryId);
-        const modalModifyCategory = document.querySelectorAll(".modify-category");
-        // console.log(responseData);
-        modalModifyCategory[0].textContent = responseData.categoryId;
-        modalModifyCategory[1].value = responseData.categoryName;
-        modalModifyCategory[2].value = responseData.username;
-        modalModifyCategory[3].textContent = responseData.createDate;
-        modalModifyCategory[4].textContent = responseData.updateDate;
+    loadCategories() {
+        const responseData = TagApi.getInstance().getCategories();
+
+        const categorySelect = document.querySelector(".category-select");
+        categorySelect.innerHTML = `<option value="">전체조회</option>`;
+
+        responseData.forEach(data => {
+            categorySelect.innerHTML += `
+                <option value="${data.categoryId}">${data.categoryName}</option>
+            `;
+        });
     }
 
-    setCategoryRegisterValues() {
-        const registerCategoryInputs = document.querySelectorAll(".modal-form-register input");
-        // console.log(registerCategoryInputs[0].value);
-        // console.log(principalData.user.userId);
-        categoryObj.userId = principalData.userMst.userId;
-        categoryObj.categoryName = registerCategoryInputs[0].value;
+    loadModalCategories() {
+        const responseData = TagApi.getInstance().getCategories();
+
+        const categorySelect = document.querySelectorAll(".register-tag");
+        categorySelect[0].innerHTML = `<option value="">전체조회</option>`;
+
+        responseData.forEach(data => {
+            categorySelect.innerHTML += `
+                <option value="${data.categoryId}">${data.categoryName}</option>
+            `;
+        });
+    }
+
+    loadModifyTagList(tagId) {
+        const responseData = TagApi.getInstance().getTagListbytagId(tagId);
+        const categoryData = TagApi.getInstance().getCategories();
+        const modalModifyTag = document.querySelectorAll(".modify-tag");
+        // console.log(responseData);
+        // if(responseData == null) {
+        //     alert("해당 태그 코드는 등록되지 않은 코드입니다.")
+        //     history.back();
+        //     return;
+        // }
+
+        modalModifyTag[0].textContent = responseData.tagId;
+        modalModifyTag[1].innerHTML = `<option value="${responseData.categoryId}">${responseData.categoryName}</option>`;
+
+        categoryData.forEach(data => {
+            // console.log(data.categoryName != responseData.categoryName);
+            if(data.categoryName != responseData.categoryName){
+                modalModifyTag[1].innerHTML += `
+                    <option value="${data.categoryId}">${data.categoryName}</option>
+                `;
+            }
+        });
+        modalModifyTag[2].value = responseData.tagName;
+        modalModifyTag[3].value = responseData.username;
+        modalModifyTag[4].textContent = responseData.createDate;
+        modalModifyTag[5].textContent = responseData.updateDate;
+    }
+
+    setTagRegisterValues() {
+        const registerTagInputs = document.querySelectorAll(".modal-form-register input");
+        // console.log(registerTagInputs[0].value);
+        // console.log(principalData.userMst.userId);
+        tagObj.userId = principalData.userMst.userId;
+        tagObj.categoryName = registerTagInputs[0].value;
+        tagObj.tagName = registerTagInputs[1].value;
     }
 
     setRegisterErrors(errors) {
@@ -277,7 +323,7 @@ class CategoryService {
         this.clearRegisterErrors();
 
         Object.keys(errors).forEach(key => {
-            if(key == "categoryName") {
+            if(key == "tagName") {
                 errorMessages[0].innerHTML = errors[key];
             }
         })
@@ -290,15 +336,15 @@ class CategoryService {
         })
     }
 
-    setCategoryModifyValues() {
-        const modifyCategoryInputs = document.querySelectorAll(".modify-category");
+    setTagModifyValues() {
+        const modifyTagInputs = document.querySelectorAll(".modify-tag");
         // console.log(modifyCategoryInputs[0].value);
         // console.log(responseData.updateDate);
         // console.log(principalData.userMst.userId);
-        categoryObj.categoryId = modifyCategoryInputs[0].textContent;
-        categoryObj.categoryName = modifyCategoryInputs[1].value;
-        categoryObj.updateDate = formattedDate;
-        categoryObj.userId = principalData.userMst.userId;
+        tagObj.tagId = modifyTagInputs[0].textContent;
+        tagObj.categoryId = modifyTagInputs[1].value;
+        tagObj.tagName = modifyTagInputs[2].value;
+        tagObj.userId = principalData.userMst.userId;
     }
 
     setModifyErrors(errors) {
@@ -306,7 +352,7 @@ class CategoryService {
         this.clearModifyErrors();
 
         Object.keys(errors).forEach(key => {
-            if(key == "categoryName") {
+            if(key == "tagName") {
                 errorMessages[1].innerHTML = errors[key];
             }
         })
@@ -319,26 +365,27 @@ class CategoryService {
         })
     }
 
-    removeCategory(categoryId) {
-        let successFlag = CategoryApi.getInstance().deleteCategory(categoryId);
+    removeTag(tagId) {
+        let successFlag = TagApi.getInstance().deleteTag(tagId);
         if(successFlag) {
             searchObj.page = 1;
-            this.loadCategoryList();
+            this.loadTagList();
         }
     }
 
-    removeCategories(deleteArray) {
-        let successFlag = CategoryApi.getInstance().deleteCategories(deleteArray);
+    removeTags(deleteArray) {
+        let successFlag = TagApi.getInstance().deleteTags(deleteArray);
         if(successFlag) {
             searchObj.page = 1;
-            this.loadCategoryList();
+            this.loadTagList();
         }
     }
 
-    loadCategoryNumberList() {
+
+    loadTagNumberList() {
         const pageController = document.querySelector(".page-controller");
 
-        const totalCount = CategoryApi.getInstance().getCategoryTotalCount(searchObj);
+        const totalCount = TagApi.getInstance().getTagTotalCount(searchObj);
         const maxPageNumber = totalCount % searchObj.count == 0 
                             ? Math.floor(totalCount / searchObj.count) 
                             : Math.floor(totalCount / searchObj.count) + 1;
@@ -356,7 +403,7 @@ class CategoryService {
 
             preButton.onclick = () => {
                 searchObj.page--;
-                this.loadCategoryList();
+                this.loadTagList();
             }
         }
 
@@ -366,7 +413,7 @@ class CategoryService {
 
             nextButton.onclick = () => {
                 searchObj.page++;
-                this.loadCategoryList();
+                this.loadTagList();
             }
         }
 
@@ -389,7 +436,7 @@ class CategoryService {
             if(pageNumber != searchObj.page) {
                 button.onclick = () => {
                     searchObj.page = pageNumber;
-                    this.loadCategoryList();
+                    this.loadTagList();
                 }
             }
         });
@@ -406,13 +453,15 @@ class ComponentEvent {
     }
 
     addClickEventSearchButton() {
+        const categorySelect = document.querySelector(".category-select");
         const searchInput = document.querySelector(".search-input");
         const searchButton = document.querySelector(".search-button");
 
         searchButton.onclick = () => {
+            searchObj.categoryName = categorySelect.value;
             searchObj.searchValue = searchInput.value;
             searchObj.page = 1;
-            CategoryService.getInstance().loadCategoryList();
+            TagService.getInstance().loadTagList();
         }
 
         searchInput.onkeyup = () => {
@@ -430,6 +479,7 @@ class ComponentEvent {
         registerButton.onclick = () => {
             modal.style.display = "flex";
             modalRegisterWindow.style.display = "block";
+            TagService.getInstance().loadModalCategories();
         }
     }
 
@@ -439,14 +489,14 @@ class ComponentEvent {
         // console.log(modalRegisterInput);
 
         modalRegisterButton.onclick = () => {
-            CategoryService.getInstance().setCategoryRegisterValues();
-            const successFlag = CategoryApi.getInstance().registerCategory();
+            TagService.getInstance().setTagRegisterValues();
+            const successFlag = TagApi.getInstance().registerTag();
 
             if(!successFlag) {
                 return;
             }
 
-            CategoryService.getInstance().clearRegisterErrors();
+            TagService.getInstance().clearRegisterErrors();
             location.reload();
         }
 
@@ -455,7 +505,6 @@ class ComponentEvent {
                 modalRegisterButton.click();
             }
         }
-
     }
 
     addClickEventModalRegisterCancelButton() {
@@ -471,39 +520,40 @@ class ComponentEvent {
         }
     }
 
-    addClickEventModifyButtons() {
+    addClickEventModifyButton() {
         const modifyButtons = document.querySelectorAll(".modify-button");
-        const categoryIds = document.querySelectorAll(".category-id");
+        const tagIds = document.querySelectorAll(".tag-id");
         const modal = document.querySelector("#modal");
         const modalModifyWindow = document.querySelector(".modal-window-modify");
 
         modifyButtons.forEach((modifyButton, index) => {
             modifyButton.onclick = () => {
-                const categoryData = CategoryApi.getInstance().getCategoryListByCategoryId(categoryIds[index].textContent)
-                // console.log(categoryIds[index].textContent);
-                // console.log(categoryData);
+                const tagData = TagApi.getInstance().getTagListbytagId(tagIds[index].textContent);
+                // console.log(tagIds[index].textContent);
+                // console.log(tagData);
                 modal.style.display = "flex";
                 modalModifyWindow.style.display = "block";
-                CategoryService.getInstance().loadModifyCategoryList(categoryIds[index].textContent);
+                TagService.getInstance().loadModifyTagList(tagIds[index].textContent);                
             }
         })
     }
 
     addClickEventModalModifyButton() {
         const modalModifyButton = document.querySelector(".modal-modify-button");
-        const categoryContents = document.querySelectorAll(".modify-category");
+        const tagContents = document.querySelectorAll(".modify-tag");
 
         modalModifyButton.onclick = () => {
-            // console.log(categoryContents[0].textContent);
-            CategoryService.getInstance().setCategoryModifyValues();
-            const successFlag = CategoryApi.getInstance().modifyCategory(categoryContents[0].textContent);
+            console.log(tagContents[0].textContent);
+            TagService.getInstance().setTagModifyValues();
+            const successFlag = TagApi.getInstance().modifyTag(tagContents[0].textContent);
 
             if(!successFlag) {
                 return;
             }
 
-            CategoryService.getInstance().clearModifyErrors();
+            TagService.getInstance().clearModifyErrors();
             location.reload();
+
         }
     }
 
@@ -522,12 +572,12 @@ class ComponentEvent {
 
     addClickEventDeleteOne() {
         const deleteOne = document.querySelectorAll(".delete-one");
-        const categoryIds = document.querySelectorAll(".category-id");
+        const tagIds = document.querySelectorAll(".tag-id");
 
         deleteOne.forEach((button, index) => {
             button.onclick = () => {
                 if(confirm("정말로 삭제하시겠습니까?")){
-                    CategoryApi.getInstance().deleteCategory(categoryIds[index].textContent);
+                    TagApi.getInstance().deleteTag(tagIds[index].textContent);
                 }
                 location.reload();
             }
@@ -544,12 +594,12 @@ class ComponentEvent {
 
                 deleteCheckboxs.forEach((deleteCheckbox, index) => {
                     if(deleteCheckbox.checked) {
-                        const categoryIds = document.querySelectorAll(".category-id");
-                        deleteArray.push(categoryIds[index].textContent);
+                        const tagIds = document.querySelectorAll(".tag-id");
+                        deleteArray.push(tagIds[index].textContent);
                     }
                 });
 
-                CategoryApi.getInstance().deleteCategories(deleteArray);
+                TagApi.getInstance().deleteTags(deleteArray);
             }
             location.reload();
         }

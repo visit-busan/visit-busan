@@ -63,15 +63,16 @@
                             <button type="button" class="search-button">검색</button>
                         </div>
                     </div>
-                    <!-- 관광지 분류 등록 모달 -->
+                    <!-- 관광지 분류 모달, 기본 display:none-->
                     <div id="modal" class="modal-overlay">
+                    <!-- 관광지 분류 등록 모달 -->
                         <div class="modal-window-register">
                             <div class="modal-header">
                                 <h2 class="modal-title">관광지 분류 등록</h2>
                                 <button class="close-button">x</button>
                             </div>
                             <div class="modal-body">
-                                <form class="modal-form-register">
+                                <div class="modal-form-register">
                                     <table>
                                         <colgroup>
                                             <col>
@@ -80,28 +81,26 @@
                                         <tr>
                                             <th>카테고리명</th>
                                             <td >
-                                                <input type="text" class="register-category name" placeholder="관광지명을 입력해주세요." maxlength="20">
+                                                <input type="text" class="register-category" placeholder="관광지 분류명을 입력해주세요." maxlength="20">
                                                 <div class="error-message"></div>
                                             </td>
                                         </tr>
                                     </table>
-                                </form>
+                                </div>
                             </div>
                             <div class="modal-footer">
                                 <button class="modal-register-button">등록</button>
                                 <button class="modal-cancel-button">취소</button>
                             </div>
                         </div>                                            
-                    </div>
                     <!-- 관광지 분류 수정 모달 -->
-                    <div id="modal" class="modal-overlay">
                         <div class="modal-window-modify">
                             <div class="modal-header">
                                 <h2 class="modal-title">관광지 분류 수정</h2>
                                 <button class="close-button">x</button>
                             </div>
                             <div class="modal-body">
-                                <form class="modal-form-modify">
+                                <div class="modal-form-modify">
                                     <table>
                                         <colgroup>
                                             <col>
@@ -109,31 +108,31 @@
                                         </colgroup>
                                         <tr>
                                             <th>번호</th>
-                                            <td class="modify-category code" >1</td>
+                                            <td class="modify-category" >1</td>
                                         </tr>
                                         <tr>
                                             <th>관광지 분류명</th>
                                             <td >
-                                                <input type="text" class="modify-category name" placeholder="관광지명을 입력해주세요.">
+                                                <input type="text" class="modify-category" placeholder="관광지 분류명을 입력해주세요." maxlength="20">
                                                 <div class="error-message"></div>
                                             </td>
                                         </tr>
                                         <tr>
                                             <th>작성자</th>
                                             <td >
-                                                <input type="text" class="modify-category username" disabled>
+                                                <input type="text" class="modify-category" disabled>
                                             </td>
                                         </tr>
                                         <tr>
                                             <th>등록일</th>
-                                            <td class="modify-category createdate">2023-02-27 14:00:00</td>
+                                            <td class="modify-category">2023-02-27 14:00:00</td>
                                         </tr>
                                         <tr>
                                             <th>수정일</th>
-                                            <td class="modify-category updatedate" >2023-02-27 14:00:00</td>
+                                            <td class="modify-category" >2023-02-27 14:00:00</td>
                                         </tr>
                                     </table>
-                                </form>
+                                </div>
                             </div>
                             <div class="modal-footer">
                                 <button class="modal-modify-button">수정</button>

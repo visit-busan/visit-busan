@@ -20,6 +20,16 @@
         </if>
     </select>
 
+    <!--관광지 분류 view 전체 개수 불러오기-->
+    <select id="findAllCategory" resultType="com.korit.visitbusan.entity.admin.AdminCategoryView">
+        select
+            category_id as categoryId,
+            category_name as categoryName
+        from
+            tour_category
+    </select>
+
+    <!--카테고리 이름으로 관광지 분류 전체 불러오기-->
     <select id="findCategoryByCategoryName" resultType="com.korit.visitbusan.entity.admin.AdminCategoryMst">
         select
             tc.category_id as categoryId,
@@ -31,6 +41,20 @@
             tour_category tc left outer join user_mst um on (tc.user_id = um.user_id)
         where
             tc.category_name = #{categoryName};
+    </select>
+
+    <!--카테고리 아이디로 관광지 분류 전체 불러오기-->
+    <select id="findCategoryByCategoryId" resultType="com.korit.visitbusan.entity.admin.AdminCategoryMst">
+        select
+            tc.category_id as categoryId,
+            tc.category_name as categoryName,
+            tc.create_date as createDate,
+            tc.update_date as updateDate,
+            um.username
+        from
+            tour_category tc left outer join user_mst um on (tc.user_id = um.user_id)
+        where
+        tc.category_id = #{categoryId};
     </select>
 
     <!--  검색 조건에 의한 카테고리 정보 불러오기  -->
@@ -68,14 +92,13 @@
     <!--  카테고리 정보 수정하기 (null이나 공백이 없을 경우)  -->
     <update id="updateCategoryByCategoryId" parameterType="com.korit.visitbusan.web.dto.admin.AdminCategoryReqDto">
         update
+            tour_category
         set
-            tc.category_name = #{categoryName}
-            tc.update_date = #{updateDate}
-            um.username = #{username}
-        from
-            tour_category tc left outer join user_mst um on (tc.user_id = um.user_id)
+            user_id = #{userId},
+            <if test='categoryName != null and categoryName != ""'>category_name = #{categoryName}</if>,
+            update_date = #{updateDate}
         where
-            tc.category_id = #{categoryId}
+            category_id = #{categoryId}
     </update>
 
     <!--  카테고리 정보 삭제하기  -->

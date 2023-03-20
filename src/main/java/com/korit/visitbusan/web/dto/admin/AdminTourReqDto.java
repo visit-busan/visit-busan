@@ -6,6 +6,7 @@ import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 public class AdminTourReqDto {
@@ -25,10 +26,10 @@ public class AdminTourReqDto {
     private int userId;
 
     @ApiModelProperty(value = "등록일", example = "2023-03-02")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-mm-dd", timezone = "Asia/Seoul")
-    private LocalDate createDate;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
+    private LocalDateTime createDate;
 
     @ApiModelProperty(value = "수정일", example = "2023-03-02")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-mm-dd", timezone = "Asia/Seoul")
-    private LocalDate updateDate;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
+    private LocalDateTime updateDate;
 }

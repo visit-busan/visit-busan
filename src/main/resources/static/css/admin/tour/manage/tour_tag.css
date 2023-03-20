@@ -16,13 +16,13 @@
     color: white;
 }
 
-.delete-button {
+.delete-all {
     border:  1px solid #ff4141;
     padding: 5px 10px;
     color: #202020;
 }
 
-.delete-button:hover {
+.delete-all:hover {
     background-color: #ff4141;
     color: white;
 }
@@ -43,7 +43,14 @@
     text-align: center;
 }
 
+.manage-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .content-table td .fa-solid {
+    padding: 0 10px;
     cursor: pointer;
 }
 

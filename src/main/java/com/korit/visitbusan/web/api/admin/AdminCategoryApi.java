@@ -3,6 +3,7 @@ package com.korit.visitbusan.web.api.admin;
 import com.korit.visitbusan.aop.annotation.ParamsAspect;
 import com.korit.visitbusan.aop.annotation.ValidAspect;
 import com.korit.visitbusan.entity.admin.AdminCategoryMst;
+import com.korit.visitbusan.entity.admin.AdminCategoryView;
 import com.korit.visitbusan.service.admin.AdminCategoryService;
 import com.korit.visitbusan.web.dto.CMRespDto;
 import com.korit.visitbusan.web.dto.admin.AdminCategoryReqDto;
@@ -32,12 +33,28 @@ public class AdminCategoryApi {
     @ParamsAspect
     @ValidAspect
     @ApiOperation(value = "관광지 분류 조회", notes = "관광지 분류를 조회 설정값에 맞게 불러오는 API입니다.")
-    @GetMapping("/categories")
+    @GetMapping("/category")
     public ResponseEntity<CMRespDto<List<AdminCategoryMst>>> searchCategory(@Valid AdminSearchCategoryReqDto adminSearchCategoryReqDto, BindingResult bindingResult) {
 //        System.out.println(adminSearchCategoryReqDto);
         return ResponseEntity
                 .ok()
                 .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully",adminCategoryService.searchCategory(adminSearchCategoryReqDto)));
+    }
+
+    @ApiOperation(value = "관광지 분류 view 조회", notes = "관광지 분류 view를 조회하기 위한 API입니다.")
+    @GetMapping("/categories")
+    public ResponseEntity<CMRespDto<List<AdminCategoryView>>> getCategories() {
+        return ResponseEntity
+                .ok()
+                .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully", adminCategoryService.getCategories()));
+    }
+
+    @ApiOperation(value = "관광지 분류Id로 관광정보 조회", notes = "관광지 분류를 관광지ID로 불러오는 API입니다.")
+    @GetMapping("/category/{categoryId}")
+    public ResponseEntity<CMRespDto<?>> getCategoryByCategoryId(@PathVariable int categoryId) {
+        return ResponseEntity
+                .ok()
+                .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully",adminCategoryService.getCategoryByCategoryId(categoryId)));
     }
 
     @ApiOperation(value = "관광지 분류 건수", notes = "관광지 분류를 페이지네이션을 위한 API입니다.")

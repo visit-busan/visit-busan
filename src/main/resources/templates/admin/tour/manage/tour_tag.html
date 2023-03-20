@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>visit-busan 관리자 페이지</title>
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="/static/css/admin/reset.css">
     <link rel="stylesheet" href="/static/css/admin/common.css">
@@ -12,6 +13,7 @@
     <link rel="stylesheet" href="/static/css/admin/lnb.css">
     <link rel="stylesheet" href="/static/css/admin/tour/tour_common.css">
     <link rel="stylesheet" href="/static/css/admin/tour/manage/tour_tag.css">
+    <link rel="stylesheet" href="/static/css/admin/modal.css">
     
 </head>
 <body>
@@ -54,7 +56,7 @@
                     <div class="content-items">
                         <div class="left-items">
                             <a href=""><button type="button" class="register-button">등록</button></a>
-                            <button type="button" class="delete-button">삭제</button>
+                            <button type="button" class="delete-all">삭제</button>
                         </div>
                         <div class="right-items">
                             <select class="category-select">
@@ -62,19 +64,117 @@
                                 <option value="명소">명소</option>
                                 <option value="맛집">맛집</option>
                             </select>
-                            <input type="search" class="search-input">
+                            <input type="search" class="search-input" placeholder="태그명을 입력하세요.">
                             <button type="button" class="search-button">검색</button>
                         </div>
                     </div>
+                    <!-- 관광지 태그 모달, 기본 display:none-->
+                    <div id="modal" class="modal-overlay">
+                        <!-- 관광지 태그 등록 모달 -->
+                            <div class="modal-window-register">
+                                <div class="modal-header">
+                                    <h2 class="modal-title">관광지 태그 등록</h2>
+                                    <button class="close-button">x</button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="modal-form-register">
+                                        <table>
+                                            <colgroup>
+                                                <col>
+                                                <col>
+                                            </colgroup>
+                                            <tr>
+                                                <th>카테고리명</th>
+                                                <td >
+                                                    <select class="register-tag">
+                                                        <option value="">전체조회</option>
+                                                        <option value="명소">명소</option>
+                                                        <option value="맛집">맛집</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>태그명</th>
+                                                <td >
+                                                    <input type="text" class="register-tag" placeholder="태그명을 입력해주세요." maxlength="10">
+                                                    <div class="error-message"></div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="modal-register-button">등록</button>
+                                    <button class="modal-cancel-button">취소</button>
+                                </div>
+                            </div>                                            
+                        <!-- 관광지 태그 수정 모달 -->
+                            <div class="modal-window-modify">
+                                <div class="modal-header">
+                                    <h2 class="modal-title">관광지 태그 수정</h2>
+                                    <button class="close-button">x</button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="modal-form-modify">
+                                        <table>
+                                            <colgroup>
+                                                <col>
+                                                <col>
+                                            </colgroup>
+                                            <tr>
+                                                <th>번호</th>
+                                                <td class="modify-tag" >1</td>
+                                            </tr>
+                                            <tr>
+                                                <th>카테고리명</th>
+                                                <td >
+                                                    <select class="modify-tag">
+                                                        <option value="">전체조회</option>
+                                                        <option value="명소">명소</option>
+                                                        <option value="맛집">맛집</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>태그명</th>
+                                                <td >
+                                                    <input type="text" class="modify-tag" placeholder="태그명을 입력해주세요." maxlength="10">
+                                                    <div class="error-message"></div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>작성자</th>
+                                                <td >
+                                                    <input type="text" class="modify-tag" disabled>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>등록일</th>
+                                                <td class="modify-tag">2023-02-27 14:00:00</td>
+                                            </tr>
+                                            <tr>
+                                                <th>수정일</th>
+                                                <td class="modify-tag" >2023-02-27 14:00:00</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="modal-modify-button">수정</button>
+                                    <button class="modal-cancel-button">취소</button>
+                                </div>
+                            </div>
+                        </div>
                     <div class="table-container">
                         <table class="content-table">
                             <thead>
                                 <tr>
                                     <th><input type="checkbox" class="delete-checkall"></th>
-                                    <th>태그 코드</th>
+                                    <th>태그 아이디</th>
                                     <th>관광지 분류</th>
                                     <th>태그명</th>
                                     <th>작성자</th>
+                                    <th>등록일</th>
                                     <th>관리</th>
                                 </tr>
                             </thead>
@@ -97,6 +197,7 @@
             </div>
         </main>
     </div>
-    <script src="/static/js/admin/book_search.js"></script>
+    <script src="/static/js/account/principal.js"></script>
+    <script src="/static/js/admin/tour/manage/tour_tag.js"></script>
 </body>
 </html>

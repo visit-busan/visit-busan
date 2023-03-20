@@ -1,6 +1,8 @@
 package com.korit.visitbusan.repository.admin;
 
 import com.korit.visitbusan.entity.admin.AdminCategoryMst;
+import com.korit.visitbusan.entity.admin.AdminCategoryView;
+import com.korit.visitbusan.web.dto.ReviewRespDto;
 import com.korit.visitbusan.web.dto.admin.AdminCategoryReqDto;
 import com.korit.visitbusan.web.dto.admin.AdminSearchCategoryListDto;
 import com.korit.visitbusan.web.dto.admin.AdminSearchCategoryReqDto;
@@ -36,8 +38,14 @@ public interface AdminCategoryRepository {
     /*카테고리 데이터 조회*/
     public List<AdminCategoryMst> searchCategory(AdminSearchCategoryReqDto adminSearchCategoryReqDto);
 
+    /*관광지 카테고리 view 데이터 조회*/
+    public List<AdminCategoryView> findAllCategory();
+
     /*카테고리 이름으로 데이터 조회*/
     public AdminCategoryMst findCategoryByCategoryName(String categoryName);
+
+    /*카테고리 아이디로 데이터 조회*/
+    public AdminCategoryMst findCategoryByCategoryId(int categoryId);
 
     /*카테고리 저장*/
     public int registerCategory(AdminCategoryReqDto adminCategoryReqDto);

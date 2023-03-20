@@ -38,6 +38,14 @@ public class AdminTagApi {
                 .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully",adminTagService.searchTag(adminSearchTagReqDto)));
     }
 
+    @ApiOperation(value = "태그 Id로 태그 조회", notes = "관광지 태그를 태그 ID로 불러오는 API입니다.")
+    @GetMapping("/tag/{tagId}")
+    public ResponseEntity<CMRespDto<?>> getTagByTagId(@PathVariable int tagId) {
+        return ResponseEntity
+                .ok()
+                .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully",adminTagService.getTagByTagId(tagId)));
+    }
+
     @ApiOperation(value = "관광지 태그 개수조회", notes = "관광지 태그 페이지네이션을 위한 API입니다.")
     @GetMapping("/tag/totalcount")
     public ResponseEntity<CMRespDto<?>> getTagTotalCount(AdminSearchTagListDto adminSearchTagListDto) {

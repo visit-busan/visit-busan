@@ -6,7 +6,7 @@ const searchObj = {
     page : 1,
     category : "",
     searchValue : "",
-    order : "tourId",
+    order : "tagId",
     limit : "Y",
     count : 20
 }
@@ -64,13 +64,13 @@ class TourSearchApi {
         return returnData;
     }
 
-    getCategories(searchObj) {
-        let responseData = null;
+    getCategories() {
+        let returnData = null;
 
         $.ajax({
             async: false,
             type: "get",
-            url: "http://localhost:8000/api/admin/tour_category",
+            url: "http://localhost:8000/api/admin/categories",
             dataType: "json",
             success: response => {
                 console.log(response);
