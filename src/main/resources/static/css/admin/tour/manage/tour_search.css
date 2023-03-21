@@ -16,13 +16,13 @@
     color: white;
 }
 
-.delete-button {
+.delete-all {
     border:  1px solid #ff4141;
     padding: 5px 10px;
     color: #202020;
 }
 
-.delete-button:hover {
+.delete-all:hover {
     background-color: #ff4141;
     color: white;
 }

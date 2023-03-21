@@ -39,7 +39,6 @@ public class AdminTagService {
         return adminTagRepository.searchTag(adminSearchTagReqDto);
     }
 
-
     public AdminTagMst getTagByTagId(int tagId) {
         return adminTagRepository.findTagByTagId(tagId);
     }

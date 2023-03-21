@@ -11,6 +11,9 @@ public class AdminSearchTourReqDto {
     @ApiModelProperty(value = "검색값", example = "블라블라블라")
     private String searchValue;
 
+    @ApiModelProperty(value = "관광카테고리", example = "명소")
+    private String categoryName;
+
     @NotBlank
     @ApiModelProperty(value = "조회 전체 = N, 조회 제한 = Y", required = true)
     private String limit;

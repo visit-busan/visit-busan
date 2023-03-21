@@ -36,11 +36,8 @@ public interface AdminTourRepository {
     /*관광정보 데이터 조회*/
     public List<AdminTourMst> searchTour(AdminSearchTourReqDto adminSearchTourReqDto);
 
-    /*관광정보 저장*/
-    public int registerTour(AdminTourReqDto adminTourReqDto);
-
-    /*관광정보 수정 put*/
-    public int updateTourByTourId(AdminTourReqDto adminTourReqDto);
+    /*관광지 아이디로 관광 데이터 조회*/
+    public AdminTourMst findTourByTourId(int tourId);
 
     /*관광정보 삭제*/
     public int deleteTour(int tourId);

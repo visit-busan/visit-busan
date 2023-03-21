@@ -490,6 +490,7 @@ class ComponentEvent {
     }
 
     addClickEventModalModifyButton() {
+        const modalModifyInput = document.querySelectorAll(".modal-form-modify input");
         const modalModifyButton = document.querySelector(".modal-modify-button");
         const categoryContents = document.querySelectorAll(".modify-category");
 
@@ -504,6 +505,12 @@ class ComponentEvent {
 
             CategoryService.getInstance().clearModifyErrors();
             location.reload();
+        }
+
+        modalModifyInput[0].onkeyup = () => {
+            if(window.event.keyCode == 13) {
+                modalModifyButton.click();
+            }
         }
     }
 

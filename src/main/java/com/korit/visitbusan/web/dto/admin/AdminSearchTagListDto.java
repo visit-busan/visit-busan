@@ -5,5 +5,6 @@ import lombok.Data;
 @Data
 public class AdminSearchTagListDto {
     private String searchValue;
+    private String categoryName;
 
 }

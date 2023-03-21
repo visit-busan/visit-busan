@@ -1,6 +1,7 @@
 package com.korit.visitbusan.service.admin;
 
 import com.korit.visitbusan.entity.admin.AdminCategoryMst;
+import com.korit.visitbusan.entity.admin.AdminTagMst;
 import com.korit.visitbusan.entity.admin.AdminTourMst;
 import com.korit.visitbusan.exception.CustomValidationException;
 import com.korit.visitbusan.repository.admin.AdminCategoryRepository;
@@ -39,12 +40,8 @@ public class AdminTourService {
         return adminTourRepository.searchTour(adminSearchTourReqDto);
     }
 
-    public void registerTour(AdminTourReqDto adminTourReqDto) {
-        adminTourRepository.registerTour(adminTourReqDto);
-    }
-
-    public void modifyTour(AdminTourReqDto adminTourReqDto) {
-        adminTourRepository.updateTourByTourId(adminTourReqDto);
+    public AdminTourMst getTourByTourId(int tourId) {
+        return adminTourRepository.findTourByTourId(tourId);
     }
 
     public void removeTour(int tourId) {

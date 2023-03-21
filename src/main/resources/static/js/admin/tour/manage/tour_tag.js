@@ -24,6 +24,7 @@ const searchObj = {
 const tagObj = {
     tagId: "",
     categoryName: "",
+    categoryId:"",
     tagName: "",
     userId: "",
     createDate: "",
@@ -71,7 +72,7 @@ class TagApi {
         $.ajax({
             async: false,
             type: "get",
-            url: "http://localhost:8000/api/admin/tags",
+            url: "http://localhost:8000/api/admin/tag",
             data: searchObj,
             dataType: "json",
             success: response => {
@@ -270,12 +271,11 @@ class TagService {
 
     loadModalCategories() {
         const responseData = TagApi.getInstance().getCategories();
-
         const categorySelect = document.querySelectorAll(".register-tag");
-        categorySelect[0].innerHTML = `<option value="">전체조회</option>`;
+        categorySelect[0].innerHTML = `<option value="${responseData[0].categoryId}">${responseData[0].categoryName}</option>`;
 
         responseData.forEach(data => {
-            categorySelect.innerHTML += `
+            categorySelect[0].innerHTML += `
                 <option value="${data.categoryId}">${data.categoryName}</option>
             `;
         });
@@ -310,11 +310,11 @@ class TagService {
     }
 
     setTagRegisterValues() {
-        const registerTagInputs = document.querySelectorAll(".modal-form-register input");
+        const registerTagInputs = document.querySelectorAll(".register-tag");
         // console.log(registerTagInputs[0].value);
         // console.log(principalData.userMst.userId);
         tagObj.userId = principalData.userMst.userId;
-        tagObj.categoryName = registerTagInputs[0].value;
+        tagObj.categoryId = registerTagInputs[0].value;
         tagObj.tagName = registerTagInputs[1].value;
     }
 
@@ -338,6 +338,7 @@ class TagService {
 
     setTagModifyValues() {
         const modifyTagInputs = document.querySelectorAll(".modify-tag");
+        // console.log(modifyTagInputs[1].value);
         // console.log(modifyCategoryInputs[0].value);
         // console.log(responseData.updateDate);
         // console.log(principalData.userMst.userId);
@@ -458,6 +459,7 @@ class ComponentEvent {
         const searchButton = document.querySelector(".search-button");
 
         searchButton.onclick = () => {
+            console.log(categorySelect.value);
             searchObj.categoryName = categorySelect.value;
             searchObj.searchValue = searchInput.value;
             searchObj.page = 1;

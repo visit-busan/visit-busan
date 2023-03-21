@@ -23,7 +23,7 @@ public class AdminTourMst {
     private String title;
 
     @ApiModelProperty(value = "작성자 ID", example = "tester")
-    private String writer;
+    private String username;
 
     @ApiModelProperty(value= "생성일", example = "2023-02-28")
     private LocalDateTime createDate;

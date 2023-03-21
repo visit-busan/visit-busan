@@ -30,7 +30,7 @@ public class AdminTourApi {
     @ParamsAspect
     @ValidAspect
     @ApiOperation(value = "관광정보 조회", notes = "관광정보를 조회 설정값에 맞게 불러오는 API입니다.")
-    @GetMapping("/tours")
+    @GetMapping("/tour")
     public ResponseEntity<CMRespDto<List<AdminTourMst>>> searchTour(@Valid AdminSearchTourReqDto adminSearchTourReqDto, BindingResult bindingResult) {
 //        System.out.println(adminSearchTourReqDto);
         return ResponseEntity
@@ -44,6 +44,14 @@ public class AdminTourApi {
         return ResponseEntity
                 .ok()
                 .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully",adminTourService.getTourTotalCount(adminSearchTourListDto)));
+    }
+
+    @ApiOperation(value = "관광지 Id로 관광정보 조회", notes = "관광지 정보를 관광지 ID로 불러오는 API입니다.")
+    @GetMapping("/tour/{tourId}")
+    public ResponseEntity<CMRespDto<?>> getTourByTourId(@PathVariable int tourId) {
+        return ResponseEntity
+                .ok()
+                .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully",adminTourService.getTourByTourId(tourId)));
     }
 
     @ParamsAspect

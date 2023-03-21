@@ -14,9 +14,11 @@ public class AdminTourReqDto {
     @ApiModelProperty(value = "관광지 ID", example = "1")
     private int tourId;
 
-    @ApiModelProperty(value = "카테고리명", example = "명소", required = true)
-    @NotBlank
+    @ApiModelProperty(value = "카테고리명", example = "명소")
     private String categoryName;
+
+    @ApiModelProperty(value = "카테고리 ID", example = "1")
+    private int categoryId;
 
     @ApiModelProperty(value = "관광지 타이틀", example = "어느날 어디선가...")
     @NotBlank

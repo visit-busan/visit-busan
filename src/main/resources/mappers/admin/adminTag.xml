@@ -12,11 +12,15 @@
         select
             count(*)
         from
-            tour_tag
+            tour_tag tt
+            left outer join tour_category tc on (tt.category_id = tc.category_id)
         where
         1=1
+        <if test="categoryName != null and categoryName != ''">
+            and	tc.category_name = #{categoryName}
+        </if>
         <if test="searchValue != null and searchValue !=''">
-            and (tag_name concat('%', #{searchValue}, '%'))
+            and (tt.tag_name concat('%', #{searchValue}, '%'))
         </if>
     </select>
 
@@ -37,7 +41,7 @@
             tt.tag_name = #{tagName};
     </select>
 
-    <!--  테그 Id로 테그 정보 불러오기  -->
+    <!--  태그 Id로 테그 정보 불러오기  -->
     <select id="findTagByTagId" resultType="com.korit.visitbusan.entity.admin.AdminTagMst">
         select
             tt.tag_id as tagId,
@@ -72,11 +76,11 @@
             left outer join user_mst um on (tt.user_id = um.user_id)
         where
             1=1
+        <if test="categoryName != null and categoryName != ''">
+            and	tc.category_name = #{categoryName}
+        </if>
         <if test = 'searchValue != null and searchValue != ""'>
             and tt.tag_name like concat('%', #{searchValue}, '%')
-        </if>
-        <if test='categoryName != null and categoryName != ""'>
-            and	tc.category_name = #{categoryName}
         </if>
         order by
             tt.tag_id
