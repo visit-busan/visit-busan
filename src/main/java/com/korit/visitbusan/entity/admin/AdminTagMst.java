@@ -21,6 +21,9 @@ public class AdminTagMst {
     @ApiModelProperty(value = "카테고리 이름", example = "도보여행")
     private String categoryName;
 
+    @ApiModelProperty(value = "카테고리 Id", example = "1")
+    private int categoryId;
+
     @ApiModelProperty(value = "태그명", example = "자연")
     private String tagName;
 

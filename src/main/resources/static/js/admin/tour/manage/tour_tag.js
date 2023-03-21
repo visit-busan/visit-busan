@@ -264,7 +264,7 @@ class TagService {
 
         responseData.forEach(data => {
             categorySelect.innerHTML += `
-                <option value="${data.categoryId}">${data.categoryName}</option>
+                <option value="${data.categoryName}">${data.categoryName}</option>
             `;
         });
     }
@@ -275,9 +275,12 @@ class TagService {
         categorySelect[0].innerHTML = `<option value="${responseData[0].categoryId}">${responseData[0].categoryName}</option>`;
 
         responseData.forEach(data => {
-            categorySelect[0].innerHTML += `
-                <option value="${data.categoryId}">${data.categoryName}</option>
-            `;
+            // console.log(data.categoryName != responseData[0].categoryName);
+            if(data.categoryName != responseData[0].categoryName){
+                categorySelect[0].innerHTML += `
+                    <option value="${data.categoryId}">${data.categoryName}</option>
+                `;
+            }
         });
     }
 
@@ -285,7 +288,7 @@ class TagService {
         const responseData = TagApi.getInstance().getTagListbytagId(tagId);
         const categoryData = TagApi.getInstance().getCategories();
         const modalModifyTag = document.querySelectorAll(".modify-tag");
-        // console.log(responseData);
+        // console.log(responseData.categoryName);
         // if(responseData == null) {
         //     alert("해당 태그 코드는 등록되지 않은 코드입니다.")
         //     history.back();
@@ -405,6 +408,8 @@ class TagService {
             preButton.onclick = () => {
                 searchObj.page--;
                 this.loadTagList();
+                ComponentEvent.getInstance().addClickEventDeleteOne();
+                ComponentEvent.getInstance().addClickEventModifyButton();
             }
         }
 
@@ -415,6 +420,8 @@ class TagService {
             nextButton.onclick = () => {
                 searchObj.page++;
                 this.loadTagList();
+                ComponentEvent.getInstance().addClickEventDeleteOne();
+                ComponentEvent.getInstance().addClickEventModifyButton();
             }
         }
 
@@ -438,6 +445,8 @@ class TagService {
                 button.onclick = () => {
                     searchObj.page = pageNumber;
                     this.loadTagList();
+                    ComponentEvent.getInstance().addClickEventDeleteOne();
+                    ComponentEvent.getInstance().addClickEventModifyButton();
                 }
             }
         });
@@ -510,15 +519,23 @@ class ComponentEvent {
     }
 
     addClickEventModalRegisterCancelButton() {
-        const modalCancelButton = document.querySelector(".modal-window-register .close-button");
-        const modalcancelButton = document.querySelector(".modal-window-register .modal-cancel-button");
+        const modal = document.querySelector("#modal");
+        const modalRegisterWindow = document.querySelector(".modal-window-register");
+        const modalCloseButton = document.querySelector(".modal-window-register .close-button");
+        const modalCancelButton = document.querySelector(".modal-window-register .modal-cancel-button");
 
-        modalcancelButton.onclick = () => {
-            location.reload();
+        modalCloseButton.onclick = () => {
+            modal.style.display = "none";
         }
 
         modalCancelButton.onclick = () => {
-            location.reload();
+            modal.style.display = "none";
+        }
+
+        modalRegisterWindow.onkeyup = () => {
+            if(window.event.keyCode == 27) {
+                modal.style.display = "none";
+            }
         }
     }
 
@@ -560,15 +577,23 @@ class ComponentEvent {
     }
 
     addClickEventModalModifyCancelButton() {
-        const modalCancelButton = document.querySelector(".modal-window-modify .close-button");
-        const modalcancelButton = document.querySelector(".modal-window-modify .modal-cancel-button");
+        const modal = document.querySelector("#modal");
+        const modalModifyWindow = document.querySelector(".modal-window-modify");
+        const modalCloseButton = document.querySelector(".modal-window-modify .close-button");
+        const modalCancelButton = document.querySelector(".modal-window-modify .modal-cancel-button");
 
-        modalcancelButton.onclick = () => {
-            location.reload();
+        modalCloseButton.onclick = () => {
+            modal.style.display = "none";
         }
 
         modalCancelButton.onclick = () => {
-            location.reload();
+            modal.style.display = "none";
+        }
+
+        modalModifyWindow.onkeyup = () => {
+            if(window.event.keyCode == 27) {
+                modal.style.display = "none";
+            }
         }
     }
 

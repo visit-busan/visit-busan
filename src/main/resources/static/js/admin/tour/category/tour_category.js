@@ -6,7 +6,7 @@ window.onload = () => {
     ComponentEvent.getInstance().addClickEventRegisterButton();
     ComponentEvent.getInstance().addClickEventModalRegisterButton();
     ComponentEvent.getInstance().addClickEventModalRegisterCancelButton();
-    ComponentEvent.getInstance().addClickEventModifyButtons();
+    ComponentEvent.getInstance().addClickEventModifyButton();
     ComponentEvent.getInstance().addClickEventModalModifyButton();
     ComponentEvent.getInstance().addClickEventModalModifyCancelButton();
     ComponentEvent.getInstance().addClickEventDeleteOne();
@@ -357,6 +357,8 @@ class CategoryService {
             preButton.onclick = () => {
                 searchObj.page--;
                 this.loadCategoryList();
+                ComponentEvent.getInstance().addClickEventDeleteOne();
+                ComponentEvent.getInstance().addClickEventModifyButton();
             }
         }
 
@@ -367,6 +369,8 @@ class CategoryService {
             nextButton.onclick = () => {
                 searchObj.page++;
                 this.loadCategoryList();
+                ComponentEvent.getInstance().addClickEventDeleteOne();
+                ComponentEvent.getInstance().addClickEventModifyButton();
             }
         }
 
@@ -390,6 +394,8 @@ class CategoryService {
                 button.onclick = () => {
                     searchObj.page = pageNumber;
                     this.loadCategoryList();
+                    ComponentEvent.getInstance().addClickEventDeleteOne();
+                    ComponentEvent.getInstance().addClickEventModifyButton();
                 }
             }
         });
@@ -459,19 +465,27 @@ class ComponentEvent {
     }
 
     addClickEventModalRegisterCancelButton() {
-        const modalCancelButton = document.querySelector(".modal-window-register .close-button");
-        const modalcancelButton = document.querySelector(".modal-window-register .modal-cancel-button");
-
-        modalcancelButton.onclick = () => {
-            location.reload();
-        }
+        const modal = document.querySelector("#modal");
+        const modalRegisterWindow = document.querySelector(".modal-window-register");
+        const modalCloseButton = document.querySelector(".modal-window-register .close-button");
+        const modalCancelButton = document.querySelector(".modal-window-register .modal-cancel-button");
 
         modalCancelButton.onclick = () => {
-            location.reload();
+            modal.style.display = "none";
+        }
+
+        modalCloseButton.onclick = () => {
+            modal.style.display = "none";
+        }
+
+        modalRegisterWindow.onkeyup = () => {
+            if(window.event.keyCode == 27) {
+                modal.style.display = "none";
+            }
         }
     }
 
-    addClickEventModifyButtons() {
+    addClickEventModifyButton() {
         const modifyButtons = document.querySelectorAll(".modify-button");
         const categoryIds = document.querySelectorAll(".category-id");
         const modal = document.querySelector("#modal");
@@ -515,15 +529,23 @@ class ComponentEvent {
     }
 
     addClickEventModalModifyCancelButton() {
-        const modalCancelButton = document.querySelector(".modal-window-modify .close-button");
-        const modalcancelButton = document.querySelector(".modal-window-modify .modal-cancel-button");
+        const modal = document.querySelector("#modal");
+        const modalModifyWindow = document.querySelector(".modal-window-modify");
+        const modalCloseButton = document.querySelector(".modal-window-modify .close-button");
+        const modalCancelButton = document.querySelector(".modal-window-modify .modal-cancel-button");
 
-        modalcancelButton.onclick = () => {
-            location.reload();
+        modalCloseButton.onclick = () => {
+            modal.style.display = "none";
         }
 
         modalCancelButton.onclick = () => {
-            location.reload();
+            modal.style.display = "none";
+        }
+
+        modalModifyWindow.onkeyup = () => {
+            if(window.event.keyCode == 27) {
+                modal.style.display = "none";
+            }
         }
     }
 

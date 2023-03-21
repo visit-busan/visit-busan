@@ -212,7 +212,7 @@ class TourService {
 
         responseData.forEach(data => {
             categorySelect.innerHTML += `
-                <option value="${data.categoryId}">${data.categoryName}</option>
+                <option value="${data.categoryName}">${data.categoryName}</option>
             `;
         });
     }
@@ -255,6 +255,7 @@ class TourService {
             preButton.onclick = () => {
                 searchObj.page--;
                 this.loadTourList();
+                ComponentEvent.getInstance().addClickEventDeleteOne();
             }
         }
 
@@ -265,6 +266,7 @@ class TourService {
             nextButton.onclick = () => {
                 searchObj.page++;
                 this.loadTourList();
+                ComponentEvent.getInstance().addClickEventDeleteOne();
             }
         }
 
@@ -288,6 +290,7 @@ class TourService {
                 button.onclick = () => {
                     searchObj.page = pageNumber;
                     this.loadTourList();
+                    ComponentEvent.getInstance().addClickEventDeleteOne();
                 }
             }
         });

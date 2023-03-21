@@ -59,6 +59,7 @@ public class AdminTagService {
     }
 
     public void modifyTag(AdminTagReqDto adminTagReqDto) {
+        duplicateTagName(adminTagReqDto.getTagName());
         adminTagRepository.updateTagByTagId(adminTagReqDto);
     }
 

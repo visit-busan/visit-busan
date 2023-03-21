@@ -24,7 +24,6 @@ import java.util.List;
 @Api(tags = {"게시글,리뷰,평점관련 API"})
 @RestController
 @RequiredArgsConstructor
-@Api(tags = {"게시글,리뷰,평점관련 API"})
 public class PostApi {
 
     private final PostService postService;

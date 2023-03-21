@@ -66,6 +66,7 @@ public class AdminCategoryService {
     }
 
     public void modifyCategory(AdminCategoryReqDto adminCategoryReqDto) {
+        duplicateCategoryName(adminCategoryReqDto.getCategoryName());
         adminCategoryRepository.updateCategoryByCategoryId(adminCategoryReqDto);
     }
 

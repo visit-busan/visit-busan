@@ -12,7 +12,9 @@
         select
             count(*)
         from
-            tour_mst tm left outer join user_mst um on (tm.user_id = um.user_id)
+            tour_mst tm
+            left outer join tour_category tc on (tm.category_id = tc.category_id)
+            left outer join user_mst um on (tm.user_id = um.user_id)
         where
         1=1
         <if test="searchValue != null and searchValue !=''">

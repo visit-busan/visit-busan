@@ -16,7 +16,7 @@
         where
         1=1
         <if test="searchValue != null and searchValue !=''">
-            and (category_name concat('%', #{searchValue}, '%'))
+            and (category_name like concat('%', #{searchValue}, '%'))
         </if>
     </select>
 
