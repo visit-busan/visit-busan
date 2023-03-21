@@ -6,6 +6,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 /*******************************************
  *** 작성자 : 정순동
  *  버전 : V0.1
@@ -28,4 +33,15 @@ public class PostController {
         return "/post/register-post";
     }
 
-}
+//    @RequestMapping(value="/getGeoLocation", method= {RequestMethod.GET, RequestMethod.POST})
+//    @ResponseBody
+//    public List<Map<String, String>> getGeoLocation() {
+//
+//        List<Map<String, String>>container = new ArrayList<>();
+//        container = museumService.getGeoLocation();
+//
+//        return container;
+    }
+
+
+

@@ -6,15 +6,23 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Post</title>
+
+    <script type="text/javascript"
+        src="//dapi.kakao.com/v2/maps/sdk.js?appkey=735b92da3af25f4c73fbd7671b50849e&libraries=service,clusterer,drawing"></script>
+
+    <!-- <script type="text/javascript" src="/static/js/kakaomap/kakao.js"></script>
+    <script charset="UTF-8" src="https://t1.daumcdn.net/mapjsapi/js/main/4.4.8/kakao.js"></script>
+    <script charset="UTF-8" src="https://t1.daumcdn.net/mapjsapi/js/libs/services/1.0.2/services.js"></script> -->
+
     <script src="https://code.jquery.com/jquery-latest.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
         integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <link rel="stylesheet" href="/static/css/reset.css">
     <link rel="stylesheet" href="/static/css/common.css">
     <link rel="stylesheet" href="/static/css/header.css">
     <link rel="stylesheet" href="/static/css/index.css">
-    <!-- <link rel="stylesheet" href="/static/css/post/index.css"> -->
     <link rel="stylesheet" href="/static/css/post/post.css">
 </head>
 
@@ -68,9 +76,12 @@
                     </div>
 
                     <div class="main-rule off">
-                        <div class="main-map-container">
-                            
+
+                        <div class="rule-container">
+                            <div id="map" style="width: 960px; height: 400px; margin: 15px 0; border-radius: 5px;">
+                            </div>
                         </div>
+
                         <div class="rule-container">
                             <div class="rule-name-dot">
                                 <h2 class="rule-name">전화번호</h2><b class="rule-dot">ㆍ</b>

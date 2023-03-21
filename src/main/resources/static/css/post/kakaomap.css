@@ -20,10 +20,10 @@
 }
 
 #map {
-    margin-top: 20px;
+    /* margin-top: 20px; */
 
-    width: 1200px;
-    height: 580px;
+    width: 1300px;
+    height: 670px;
     position: relative;
     overflow: hidden;
 

@@ -22,5 +22,6 @@ public interface AccountRepository {
     public int saveUser(UserMst user);
     public int saveRole(UserMst user);
     public int setUserProvider(UserMst user);
+    public int updateProfile(int userId, String name, String tellNumber, String email);
     public int deleteUser(int userId);
 }

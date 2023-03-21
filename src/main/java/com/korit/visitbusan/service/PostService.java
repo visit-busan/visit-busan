@@ -392,4 +392,8 @@ public class PostService {
     public int deleteLike(LikeReqDto likeReqDto) {
         return postRepository.deleteLike(likeReqDto);
     }
+
+    public List<FindLocation> findLocation() {
+        return postRepository.findLocation();
+    }
 }

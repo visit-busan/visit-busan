@@ -5,10 +5,7 @@ import com.korit.visitbusan.entity.UserMst;
 import com.korit.visitbusan.repository.AccountRepository;
 import com.korit.visitbusan.security.PrincipalDetails;
 import com.korit.visitbusan.service.AccountService;
-import com.korit.visitbusan.web.dto.CMRespDto;
-import com.korit.visitbusan.web.dto.ChangePassword;
-import com.korit.visitbusan.web.dto.FindPassword;
-import com.korit.visitbusan.web.dto.FindUsername;
+import com.korit.visitbusan.web.dto.*;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiParam;
@@ -98,6 +95,7 @@ public class AccountApi {
     @PostMapping("/find/password")
     public ResponseEntity<?> findPassword (@RequestBody FindPassword findPassword) {
         System.out.println(findPassword);
+//      변경페이지로 넘어가기전에 token발급으로 변경페이지로 이동하게 만들고, 만약 변경 페이지로 그냥 넘어갈시, 만료된 페이지(?)라고 띄워주기
 
         String password = accountService.findPassword(findPassword.getUsername(), findPassword.getName(), findPassword.getTellNumber()).getPassword();
         return ResponseEntity
@@ -121,6 +119,21 @@ public class AccountApi {
                 .body(new CMRespDto<>(HttpStatus.OK.value(), "비밀번호 변경완료"
                 , userMst));
     }
+    @ApiOperation(value = "회원정보변경", notes = "회원정보변경")
+    @PatchMapping("/update/profile")
+    public ResponseEntity<?> updateProfile (@RequestBody UpdateProfile updateProfile) {
+        System.out.println(updateProfile);
+        int flag =  accountService.UpdateProfile(updateProfile.getUserId(),updateProfile.getName(), updateProfile.getEmail(), updateProfile.getTellNumber());
+//        UserMst userMst = null;
+//        if (flag == 1) {
+//            userMst = accountService.findPassword(updateProfile.getName(), updateProfile.getTellNumber(), updateProfile.getEmail());
+//        }
+        return ResponseEntity
+                .ok()
+                .body(new CMRespDto<>(HttpStatus.OK.value(), "회원정보 변경 완료"
+                ,flag));
+    }
+
     @ApiOperation(value = "회원탈퇴", notes = "회원정보 삭제")
     @DeleteMapping("/delete/{userId}")
     public ResponseEntity<?> deleteUser(@PathVariable int userId) {

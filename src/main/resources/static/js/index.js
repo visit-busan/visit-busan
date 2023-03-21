@@ -3,8 +3,6 @@ window.onload = () => {
     HeaderService.getInstance().Categoryload();
     FooterService.getInstance().loadFooter();
     IndexService.getInstance().Categoryload();
-
-
 }
 
 class IndexService {
@@ -30,11 +28,10 @@ class IndexService {
             }
         })
         const category = document.querySelector(".category-option");
-        responseData.forEach((data,value) => {
-            value = 1;
+        responseData.forEach(data => {
             category.innerHTML +=
                 `
-                <option value="${value++}" style="width:100px; height:60px;">${data.categoryName}</option>
+                <option value="${data.categoryId}" style="width:100px; height:60px;">${data.categoryName}</option>
                  `;
         });
     }
