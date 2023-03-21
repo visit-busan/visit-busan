@@ -12,6 +12,57 @@ window.onload = () => {
     HeaderService.getInstance().loadHeader();
     HeaderService.getInstance().Categoryload();
     FooterService.getInstance().loadFooter();
+
+    // 옮겨야함
+    const responseData = PostApi.getInstance().getPost();
+    var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
+        mapOption = {
+            center: new kakao.maps.LatLng(responseData.data.lat, responseData.data.lon), // 지도의 중심좌표
+            level: 1 // 지도의 확대 레벨
+        };
+
+    var map = new kakao.maps.Map(mapContainer, mapOption); // 지도생성
+
+    // 마커를 표시할 위치와 내용을 가지고 있는 객체 배열
+    var positions = [
+        {
+            content: `<div>${responseData.data.title}</div>`,
+            latlng: new kakao.maps.LatLng(responseData.data.lat, responseData.data.lon)
+        }
+    ];
+
+    for (var i = 0; i < positions.length; i++) {
+        // 마커를 생성합니다
+        var marker = new kakao.maps.Marker({
+            map: map, // 마커를 표시할 지도
+            position: positions[i].latlng // 마커의 위치
+        });
+
+        // 마커에 표시할 인포윈도우를 생성합니다 
+        var infowindow = new kakao.maps.InfoWindow({
+            content: positions[i].content // 인포윈도우에 표시할 내용
+        });
+
+        // 마커에 mouseover 이벤트와 mouseout 이벤트를 등록
+        // 이벤트 리스너로는 클로저를 만들어 등록
+        // for문에서 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록
+        kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
+        kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
+    }
+
+    // 인포윈도우를 표시하는 클로저를 만드는 함수
+    function makeOverListener(map, marker, infowindow) {
+        return function () {
+            infowindow.open(map, marker);
+        };
+    }
+
+    // 인포윈도우를 닫는 클로저를 만드는 함수
+    function makeOutListener(infowindow) {
+        return function () {
+            infowindow.close();
+        };
+    }
 }
 
 // -----------------------------------------
@@ -22,30 +73,30 @@ let principalData = null;
 
 
 let reviewObj = {
-    reviewId : 0,
-    userId : null,
-    rating : 5,
-    visitStatus : 1,
-    reviewContent : ""
+    reviewId: 0,
+    userId: null,
+    rating: 5,
+    visitStatus: 1,
+    reviewContent: ""
 }
 
 let reviewImgObj = {
-    fileOne : null,
-    fileTwo : null,
-    fileThree : null,
+    fileOne: null,
+    fileTwo: null,
+    fileThree: null,
     formData: new FormData()
 }
 
 let deleteReviewObj = {
-    userId : null,
-    reviewId : null,
+    userId: null,
+    reviewId: null,
 }
 
 let modalFlag = false
 
 let likeObj = {
-    userId : null,
-    tourId : null
+    userId: null,
+    tourId: null
 }
 // -----------------------------------------
 //                   APIs
@@ -53,7 +104,7 @@ let likeObj = {
 class PostApi {
     static #instance = null;
     static getInstance = () => {
-        if(this.#instance == null) {
+        if (this.#instance == null) {
             this.#instance = new PostApi();
         }
         return this.#instance;
@@ -61,20 +112,21 @@ class PostApi {
 
     getPost() {
         let responseData = null;
-        
+
         $.ajax({
-            async:false,
-            type:"get",
+            async: false,
+            type: "get",
             url: `/api/post/${tourId}`,
             dataType: "json",
             success: response => {
                 responseData = response;
                 $.ajax({
-                    async:false,
-                    type:"put",
-                    url:`/api/post/${tourId}/view`,
-                    dataType:"json",
+                    async: false,
+                    type: "put",
+                    url: `/api/post/${tourId}/view`,
+                    dataType: "json",
                     success: response => {
+
                     },
                     error: error => {
                         console.log(error);
@@ -113,8 +165,8 @@ class PostApi {
         let responseData = null;
 
         $.ajax({
-            async:false,
-            type:"get",
+            async: false,
+            type: "get",
             url: `/api/post/${tourId}/likes`,
             dataType: "json",
             success: response => {
@@ -132,8 +184,8 @@ class PostApi {
         let responseData = null
 
         $.ajax({
-            async:false,
-            type:"post",
+            async: false,
+            type: "post",
             url: `/api/post/like`,
             contentType: "application/json",
             data: JSON.stringify(likeObj),
@@ -141,7 +193,7 @@ class PostApi {
             success: response => {
                 responseData = response;
             },
-            error : error => {
+            error: error => {
                 console.log(error);
             }
         });
@@ -153,16 +205,16 @@ class PostApi {
         let responseData = null;
 
         $.ajax({
-            async:false,
-            type:"post",
+            async: false,
+            type: "post",
             url: `/api/post/${tourId}/like`,
             contentType: "application/json",
             data: JSON.stringify(likeObj),
             dataType: "json",
             success: response => {
-                responseData =response;
+                responseData = response;
             },
-            error:error => {
+            error: error => {
                 console.log(error);
             }
         });
@@ -171,21 +223,21 @@ class PostApi {
     }
 
     registerReview() {
-            $.ajax({
-            async:false,
-            type:"POST",
-            url:`/api/post/${tourId}/review`,
+        $.ajax({
+            async: false,
+            type: "POST",
+            url: `/api/post/${tourId}/review`,
             contentType: "application/json",
             data: JSON.stringify(reviewObj),
             dataType: "json",
             success: response => {
-                if(reviewImgObj.fileOne != null 
-                    || reviewImgObj.fileTwo != null 
+                if (reviewImgObj.fileOne != null
+                    || reviewImgObj.fileTwo != null
                     || reviewImgObj.fileThree != null) {
                     $.ajax({
-                        async:false,
-                        type:"POST",
-                        url:`/api/post/${response.data}/review/image`,
+                        async: false,
+                        type: "POST",
+                        url: `/api/post/${response.data}/review/image`,
                         encType: "multipart/form-data",
                         contentType: false,
                         processData: false,
@@ -199,7 +251,7 @@ class PostApi {
                             console.log(error);
                         }
                     });
-                }else {
+                } else {
                     alert("이미지 없이 리뷰 등록 완료!");
                     location.reload();
                 }
@@ -213,9 +265,9 @@ class PostApi {
     getReviews() {
         let responseData = null;
         $.ajax({
-            async:false,
-            type:"GET",
-            url:`/api/post/${tourId}/review`,
+            async: false,
+            type: "GET",
+            url: `/api/post/${tourId}/review`,
             dataType: 'json',
             success: response => {
                 responseData = response.data;
@@ -229,9 +281,9 @@ class PostApi {
 
     deleteReview() {
         $.ajax({
-            async:false,
-            type:"delete",
-            url:`/api/post/${tourId}/review`,
+            async: false,
+            type: "delete",
+            url: `/api/post/${tourId}/review`,
             contentType: "application/json",
             data: JSON.stringify(deleteReviewObj),
             dataType: 'json',
@@ -247,13 +299,17 @@ class PostApi {
 
     deletePost() {
         $.ajax({
-            async:false,
-            type:"delete",
-            url:`/api/post/${tourId}`,
+            async: false,
+            type: "delete",
+            url: `/api/post/${tourId}`,
             dataType: 'json',
             success: response => {
                 alert("게시글 삭제 완료!");
+<<<<<<< HEAD
                 window.location.href='/search?categoryId=0';
+=======
+                window.location.href = 'http://localhost:8000/search?categoryId=0';
+>>>>>>> origin/feature_finaltest2
             },
             error: error => {
                 console.log(error);
@@ -268,7 +324,7 @@ class PostApi {
 class PostService {
     static #instance = null;
     static getInstance = () => {
-        if(this.#instance == null) {
+        if (this.#instance == null) {
             this.#instance = new PostService();
         }
         return this.#instance;
@@ -276,36 +332,41 @@ class PostService {
 
     loadPage() {
         const URLSearch = new URLSearchParams(location.search);
-        if(URLSearch.has("tourId")) {
+        if (URLSearch.has("tourId")) {
             const id = URLSearch.get("tourId");
-            if(id == "") {
+            if (id == "") {
                 history.back();
             }
             tourId = id;
         }
 
-        
+
         const responseData = PostApi.getInstance().getPost();
         console.log(principalData);
         console.log(responseData);
         const categories = PostApi.getInstance().getCategories();
 
-        if(responseData == null) {
+        if (responseData == null) {
             alert("존재하지 않는 게시글입니다.");
+<<<<<<< HEAD
             window.location.href='/';
+=======
+            window.location.href = 'http://localhost:8000/';
+>>>>>>> origin/feature_finaltest2
         }
 
         principalData = PrincipalApi.getInstance().getPrincipal();
 
-        if(principalData != null) {
+        if (principalData != null) {
             let authorityFlag = false;
 
             principalData.authorities.forEach(authority => {
-                if(authority.authority == "ROLE_ADMIN") {
+                if (authority.authority == "ROLE_ADMIN") {
                     authorityFlag = true;
-                }});
+                }
+            });
 
-            if(principalData.userMst.userId == responseData.data.userId  || authorityFlag) {
+            if (principalData.userMst.userId == responseData.data.userId || authorityFlag) {
                 const modifyButton = document.querySelector(".modify-buttons");
                 modifyButton.innerHTML = `
                     <ul>
@@ -316,7 +377,7 @@ class PostService {
                 ComponentEvent.getInstance().clickModifyButtons();
             }
         }
-            
+
         const mainTitle = document.querySelector(".main-title");
         const subTitle = document.querySelector(".sub-title");
         const mainImg = document.querySelector(".main-img");
@@ -340,74 +401,79 @@ class PostService {
         const categoryNavigator = document.querySelector(".category-navigator");
 
         categories.data.forEach(category => {
-            if(category.categoryId == responseData.data.categoryId) {
+            if (category.categoryId == responseData.data.categoryId) {
                 categoryNavigator.innerHTML += `
                 <a href="/search?categoryId=${category.categoryId}"><b>${category.categoryName}</b></a>
                 `;
             }
         });
-        
+
         documentTitle.innerHTML = `${responseData.data.title}`;
         mainTitle.innerHTML = `${responseData.data.title}`;
         subTitle.innerHTML = `${responseData.data.subtitle}`;
         article.innerHTML = `${responseData.data.contents}`;
 
-        let rating =  responseData.data.rating;
-        if(rating != null) {
+        let rating = responseData.data.rating;
+        if (rating != null) {
             let subRating = rating.substring(0, rating.indexOf(".") + 2);
             reviewRating.innerHTML = subRating;
         };
-        
-        postView.innerHTML = responseData.data.viewCount;        
-        
-        if(responseData.data.mainImage != null) {
-            if(responseData.data.mainImage.indexOf("mainimage") < 0) 
+
+        postView.innerHTML = responseData.data.viewCount;
+
+        if (responseData.data.mainImage != null) {
+            if (responseData.data.mainImage.indexOf("mainimage") < 0)
                 mainImg.src = `${responseData.data.mainImage}`;
+<<<<<<< HEAD
             else 
                 mainImg.src = `/image/${responseData.data.mainImage}`;
+=======
+            else
+                mainImg.src = `http://localhost:8000/image/${responseData.data.mainImage}`;
+>>>>>>> origin/feature_finaltest2
         }
 
-        if(responseData.data.tellNumber == "") 
+        if (responseData.data.tellNumber == "")
             tellNumber.parentElement.classList.add("off");
-        else 
+        else
             tellNumber.innerHTML = `${responseData.data.tellNumber}`;
         //-----------------------------------
-        if(responseData.data.homepageUrl == "")
+        if (responseData.data.homepageUrl == "")
             homepageUrl.parentElement.classList.add("off");
         else
             homepageUrl.innerHTML = `${responseData.data.homepageUrl}`;
         //-----------------------------------
-        if(responseData.data.holidayInfo == "")
+        if (responseData.data.holidayInfo == "")
             holidayInfo.parentElement.classList.add("off");
         else
             holidayInfo.innerHTML = `${responseData.data.holidayInfo}`;
         //-----------------------------------
-        if(responseData.data.handicappedArea == "")
+        if (responseData.data.handicappedArea == "")
             handicappedArea.parentElement.classList.add("off");
         else
             handicappedArea.innerHTML = `${responseData.data.handicappedArea}`;
         //-----------------------------------
-        if(responseData.data.usageDayAndTime == "")
+        if (responseData.data.usageDayAndTime == "")
             usageDayAndTime.parentElement.classList.add("off");
         else
             usageDayAndTime.innerHTML = `${responseData.data.usageDayAndTime}`;
         //-----------------------------------
-        if(responseData.data.usageAmount == "")
+        if (responseData.data.usageAmount == "")
             usageAmount.parentElement.classList.add("off");
         else
             usageAmount.innerHTML = `${responseData.data.usageAmount}`;;
         //-----------------------------------
-        if(responseData.data.mainMenu == "")
+        if (responseData.data.mainMenu == "")
             mainMenu.parentElement.classList.add("off");
         else
             mainMenu.innerHTML = `${responseData.data.mainMenu}`;;
         //-----------------------------------
-        if(responseData.data.trafficInfo == "")
+        if (responseData.data.trafficInfo == "")
             trafficInfo.parentElement.classList.add("off");
         else
             trafficInfo.innerHTML = `${responseData.data.trafficInfo}`;;
         //-----------------------------------
-        if(responseData.data.etcInfo == "")
+        if (responseData.data.etcInfo == "")
             etcInfo.parentElement.classList.add("off");
         else
             etcInfo.innerHTML = `${responseData.data.etcInfo}`;;
@@ -419,14 +485,14 @@ class PostService {
 
     loadReviews() {
         let reviewData = PostApi.getInstance().getReviews();
-        if (reviewData != null){
+        if (reviewData != null) {
             console.log(reviewData);
             let reviewContainer = document.querySelector(".review-container");
             reviewContainer.innerHTML = ``;
             let reviewCount = document.querySelector(".post-review");
             reviewCount.innerHTML = reviewData.length;
-            
-            if(principalData == null) {
+
+            if (principalData == null) {
                 reviewData.forEach(data => {
                     reviewContainer.innerHTML += `
                     <div class="review-item">
@@ -440,6 +506,7 @@ class PostService {
                             <textarea class="review-content" readonly>${data.reviewComment}</textarea>
                             <div class="review-img-container">
                                 ${data.commentDtl[0].saveName != null ?
+<<<<<<< HEAD
                                     '<img src="/image/review/' + data.commentDtl[0].saveName + '"alt="">' : ""}
         
                                 ${data.commentDtl[0].saveName != null && data.commentDtl.length > 1 ?
@@ -447,6 +514,15 @@ class PostService {
         
                                 ${data.commentDtl[0].saveName != null && data.commentDtl.length > 2 ?
                                     '<img src="/image/review/' + data.commentDtl[2].saveName + '"alt="">' : ""}
+=======
+                            '<img src="http://localhost:8000/image/review/' + data.commentDtl[0].saveName + '"alt="">' : ""}
+        
+                                ${data.commentDtl[0].saveName != null && data.commentDtl.length > 1 ?
+                            '<img src="http://localhost:8000/image/review/' + data.commentDtl[1].saveName + '"alt="">' : ""}
+        
+                                ${data.commentDtl[0].saveName != null && data.commentDtl.length > 2 ?
+                            '<img src="http://localhost:8000/image/review/' + data.commentDtl[2].saveName + '"alt="">' : ""}
+>>>>>>> origin/feature_finaltest2
                             </div>
                         </div>
                     </div>
@@ -463,10 +539,11 @@ class PostService {
                             <span>★<b class="review-rating">${data.rating}</b></span>
                         </div>
                         <div class="review-contents">
-                            <span class="visit-status">${data.visit == 1 ? "방문했음" : "방문하지 않음"}${principalData.userMst.userId == data.userId ? '<b class="review-delete">X</b>' :""}</span>
+                            <span class="visit-status">${data.visit == 1 ? "방문했음" : "방문하지 않음"}${principalData.userMst.userId == data.userId ? '<b class="review-delete">X</b>' : ""}</span>
                             <textarea class="review-content" readonly>${data.reviewComment}</textarea>
                             <div class="review-img-container">
                                 ${data.commentDtl[0].saveName != null ?
+<<<<<<< HEAD
                                     '<img src="/image/review/' + data.commentDtl[0].saveName + '"alt="">' : ""}
         
                                 ${data.commentDtl[0].saveName != null && data.commentDtl.length > 1 ?
@@ -474,6 +551,15 @@ class PostService {
         
                                 ${data.commentDtl[0].saveName != null && data.commentDtl.length > 2 ?
                                     '<img src="/image/review/' + data.commentDtl[2].saveName + '"alt="">' : ""}
+=======
+                            '<img src="http://localhost:8000/image/review/' + data.commentDtl[0].saveName + '"alt="">' : ""}
+        
+                                ${data.commentDtl[0].saveName != null && data.commentDtl.length > 1 ?
+                            '<img src="http://localhost:8000/image/review/' + data.commentDtl[1].saveName + '"alt="">' : ""}
+        
+                                ${data.commentDtl[0].saveName != null && data.commentDtl.length > 2 ?
+                            '<img src="http://localhost:8000/image/review/' + data.commentDtl[2].saveName + '"alt="">' : ""}
+>>>>>>> origin/feature_finaltest2
                             </div>
                         </div>
                     </div>
@@ -485,14 +571,14 @@ class PostService {
 
     loadIsLike() {
         likeObj.tourId = tourId;
-        if(principalData == null) {
+        if (principalData == null) {
             return;
         }
         likeObj.userId = principalData.userMst.userId;
         const likeButton = document.querySelector(".like-button");
         let isLike = PostApi.getInstance().getIsLike();
-        
-        if(isLike.data) {
+
+        if (isLike.data) {
             likeButton.classList.add("liked");
         } else {
             likeButton.classList.remove("liked");
@@ -500,7 +586,7 @@ class PostService {
     }
 
     registerReview() {
-        if(principalData == null) {
+        if (principalData == null) {
             alert("로그인없이 리뷰를 작성하실 수 없습니다.");
             return;
         }
@@ -509,16 +595,16 @@ class PostService {
         reviewObj.visitStatus = visitStatusSelector.value;
         reviewObj.userId = principalData.userMst.userId;
         reviewObj.reviewContent = reviewInput.value;
-                
-        if(reviewImgObj.fileOne != null) {
+
+        if (reviewImgObj.fileOne != null) {
             reviewImgObj.formData.append("files", reviewImgObj.fileOne);
         }
 
-        if(reviewImgObj.fileTwo != null) {
+        if (reviewImgObj.fileTwo != null) {
             reviewImgObj.formData.append("files", reviewImgObj.fileTwo);
         }
 
-        if(reviewImgObj.fileThree != null) {
+        if (reviewImgObj.fileThree != null) {
             reviewImgObj.formData.append("files", reviewImgObj.fileThree);
         }
 
@@ -528,7 +614,7 @@ class PostService {
     deleteReview(e) {
         deleteReviewObj.userId = principalData.userMst.userId;
         deleteReviewObj.reviewId = e.target.parentElement.parentElement.parentElement.children[0].children[0].value;
-        if(confirm("정말 리뷰를 삭제하시겠습니까?")) {
+        if (confirm("정말 리뷰를 삭제하시겠습니까?")) {
             PostApi.getInstance().deleteReview();
         }
     }
@@ -547,7 +633,7 @@ class PostService {
 class ComponentEvent {
     static #instance = null;
     static getInstance() {
-        if(this.#instance == null) {
+        if (this.#instance == null) {
             this.#instance = new ComponentEvent();
         }
         return this.#instance;
@@ -581,7 +667,7 @@ class ComponentEvent {
     clickStarButton() {
         let stars = document.querySelector(".modal-rating").children;
 
-        for(let i = 0; i < stars.length; i ++) {
+        for (let i = 0; i < stars.length; i++) {
             stars[i].onclick = () => {
                 reviewObj.rating = i + 1;
                 stars[0].classList.remove("enable");
@@ -589,7 +675,7 @@ class ComponentEvent {
                 stars[2].classList.remove("enable");
                 stars[3].classList.remove("enable");
                 stars[4].classList.remove("enable");
-                for(let e = 0; e <= i; e++) {
+                for (let e = 0; e <= i; e++) {
                     stars[e].classList.add("enable");
                 }
                 console.log(reviewObj.rating);
@@ -608,15 +694,15 @@ class ComponentEvent {
             let changeFlag = false;
 
             reviewImgObj.fileOne = null;
-            
+
             formData.forEach(value => {
-                if(value.size != 0) {
+                if (value.size != 0) {
                     reviewImgObj.fileOne = value;
                     changeFlag = true;
                 }
             });
 
-            if(changeFlag) {
+            if (changeFlag) {
                 inputOne.value = null;
                 const reader = new FileReader();
 
@@ -633,15 +719,15 @@ class ComponentEvent {
             let changeFlag = false;
 
             reviewImgObj.fileTwo = null;
-            
+
             formData.forEach(value => {
-                if(value.size != 0) {
+                if (value.size != 0) {
                     reviewImgObj.fileTwo = value;
                     changeFlag = true;
                 }
             });
 
-            if(changeFlag) {
+            if (changeFlag) {
                 inputTwo.value = null;
                 const reader = new FileReader();
 
@@ -658,15 +744,15 @@ class ComponentEvent {
             let changeFlag = false;
 
             reviewImgObj.fileThree = null;
-            
+
             formData.forEach(value => {
-                if(value.size != 0) {
+                if (value.size != 0) {
                     reviewImgObj.fileThree = value;
                     changeFlag = true;
                 }
             });
 
-            if(changeFlag) {
+            if (changeFlag) {
                 inputThree.value = null;
                 const reader = new FileReader();
 
@@ -680,27 +766,31 @@ class ComponentEvent {
     }
 
     clickModifyButtons() {
-        if(principalData == null) {
+        if (principalData == null) {
             return;
         }
         const modifyButton = document.querySelector(".modify-button");
         const deleteButton = document.querySelector(".delete-button");
         modifyButton.onclick = () => {
+<<<<<<< HEAD
             window.location.href=`/post/modify/${tourId}`;
+=======
+            window.location.href = `http://localhost:8000/post/modify/${tourId}`;
+>>>>>>> origin/feature_finaltest2
         }
 
         deleteButton.onclick = () => {
-            if(confirm("정말로 게시글을 삭제하시겠습니까? 돌이킬 수 없습니다.")) {
+            if (confirm("정말로 게시글을 삭제하시겠습니까? 돌이킬 수 없습니다.")) {
                 PostApi.getInstance().deletePost();
             }
         }
     }
 
-    clickLikeButton () {
+    clickLikeButton() {
         const likeButton = document.querySelector(".like-button");
 
         likeButton.onclick = () => {
-            if(principalData == null) {
+            if (principalData == null) {
                 alert("로그인 없이 좋아요 버튼을 누르실 수 없습니다.");
                 return;
             }
@@ -718,7 +808,7 @@ class ComponentEvent {
         const modal = document.querySelector("#modal");
 
         reviewWriteButton.onclick = () => {
-            if(principalData == null) {
+            if (principalData == null) {
                 alert("로그인 없이 리뷰등록할 수 없습니다.");
                 return;
             }
@@ -739,7 +829,7 @@ class ComponentEvent {
     }
 
     clickReviewDelete() {
-        if(principalData != null) {
+        if (principalData != null) {
             let reviewDeleteButton = document.querySelectorAll(".review-delete");
 
             reviewDeleteButton.forEach(button => {

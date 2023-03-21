@@ -88,4 +88,5 @@ public interface PostRepository {
 
     //게시글 좋아요 Delete ---------------------------------------------
     public int deleteLike(LikeReqDto likeReqDto);
+    public List<FindLocation> findLocation();
 }

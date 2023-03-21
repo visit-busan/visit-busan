@@ -351,4 +351,15 @@
             tour_id = #{tourId}
         and user_id = #{userId}
     </delete>
+
+    <!--카카오맵 이성욱 추가-->
+    <select id="findLocation" resultType="com.korit.visitbusan.entity.FindLocation">
+        select
+            tour_id as tourId,
+            title,
+            lat,
+            lon
+        from
+            tour_mst
+    </select>
 </mapper>

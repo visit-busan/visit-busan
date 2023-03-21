@@ -47,6 +47,11 @@ public class AccountController {
         return "account/change_pw";
     }
 
+    @GetMapping("/update/profile")
+    public String updateProfile() {
+        return "account/update_profile";
+    }
+
     @GetMapping("/delete")
     public String deleteUser() {
         return "account/secession";

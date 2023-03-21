@@ -92,14 +92,12 @@
     <insert id="saveRole" parameterType="com.korit.visitbusan.entity.UserMst">
         insert into role_dtl
         values(0, #{userId}, 2, now(), now())
-<!--        values(0, #{userId}, #{roleId}, now(), now())-->
     </insert>
 
-<!--    <insert id="saveRoleId" parameterType="com.korit.visitbusan.entity.UserMst">-->
-<!--        insert into role_dtl-->
-<!--        values(0, #{userId}, 2, now(), now()),-->
-<!--                (0, #{userId}, 3, now(), now())-->
-<!--    </insert>-->
+    <insert id="saveRoleWriter" parameterType="com.korit.visitbusan.entity.UserMst">
+        insert into role_dtl
+        values (0, #{userId}, 3, now(), now())
+    </insert>
 
     <update id="setUserProvider" parameterType="com.korit.visitbusan.entity.UserMst">
         update
@@ -136,6 +134,16 @@
         where
             name = #{name} and tell_number = #{tellNumber} and username = #{username};
     </update>
+
+    <update id="updateProfile" parameterType="com.korit.visitbusan.web.dto.UpdateProfile">
+        update
+            user_mst
+        set
+            name = #{name}, tell_number = #{tellNumber}, email = #{email}
+        where
+            user_id = #{userId};
+    </update>
+
 
     <delete id="deleteUser">
         delete

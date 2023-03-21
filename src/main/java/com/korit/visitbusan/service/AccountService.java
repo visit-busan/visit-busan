@@ -20,7 +20,7 @@ import java.util.Map;
  *** 작성자 : 이성욱
  *  버전 : V0.1
  *  내용 :  회원정보 관리를 위한 Service
- *  최종작성일 : 2023.03.11
+ *  최종  작성일 : 2023.03.11
  *******************************************/
 public class AccountService {
 
@@ -36,6 +36,10 @@ public class AccountService {
     }
     public int changePassword(String password, String username, String name, String tellNumber) {
         return accountRepository.changePassword(password, username, name, tellNumber);
+    }
+
+    public int UpdateProfile(int userId, String name, String tellNumber, String email) {
+        return accountRepository.updateProfile(userId, name, email, tellNumber);
     }
 
 //    public void modifyPw(UserMst userMst) throws Exception {

@@ -9,9 +9,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Find {
+public class UpdateProfile {
 
+    private int userId;
     private String name;
-
     private String tellNumber;
+    private String email;
 }

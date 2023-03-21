@@ -262,4 +262,9 @@ public class PostApi {
     public ResponseEntity<CMRespDto<?>> deleteLike(@PathVariable int tourId, @RequestBody @Valid LikeReqDto likeReqDto, BindingResult bindingResult) {
         return ResponseEntity.ok(new CMRespDto<>(HttpStatus.OK.value(), "success", postService.deleteLike(likeReqDto)));
     }
+
+    @GetMapping("/api/post/findlocation")
+    public ResponseEntity<?> findLocation() {
+        return ResponseEntity.ok(new CMRespDto<>(HttpStatus.OK.value(), "success", postService.findLocation()));
+    }
 }
